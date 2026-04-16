@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simulatore Accumulo Industriale</title>
+  <title>Premium Storage - Simulatore Accumulo Industriale</title>
   <style>
     :root {
       --bg: #f6f7f8;
@@ -12,6 +12,8 @@
       --muted: #666;
       --line: #e7e7e7;
       --accent: #111;
+      --orange: #f28c28;
+      --green: #1f9d55;
       --soft: #fafafa;
       --shadow: 0 10px 30px rgba(0,0,0,0.06);
       --radius: 24px;
@@ -181,7 +183,6 @@
       border: 0;
       border-radius: 20px;
       padding: 16px 22px;
-      background: var(--accent);
       color: #fff;
       font-size: 16px;
       font-weight: 700;
@@ -193,6 +194,8 @@
       opacity: 0.94;
       transform: translateY(-1px);
     }
+    .btn-calc { background: var(--orange); }
+    .btn-lead { background: var(--green); }
     .section { padding: 16px 0 28px; }
     .section-head { margin-bottom: 18px; }
     .eyebrow {
@@ -251,6 +254,10 @@
       margin: 0;
       color: var(--muted);
       font-size: 14px;
+    }
+    #leadBox {
+      display: none;
+      margin-top: 24px;
     }
     @media (max-width: 980px) {
       .grid, .results-grid, .info-grid, .stats, .two-col { grid-template-columns: 1fr; }
@@ -337,36 +344,8 @@
           </div>
           <div class="note-box">Nota: per una valutazione precisa saranno necessari bollette, profilo di carico e dati tecnici dell'impianto.</div>
           <div id="errorBox" class="error-box"></div>
-          <button type="submit" class="btn">Calcola la convenienza</button>
+          <button type="submit" class="btn btn-calc">Calcola la convenienza</button>
         </form>
-
-        <div id="leadBox" class="card" style="display:none; margin-top:18px; padding:22px; background:#fff;">
-          <h2 style="font-size:24px; margin:0 0 8px;">Vuoi una simulazione precisa per la tua azienda?</h2>
-          <p class="top-note" style="margin-bottom:18px;">Lascia i tuoi riferimenti e ti ricontatteremo per un'analisi più accurata.</p>
-          <form id="leadForm">
-            <div class="two-col">
-              <div class="field">
-                <label for="azienda">Azienda <span class="req">*</span></label>
-                <input id="azienda" type="text" placeholder="Es. Rossi Srl" />
-              </div>
-              <div class="field">
-                <label for="nomeCognome">Nome e cognome <span class="req">*</span></label>
-                <input id="nomeCognome" type="text" placeholder="Es. Marco Rossi" />
-              </div>
-              <div class="field">
-                <label for="emailLead">Email <span class="req">*</span></label>
-                <input id="emailLead" type="email" placeholder="Es. nome@azienda.it" />
-              </div>
-              <div class="field">
-                <label for="telefonoLead">Telefono</label>
-                <input id="telefonoLead" type="text" placeholder="Es. 333 1234567" />
-              </div>
-            </div>
-            <div id="leadErrorBox" class="error-box"></div>
-            <div id="leadSuccessBox" class="note-box" style="display:none;">Grazie, richiesta registrata. Ora puoi collegare questo form a email, CRM o Google Sheets.</div>
-            <button type="submit" class="btn">Invia richiesta</button>
-          </form>
-        </div>
       </div>
     </div>
   </section>
@@ -383,6 +362,34 @@
         <div class="result-card"><div class="label">Risparmio annuo stimato</div><div class="big" id="resSavings">€ 11.400</div><p id="detail2">Valore indicativo basato su autoconsumo e peak shaving.</p></div>
         <div class="result-card"><div class="label">Tempo di rientro</div><div class="big" id="resPayback">5,2 anni</div><p id="detail3">Calcolo orientativo, da verificare con analisi tecnica.</p></div>
         <div class="result-card"><div class="label">Valutazione</div><div class="big" id="resScore">Convenienza alta</div><p id="detail4">Ottimo potenziale per accumulo industriale.</p></div>
+      </div>
+
+      <div id="leadBox" class="card">
+        <h2 style="font-size:24px; margin:0 0 8px;">Vuoi una simulazione precisa per la tua azienda?</h2>
+        <p class="top-note" style="margin-bottom:18px;">Lascia i tuoi riferimenti e ti ricontatteremo per un'analisi più accurata.</p>
+        <form id="leadForm">
+          <div class="two-col">
+            <div class="field">
+              <label for="azienda">Azienda <span class="req">*</span></label>
+              <input id="azienda" type="text" placeholder="Es. Rossi Srl" />
+            </div>
+            <div class="field">
+              <label for="nomeCognome">Nome e cognome <span class="req">*</span></label>
+              <input id="nomeCognome" type="text" placeholder="Es. Marco Rossi" />
+            </div>
+            <div class="field">
+              <label for="emailLead">Email <span class="req">*</span></label>
+              <input id="emailLead" type="email" placeholder="Es. nome@azienda.it" />
+            </div>
+            <div class="field">
+              <label for="telefonoLead">Telefono</label>
+              <input id="telefonoLead" type="text" placeholder="Es. 333 1234567" />
+            </div>
+          </div>
+          <div id="leadErrorBox" class="error-box"></div>
+          <div id="leadSuccessBox" class="note-box" style="display:none;">Grazie, richiesta registrata.</div>
+          <button type="submit" class="btn btn-lead">Invia richiesta</button>
+        </form>
       </div>
     </div>
   </section>
@@ -426,6 +433,8 @@
     const leadSuccessBox = document.getElementById('leadSuccessBox');
     const consumoAnnuoInput = document.getElementById('consumoAnnuo');
 
+    const APPS_SCRIPT_URL = 'INCOLLA_QUI_LA_TUA_WEB_APP_URL';
+
     function parseItalianNumber(value) {
       if (!value) return NaN;
       let cleaned = String(value).trim().split(' ').join('');
@@ -462,6 +471,7 @@
       errorBox.style.display = 'block';
       errorBox.textContent = message;
       resultsGrid.style.display = 'none';
+      leadBox.style.display = 'none';
     }
 
     function clearError() {
@@ -517,6 +527,7 @@
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       clearError();
+      clearLeadMessages();
 
       const consumoAnnuo = parseItalianNumber(document.getElementById('consumoAnnuo').value);
       const costoEnergia = parseItalianNumber(document.getElementById('costoEnergia').value);
@@ -602,31 +613,50 @@
       resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    leadForm.addEventListener('submit', function (event) {
+    leadForm.addEventListener('submit', async function (event) {
       event.preventDefault();
       clearLeadMessages();
 
-      const azienda = document.getElementById('azienda').value.trim();
-      const nomeCognome = document.getElementById('nomeCognome').value.trim();
-      const emailLead = document.getElementById('emailLead').value.trim();
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailLead);
+      const payload = {
+        azienda: document.getElementById('azienda').value.trim(),
+        nomeCognome: document.getElementById('nomeCognome').value.trim(),
+        email: document.getElementById('emailLead').value.trim(),
+        telefono: document.getElementById('telefonoLead').value.trim(),
+        consumoAnnuo: document.getElementById('consumoAnnuo').value.trim(),
+        costoEnergia: document.getElementById('costoEnergia').value.trim(),
+        haFotovoltaico: document.querySelector('input[name="fv"]:checked') ? document.querySelector('input[name="fv"]:checked').value : '',
+        potenzaFotovoltaico: document.getElementById('fvPower').value.trim(),
+        profiloConsumo: document.getElementById('profiloConsumo').value,
+        picchi: document.querySelector('input[name="picchi"]:checked') ? document.querySelector('input[name="picchi"]:checked').value : '',
+        potenzaImpegnata: document.getElementById('potenzaImpegnata').value.trim(),
+        batteriaConsigliata: document.getElementById('resBattery').textContent,
+        risparmioStimato: document.getElementById('resSavings').textContent,
+        paybackStimato: document.getElementById('resPayback').textContent,
+        valutazione: document.getElementById('resScore').textContent,
+        origine: window.location.href
+      };
 
-      if (!azienda) {
-        showLeadError("Inserisci il nome dell'azienda.");
-        return;
-      }
-      if (!nomeCognome) {
-        showLeadError('Inserisci nome e cognome.');
-        return;
-      }
-      if (!emailOk) {
-        showLeadError('Inserisci un indirizzo email valido.');
-        return;
-      }
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
+      if (!payload.azienda) return showLeadError("Inserisci il nome dell'azienda.");
+      if (!payload.nomeCognome) return showLeadError('Inserisci nome e cognome.');
+      if (!emailOk) return showLeadError('Inserisci un indirizzo email valido.');
+      if (APPS_SCRIPT_URL === 'INCOLLA_QUI_LA_TUA_WEB_APP_URL') return showLeadError('Inserisci nel codice l\'URL della Web App di Google Apps Script.');
 
-      leadSuccessBox.style.display = 'block';
-      leadSuccessBox.textContent = 'Grazie ' + nomeCognome + ', la richiesta per ' + azienda + ' è stata registrata. Ora puoi collegare questo form a email, CRM o Google Sheets.';
-      leadForm.reset();
+      try {
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+        if (!result.ok) throw new Error(result.error || 'Invio non riuscito');
+        leadSuccessBox.style.display = 'block';
+        leadSuccessBox.textContent = 'Grazie ' + payload.nomeCognome + ', la richiesta per ' + payload.azienda + ' è stata inviata correttamente.';
+        leadForm.reset();
+      } catch (error) {
+        showLeadError('Invio non riuscito. Controlla la Web App di Google Sheets o riprova.');
+      }
     });
 
     toggleFvField();
