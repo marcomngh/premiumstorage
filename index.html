@@ -281,7 +281,7 @@
               <label for="consumoAnnuo">Consumo annuo di energia <span class="req">*</span></label>
               <div class="hint">Inserisci il consumo totale annuo in kWh.</div>
               <div class="input-wrap with-suffix">
-                <input id="consumoAnnuo" type="text" placeholder="Es. 250000" />
+                <input id="consumoAnnuo" type="text" inputmode="numeric" placeholder="Es. 250.000" />
                 <span class="suffix">kWh/anno</span>
               </div>
             </div>
@@ -339,9 +339,38 @@
           <div id="errorBox" class="error-box"></div>
           <button type="submit" class="btn">Calcola la convenienza</button>
         </form>
+
+        <div id="leadBox" class="card" style="display:none; margin-top:18px; padding:22px; background:#fff;">
+          <h2 style="font-size:24px; margin:0 0 8px;">Vuoi una simulazione precisa per la tua azienda?</h2>
+          <p class="top-note" style="margin-bottom:18px;">Lascia i tuoi riferimenti e ti ricontatteremo per un'analisi più accurata.</p>
+          <form id="leadForm">
+            <div class="two-col">
+              <div class="field">
+                <label for="azienda">Azienda <span class="req">*</span></label>
+                <input id="azienda" type="text" placeholder="Es. Rossi Srl" />
+              </div>
+              <div class="field">
+                <label for="nomeCognome">Nome e cognome <span class="req">*</span></label>
+                <input id="nomeCognome" type="text" placeholder="Es. Marco Rossi" />
+              </div>
+              <div class="field">
+                <label for="emailLead">Email <span class="req">*</span></label>
+                <input id="emailLead" type="email" placeholder="Es. nome@azienda.it" />
+              </div>
+              <div class="field">
+                <label for="telefonoLead">Telefono</label>
+                <input id="telefonoLead" type="text" placeholder="Es. 333 1234567" />
+              </div>
+            </div>
+            <div id="leadErrorBox" class="error-box"></div>
+            <div id="leadSuccessBox" class="note-box" style="display:none;">Grazie, richiesta registrata. Ora puoi collegare questo form a email, CRM o Google Sheets.</div>
+            <button type="submit" class="btn">Invia richiesta</button>
+          </form>
+        </div>
       </div>
     </div>
   </section>
+
   <section class="section">
     <div class="container">
       <div class="section-head">
@@ -357,6 +386,7 @@
       </div>
     </div>
   </section>
+
   <section class="section">
     <div class="container">
       <div class="info-grid">
@@ -366,6 +396,7 @@
       </div>
     </div>
   </section>
+
   <script>
     const profileMap = {
       giorno: { autoconsumo: 0.75, utilizzo: 0.35, taglia: 0.30 },
@@ -389,6 +420,11 @@
     const fvPowerInput = document.getElementById('fvPower');
     const errorBox = document.getElementById('errorBox');
     const resultsGrid = document.getElementById('resultsGrid');
+    const leadBox = document.getElementById('leadBox');
+    const leadForm = document.getElementById('leadForm');
+    const leadErrorBox = document.getElementById('leadErrorBox');
+    const leadSuccessBox = document.getElementById('leadSuccessBox');
+    const consumoAnnuoInput = document.getElementById('consumoAnnuo');
 
     function parseItalianNumber(value) {
       if (!value) return NaN;
@@ -397,8 +433,17 @@
         cleaned = cleaned.split('.').join('').replace(',', '.');
       } else if (cleaned.indexOf(',') !== -1) {
         cleaned = cleaned.replace(',', '.');
+      } else if (cleaned.indexOf('.') !== -1) {
+        const parts = cleaned.split('.');
+        if (parts.length > 1 && parts[parts.length - 1].length === 3) cleaned = parts.join('');
       }
       return Number(cleaned);
+    }
+
+    function formatThousandsInput(value) {
+      const digitsOnly = String(value || '').replace(/[^0-9]/g, '');
+      if (!digitsOnly) return '';
+      return digitsOnly.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 
     function formatNumber(value, decimals) {
@@ -424,6 +469,18 @@
       errorBox.textContent = '';
     }
 
+    function showLeadError(message) {
+      leadErrorBox.style.display = 'block';
+      leadErrorBox.textContent = message;
+      leadSuccessBox.style.display = 'none';
+    }
+
+    function clearLeadMessages() {
+      leadErrorBox.style.display = 'none';
+      leadErrorBox.textContent = '';
+      leadSuccessBox.style.display = 'none';
+    }
+
     function toggleFvField() {
       const selected = document.querySelector('input[name="fv"]:checked');
       if (selected && selected.value === 'si') {
@@ -444,6 +501,17 @@
 
     document.querySelectorAll('input[name="fv"]').forEach(function (radio) {
       radio.addEventListener('change', toggleFvField);
+    });
+
+    consumoAnnuoInput.addEventListener('input', function (event) {
+      const current = event.target.value;
+      const before = current.length;
+      const selection = event.target.selectionStart || current.length;
+      const formatted = formatThousandsInput(current);
+      event.target.value = formatted;
+      const diff = formatted.length - before;
+      const pos = Math.max(0, selection + diff);
+      event.target.setSelectionRange(pos, pos);
     });
 
     form.addEventListener('submit', function (event) {
@@ -493,6 +561,7 @@
         setResult('detail3', 'Ti conviene fare una simulazione combinata FV + accumulo per ottenere un business case più credibile.');
         setResult('detail4', 'Hai inserito un consumo annuo di ' + formatNumber(consumoAnnuo, 0) + ' kWh e un costo energia di ' + formatCurrency(costoEnergia, 2) + '/kWh.');
         resultsGrid.style.display = 'grid';
+        leadBox.style.display = 'block';
         resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
         return;
       }
@@ -529,7 +598,35 @@
       setResult('detail3', 'Costo indicativo del sistema di accumulo: ' + formatCurrency(costoBatteria, 0) + ' (' + formatNumber(numeroBlocchi, 0) + ' blocchi da 100 kWh). Copertura sui consumi annuali: ' + formatNumber(coperturaConsumi, 1) + '%.');
       setResult('detail4', potenzaText);
       resultsGrid.style.display = 'grid';
+      leadBox.style.display = 'block';
       resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    leadForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      clearLeadMessages();
+
+      const azienda = document.getElementById('azienda').value.trim();
+      const nomeCognome = document.getElementById('nomeCognome').value.trim();
+      const emailLead = document.getElementById('emailLead').value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailLead);
+
+      if (!azienda) {
+        showLeadError("Inserisci il nome dell'azienda.");
+        return;
+      }
+      if (!nomeCognome) {
+        showLeadError('Inserisci nome e cognome.');
+        return;
+      }
+      if (!emailOk) {
+        showLeadError('Inserisci un indirizzo email valido.');
+        return;
+      }
+
+      leadSuccessBox.style.display = 'block';
+      leadSuccessBox.textContent = 'Grazie ' + nomeCognome + ', la richiesta per ' + azienda + ' è stata registrata. Ora puoi collegare questo form a email, CRM o Google Sheets.';
+      leadForm.reset();
     });
 
     toggleFvField();
