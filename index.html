@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulatore Accumulo Industriale</title>
+  <style>
+    :root {
+      --bg: #f6f7f8;
+      --card: #ffffff;
+      --text: #171717;
+      --muted: #666;
+      --line: #e7e7e7;
+      --accent: #111;
+      --soft: #fafafa;
+      --shadow: 0 10px 30px rgba(0,0,0,0.06);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .hero { padding: 48px 0 24px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .pill {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+      margin: 18px 0 14px;
+      letter-spacing: -0.03em;
+    }
+    .lead {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 760px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .stat, .card, .result-card, .info-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .stat { padding: 18px; }
+    .stat .label, .result-card .label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .stat .value {
+      margin-top: 6px;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .card {
+      padding: 26px;
+      background: linear-gradient(180deg, #fff 0%, #fbfbfb 100%);
+    }
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+    }
+    .card p.top-note {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    form {
+      display: grid;
+      gap: 18px;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .field.full { grid-column: 1 / -1; }
+    label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .req {
+      color: #999;
+      margin-left: 4px;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: -2px;
+    }
+    input, select {
+      width: 100%;
+      padding: 15px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    input:focus, select:focus {
+      border-color: #bdbdbd;
+      box-shadow: 0 0 0 4px rgba(0,0,0,0.04);
+    }
+    .input-wrap { position: relative; }
+    .suffix {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    .with-suffix input { padding-right: 90px; }
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .radio-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      font-size: 14px;
+    }
+    .note-box {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      border-radius: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .error-box {
+      display: none;
+      padding: 16px 18px;
+      border: 1px solid #f1c9c9;
+      background: #fff5f5;
+      border-radius: 18px;
+      color: #9b2c2c;
+      font-size: 14px;
+    }
+    .btn {
+      border: 0;
+      border-radius: 20px;
+      padding: 16px 22px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .btn:hover {
+      opacity: 0.94;
+      transform: translateY(-1px);
+    }
+    .section { padding: 16px 0 28px; }
+    .section-head { margin-bottom: 18px; }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    h3 {
+      font-size: 30px;
+      letter-spacing: -0.03em;
+      margin: 0 0 6px;
+    }
+    .section-copy {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 14px;
+    }
+    .results-grid {
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .result-card {
+      padding: 20px;
+      background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+    }
+    .result-card .big {
+      margin-top: 8px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+    .result-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+      padding-bottom: 40px;
+    }
+    .info-card { padding: 22px; }
+    .info-card h4 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    @media (max-width: 980px) {
+      .grid, .results-grid, .info-grid, .stats, .two-col { grid-template-columns: 1fr; }
+      .hero { padding-top: 26px; }
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container grid">
+      <div>
+        <div class="pill">Simulatore preliminare di convenienza</div>
+        <h1>Scopri se una batteria di accumulo conviene davvero alla tua azienda.</h1>
+        <p class="lead">Inserisci pochi dati essenziali e ottieni una prima stima della convenienza economica per un sistema di accumulo in ambito industriale.</p>
+        <div class="stats">
+          <div class="stat"><div class="label">Compilazione</div><div class="value">2 minuti</div></div>
+          <div class="stat"><div class="label">Output</div><div class="value">Stima immediata</div></div>
+          <div class="stat"><div class="label">Target</div><div class="value">Imprese e industria</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Richiedi la tua simulazione</h2>
+        <p class="top-note">Compila il form: i risultati sono indicativi e servono per capire rapidamente se ha senso approfondire.</p>
+        <form id="simulatorForm">
+          <div class="two-col">
+            <div class="field">
+              <label for="consumoAnnuo">Consumo annuo di energia <span class="req">*</span></label>
+              <div class="hint">Inserisci il consumo totale annuo in kWh.</div>
+              <div class="input-wrap with-suffix">
+                <input id="consumoAnnuo" type="text" placeholder="Es. 250000" />
+                <span class="suffix">kWh/anno</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="costoEnergia">Costo medio dell'energia <span class="req">*</span></label>
+              <div class="hint">Il costo medio pagato in bolletta per kWh.</div>
+              <div class="input-wrap with-suffix">
+                <input id="costoEnergia" type="text" placeholder="Es. 0,22" />
+                <span class="suffix">€/kWh</span>
+              </div>
+            </div>
+            <div class="field full">
+              <label>Hai già un impianto fotovoltaico? <span class="req">*</span></label>
+              <div class="radio-group">
+                <label class="radio-pill"><input type="radio" name="fv" value="si" /> Sì</label>
+                <label class="radio-pill"><input type="radio" name="fv" value="no" /> No</label>
+              </div>
+            </div>
+            <div class="field" id="fvField" style="display:none;">
+              <label for="fvPower">Potenza fotovoltaico installata</label>
+              <div class="hint">Da mostrare solo se il cliente risponde Sì alla domanda precedente.</div>
+              <div class="input-wrap with-suffix">
+                <input id="fvPower" type="text" placeholder="Es. 100" />
+                <span class="suffix">kWp</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="profiloConsumo">Quando consumi di più? <span class="req">*</span></label>
+              <select id="profiloConsumo">
+                <option value="">Seleziona un'opzione</option>
+                <option value="giorno">Giorno (8–18)</option>
+                <option value="sera">Sera (18–24)</option>
+                <option value="notte">Notte (24–8)</option>
+                <option value="uniforme">Sempre uguale</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label>Hai bollette alte per potenza o picchi di assorbimento? <span class="req">*</span></label>
+              <div class="radio-group">
+                <label class="radio-pill"><input type="radio" name="picchi" value="si" /> Sì</label>
+                <label class="radio-pill"><input type="radio" name="picchi" value="no" /> No</label>
+                <label class="radio-pill"><input type="radio" name="picchi" value="nonso" /> Non so</label>
+              </div>
+            </div>
+            <div class="field full">
+              <label for="potenzaImpegnata">Potenza impegnata</label>
+              <div class="hint">Facoltativa, ma utile per affinare la stima.</div>
+              <div class="input-wrap with-suffix">
+                <input id="potenzaImpegnata" type="text" placeholder="Es. 120" />
+                <span class="suffix">kW</span>
+              </div>
+            </div>
+          </div>
+          <div class="note-box">Nota: per una valutazione precisa saranno necessari bollette, profilo di carico e dati tecnici dell'impianto.</div>
+          <div id="errorBox" class="error-box"></div>
+          <button type="submit" class="btn">Calcola la convenienza</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Risultati</div>
+        <h3>Stima preliminare di convenienza</h3>
+        <div class="section-copy">Il calcolo è indicativo e si basa sui dati inseriti e su coefficienti prudenziali pensati per una pre-analisi commerciale.</div>
+      </div>
+      <div id="resultsGrid" class="results-grid">
+        <div class="result-card"><div class="label">Batteria consigliata</div><div class="big" id="resBattery">80–120 kWh</div><p id="detail1">Stima preliminare in base ai dati inseriti.</p></div>
+        <div class="result-card"><div class="label">Risparmio annuo stimato</div><div class="big" id="resSavings">€ 11.400</div><p id="detail2">Valore indicativo basato su autoconsumo e peak shaving.</p></div>
+        <div class="result-card"><div class="label">Tempo di rientro</div><div class="big" id="resPayback">5,2 anni</div><p id="detail3">Calcolo orientativo, da verificare con analisi tecnica.</p></div>
+        <div class="result-card"><div class="label">Valutazione</div><div class="big" id="resScore">Convenienza alta</div><p id="detail4">Ottimo potenziale per accumulo industriale.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-card"><h4>Perché funziona</h4><p>Il form chiede solo i dati minimi davvero utili, così riduce l'abbandono e aumenta la conversione.</p></div>
+        <div class="info-card"><h4>Perché converte</h4><p>Promette un risultato concreto: batteria consigliata, risparmio annuo e tempo di rientro.</p></div>
+        <div class="info-card"><h4>Perché genera lead buoni</h4><p>Le risposte qualificano già il potenziale cliente e preparano il contatto commerciale successivo.</p></div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const profileMap = {
+      giorno: { autoconsumo: 0.75, utilizzo: 0.35, taglia: 0.30 },
+      uniforme: { autoconsumo: 0.60, utilizzo: 0.50, taglia: 0.50 },
+      sera: { autoconsumo: 0.40, utilizzo: 0.70, taglia: 0.80 },
+      notte: { autoconsumo: 0.25, utilizzo: 0.75, taglia: 1.00 }
+    };
+    const peakMap = { si: 0.20, no: 0.00, nonso: 0.08 };
+    const constants = {
+      produzionePerKwp: 1100,
+      rendimentoBatteria: 0.90,
+      valoreUnitarioAccumulo: 0.12,
+      costoPerBlocco100kwh: 40000,
+      tagliaBloccoKwh: 100,
+      batteriaMin: 100,
+      batteriaMax: 500
+    };
+
+    const form = document.getElementById('simulatorForm');
+    const fvField = document.getElementById('fvField');
+    const fvPowerInput = document.getElementById('fvPower');
+    const errorBox = document.getElementById('errorBox');
+    const resultsGrid = document.getElementById('resultsGrid');
+
+    function parseItalianNumber(value) {
+      if (!value) return NaN;
+      let cleaned = String(value).trim().split(' ').join('');
+      if (cleaned.indexOf(',') !== -1 && cleaned.indexOf('.') !== -1) {
+        cleaned = cleaned.split('.').join('').replace(',', '.');
+      } else if (cleaned.indexOf(',') !== -1) {
+        cleaned = cleaned.replace(',', '.');
+      }
+      return Number(cleaned);
+    }
+
+    function formatNumber(value, decimals) {
+      return new Intl.NumberFormat('it-IT', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(value);
+    }
+
+    function formatCurrency(value, decimals) {
+      return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(value);
+    }
+
+    function setResult(id, text) {
+      document.getElementById(id).textContent = text;
+    }
+
+    function showError(message) {
+      errorBox.style.display = 'block';
+      errorBox.textContent = message;
+      resultsGrid.style.display = 'none';
+    }
+
+    function clearError() {
+      errorBox.style.display = 'none';
+      errorBox.textContent = '';
+    }
+
+    function toggleFvField() {
+      const selected = document.querySelector('input[name="fv"]:checked');
+      if (selected && selected.value === 'si') {
+        fvField.style.display = 'flex';
+      } else {
+        fvField.style.display = 'none';
+        fvPowerInput.value = '';
+      }
+    }
+
+    function getRating(payback) {
+      if (!isFinite(payback)) return 'Non calcolabile';
+      if (payback < 4) return 'Convenienza molto alta';
+      if (payback < 6) return 'Convenienza alta';
+      if (payback < 8) return 'Convenienza media';
+      return 'Convenienza debole';
+    }
+
+    document.querySelectorAll('input[name="fv"]').forEach(function (radio) {
+      radio.addEventListener('change', toggleFvField);
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      clearError();
+
+      const consumoAnnuo = parseItalianNumber(document.getElementById('consumoAnnuo').value);
+      const costoEnergia = parseItalianNumber(document.getElementById('costoEnergia').value);
+      const fvSelection = document.querySelector('input[name="fv"]:checked');
+      const profilo = document.getElementById('profiloConsumo').value;
+      const picchiSelection = document.querySelector('input[name="picchi"]:checked');
+      const fvPower = parseItalianNumber(document.getElementById('fvPower').value);
+      const potenzaImpegnata = parseItalianNumber(document.getElementById('potenzaImpegnata').value);
+
+      if (!isFinite(consumoAnnuo) || consumoAnnuo <= 0) {
+        showError('Inserisci un consumo annuo valido.');
+        return;
+      }
+      if (!isFinite(costoEnergia) || costoEnergia <= 0) {
+        showError("Inserisci un costo medio dell'energia valido.");
+        return;
+      }
+      if (!fvSelection) {
+        showError('Seleziona se hai già un impianto fotovoltaico.');
+        return;
+      }
+      if (!profilo || !profileMap[profilo]) {
+        showError('Seleziona quando consumi di più.');
+        return;
+      }
+      if (!picchiSelection) {
+        showError('Indica se hai bollette alte per potenza o picchi di assorbimento.');
+        return;
+      }
+      if (fvSelection.value === 'si' && (!isFinite(fvPower) || fvPower <= 0)) {
+        showError('Inserisci una potenza fotovoltaica valida.');
+        return;
+      }
+
+      if (fvSelection.value === 'no') {
+        setResult('resBattery', 'Da valutare con FV');
+        setResult('resSavings', 'Stima non disponibile');
+        setResult('resPayback', 'Non calcolabile');
+        setResult('resScore', 'Serve valutazione FV + accumulo');
+        setResult('detail1', "Senza un impianto fotovoltaico esistente, questo simulatore non fornisce una stima affidabile dell'accumulo standalone.");
+        setResult('detail2', "Il massimo valore economico dell'accumulo emerge quando la batteria è abbinata a un impianto fotovoltaico con eccedenze da spostare.");
+        setResult('detail3', 'Ti conviene fare una simulazione combinata FV + accumulo per ottenere un business case più credibile.');
+        setResult('detail4', 'Hai inserito un consumo annuo di ' + formatNumber(consumoAnnuo, 0) + ' kWh e un costo energia di ' + formatCurrency(costoEnergia, 2) + '/kWh.');
+        resultsGrid.style.display = 'grid';
+        resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+
+      const coeff = profileMap[profilo];
+      const produzioneFV = fvPower * constants.produzionePerKwp;
+      const autoconsumoDiretto = produzioneFV * coeff.autoconsumo;
+      const eccedenzaFV = Math.max(produzioneFV - autoconsumoDiretto, 0);
+      const energiaSpostataLorda = eccedenzaFV * coeff.utilizzo;
+      const energiaSpostataNetta = energiaSpostataLorda * constants.rendimentoBatteria;
+      const batteriaBase = fvPower * coeff.taglia;
+      const batteriaArrotondata = Math.ceil(Math.max(batteriaBase, constants.batteriaMin) / constants.tagliaBloccoKwh) * constants.tagliaBloccoKwh;
+      const batteriaKwh = Math.min(batteriaArrotondata, constants.batteriaMax);
+      const valoreUnitario = constants.valoreUnitarioAccumulo;
+      const risparmioEnergyShifting = energiaSpostataNetta * valoreUnitario;
+      const bonusPeak = risparmioEnergyShifting * peakMap[picchiSelection.value];
+      const risparmioTotale = risparmioEnergyShifting + bonusPeak;
+      const numeroBlocchi = batteriaKwh / constants.tagliaBloccoKwh;
+      const costoBatteria = numeroBlocchi * constants.costoPerBlocco100kwh;
+      const payback = risparmioTotale > 0 ? costoBatteria / risparmioTotale : Infinity;
+      const autoconsumoPercent = produzioneFV > 0 ? autoconsumoDiretto / produzioneFV * 100 : 0;
+      const coperturaConsumi = consumoAnnuo > 0 ? energiaSpostataNetta / consumoAnnuo * 100 : 0;
+      let potenzaText = 'Potenza impegnata non indicata: il beneficio da peak shaving è stimato in modo prudenziale.';
+      if (isFinite(potenzaImpegnata) && potenzaImpegnata > 0) {
+        potenzaText = 'Potenza impegnata indicata: ' + formatNumber(potenzaImpegnata, 0) + ' kW.';
+      }
+
+      setResult('resBattery', formatNumber(batteriaKwh, 0) + ' kWh');
+      setResult('resSavings', formatCurrency(risparmioTotale, 0));
+      setResult('resPayback', isFinite(payback) ? formatNumber(payback, 1) + ' anni' : 'Non calcolabile');
+      setResult('resScore', getRating(payback));
+      setResult('detail1', 'Produzione FV stimata: ' + formatNumber(produzioneFV, 0) + ' kWh/anno. Autoconsumo diretto stimato: ' + formatNumber(autoconsumoPercent, 0) + '%.');
+      setResult('detail2', 'Energia annuale spostata dalla batteria: ' + formatNumber(energiaSpostataNetta, 0) + ' kWh. Valore unitario dell\'accumulo: ' + formatCurrency(valoreUnitario, 2) + '/kWh.');
+      setResult('detail3', 'Costo indicativo del sistema di accumulo: ' + formatCurrency(costoBatteria, 0) + ' (' + formatNumber(numeroBlocchi, 0) + ' blocchi da 100 kWh). Copertura sui consumi annuali: ' + formatNumber(coperturaConsumi, 1) + '%.');
+      setResult('detail4', potenzaText);
+      resultsGrid.style.display = 'grid';
+      resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    toggleFvField();
+  </script>
+</body>
+</html>
