@@ -640,7 +640,7 @@
       if (!payload.azienda) return showLeadError("Inserisci il nome dell'azienda.");
       if (!payload.nomeCognome) return showLeadError('Inserisci nome e cognome.');
       if (!emailOk) return showLeadError('Inserisci un indirizzo email valido.');
-      if (APPS_SCRIPT_URL === 'INCOLLA_QUI_LA_TUA_WEB_APP_URL') return showLeadError('Inserisci nel codice l\'URL della Web App di Google Apps Script.');
+      if (APPS_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzse-rVM6VLTUiXIzLWbYuhubHC6Sqe0q3dg5xBoWvS0cWM_xggFWDcEGhVAlwDXASK4A/exec') return showLeadError('Inserisci nel codice l\'URL della Web App di Google Apps Script.');
 
       try {
         const response = await fetch(APPS_SCRIPT_URL, {
