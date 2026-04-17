@@ -644,22 +644,23 @@
   return showLeadError("Inserisci nel codice l'URL della Web App di Google Apps Script.");
 }
 
-      try {
-        const response = await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const result = await response.json();
-        if (!result.ok) throw new Error(result.error || 'Invio non riuscito');
-        leadSuccessBox.style.display = 'block';
-        leadSuccessBox.textContent = 'Grazie ' + payload.nomeCognome + ', la richiesta per ' + payload.azienda + ' è stata inviata correttamente.';
-        leadForm.reset();
-      } catch (error) {
-        showLeadError('Invio non riuscito. Controlla la Web App di Google Sheets o riprova.');
-      }
-    });
+try {
+  const formBody = new URLSearchParams(payload);
+
+  const response = await fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    body: formBody
+  });
+
+  const result = await response.json();
+  if (!result.ok) throw new Error(result.error || 'Invio non riuscito');
+
+  leadSuccessBox.style.display = 'block';
+  leadSuccessBox.textContent = 'Grazie ' + payload.nomeCognome + ', la richiesta per ' + payload.azienda + ' è stata inviata correttamente.';
+  leadForm.reset();
+} catch (error) {
+  showLeadError('Invio non riuscito: ' + error.message);
+}
 
     toggleFvField();
   </script>
