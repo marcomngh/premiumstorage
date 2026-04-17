@@ -613,7 +613,7 @@
       resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    leadForm.addEventListener('submit', async function (event) {
+        leadForm.addEventListener('submit', async function (event) {
       event.preventDefault();
       clearLeadMessages();
 
@@ -624,10 +624,14 @@
         telefono: document.getElementById('telefonoLead').value.trim(),
         consumoAnnuo: document.getElementById('consumoAnnuo').value.trim(),
         costoEnergia: document.getElementById('costoEnergia').value.trim(),
-        haFotovoltaico: document.querySelector('input[name="fv"]:checked') ? document.querySelector('input[name="fv"]:checked').value : '',
+        haFotovoltaico: document.querySelector('input[name="fv"]:checked')
+          ? document.querySelector('input[name="fv"]:checked').value
+          : '',
         potenzaFotovoltaico: document.getElementById('fvPower').value.trim(),
         profiloConsumo: document.getElementById('profiloConsumo').value,
-        picchi: document.querySelector('input[name="picchi"]:checked') ? document.querySelector('input[name="picchi"]:checked').value : '',
+        picchi: document.querySelector('input[name="picchi"]:checked')
+          ? document.querySelector('input[name="picchi"]:checked').value
+          : '',
         potenzaImpegnata: document.getElementById('potenzaImpegnata').value.trim(),
         batteriaConsigliata: document.getElementById('resBattery').textContent,
         risparmioStimato: document.getElementById('resSavings').textContent,
@@ -637,30 +641,42 @@
       };
 
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
-      if (!payload.azienda) return showLeadError("Inserisci il nome dell'azienda.");
-      if (!payload.nomeCognome) return showLeadError('Inserisci nome e cognome.');
-      if (!emailOk) return showLeadError('Inserisci un indirizzo email valido.');
+
+      if (!payload.azienda) {
+        return showLeadError("Inserisci il nome dell'azienda.");
+      }
+      if (!payload.nomeCognome) {
+        return showLeadError('Inserisci nome e cognome.');
+      }
+      if (!emailOk) {
+        return showLeadError('Inserisci un indirizzo email valido.');
+      }
       if (!APPS_SCRIPT_URL || !APPS_SCRIPT_URL.includes('/exec')) {
-  return showLeadError("Inserisci nel codice l'URL della Web App di Google Apps Script.");
-}
+        return showLeadError("Inserisci nel codice l'URL della Web App di Google Apps Script.");
+      }
 
-try {
-  const formBody = new URLSearchParams(payload);
+      try {
+        const formBody = new URLSearchParams(payload);
 
-  const response = await fetch(APPS_SCRIPT_URL, {
-    method: 'POST',
-    body: formBody
-  });
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          body: formBody
+        });
 
-  const result = await response.json();
-  if (!result.ok) throw new Error(result.error || 'Invio non riuscito');
+        const result = await response.json();
 
-  leadSuccessBox.style.display = 'block';
-  leadSuccessBox.textContent = 'Grazie ' + payload.nomeCognome + ', la richiesta per ' + payload.azienda + ' è stata inviata correttamente.';
-  leadForm.reset();
-} catch (error) {
-  showLeadError('Invio non riuscito: ' + error.message);
-}
+        if (!result.ok) {
+          throw new Error(result.error || 'Invio non riuscito');
+        }
+
+        leadSuccessBox.style.display = 'block';
+        leadSuccessBox.textContent =
+          'Grazie ' + payload.nomeCognome + ', la richiesta per ' + payload.azienda + ' è stata inviata correttamente.';
+        leadForm.reset();
+      } catch (error) {
+        showLeadError('Invio non riuscito: ' + error.message);
+      }
+    });
 
     toggleFvField();
   </script>
