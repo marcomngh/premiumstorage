@@ -271,77 +271,108 @@
     <div class="container grid">
       <div>
         <div class="pill">Simulatore preliminare di convenienza</div>
-        <h1>Scopri se una batteria di accumulo conviene davvero alla tua azienda.</h1>
-        <p class="lead">Inserisci pochi dati essenziali e ottieni una prima stima della convenienza economica per un sistema di accumulo in ambito industriale.</p>
+        <h1>Scopri se fotovoltaico e batteria di accumulo convengono davvero alla tua azienda.</h1>
+        <p class="lead">Inserisci pochi dati essenziali e ottieni una prima stima orientativa di fotovoltaico, storage e risparmio economico per la tua attività.</p>
         <div class="stats">
           <div class="stat"><div class="label">Compilazione</div><div class="value">2 minuti</div></div>
           <div class="stat"><div class="label">Output</div><div class="value">Stima immediata</div></div>
           <div class="stat"><div class="label">Target</div><div class="value">Imprese e industria</div></div>
         </div>
       </div>
+
       <div class="card">
         <h2>Richiedi la tua simulazione</h2>
         <p class="top-note">Compila il form: i risultati sono indicativi e servono per capire rapidamente se ha senso approfondire.</p>
+
         <form id="simulatorForm">
           <div class="two-col">
             <div class="field">
-              <label for="consumoAnnuo">Consumo annuo di energia <span class="req">*</span></label>
+              <label for="consumoAnnuo">1. Consumo annuo di energia <span class="req">*</span></label>
               <div class="hint">Inserisci il consumo totale annuo in kWh.</div>
               <div class="input-wrap with-suffix">
                 <input id="consumoAnnuo" type="text" inputmode="numeric" placeholder="Es. 250.000" />
                 <span class="suffix">kWh/anno</span>
               </div>
             </div>
+
             <div class="field">
-              <label for="costoEnergia">Costo medio dell'energia <span class="req">*</span></label>
+              <label for="costoEnergia">2. Costo medio dell'energia <span class="req">*</span></label>
               <div class="hint">Il costo medio pagato in bolletta per kWh.</div>
               <div class="input-wrap with-suffix">
                 <input id="costoEnergia" type="text" placeholder="Es. 0,22" />
                 <span class="suffix">€/kWh</span>
               </div>
             </div>
+
             <div class="field full">
-              <label>Hai già un impianto fotovoltaico? <span class="req">*</span></label>
+              <label for="profiloConsumo">3. Quando consumi di più? <span class="req">*</span></label>
+              <select id="profiloConsumo">
+                <option value="">Seleziona un'opzione</option>
+                <option value="giorno">Principalmente di giorno</option>
+                <option value="sera">Principalmente di sera</option>
+                <option value="notte">Principalmente di notte</option>
+                <option value="uniforme">In modo uniforme nelle 24 ore</option>
+                <option value="variabile">Variabile / dipende dai turni produttivi</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="settoreMerceologico">4. A quale settore appartiene la tua azienda? <span class="req">*</span></label>
+              <select id="settoreMerceologico">
+                <option value="">Seleziona un'opzione</option>
+                <option value="industria">Industria (metalmeccanica, plastica, legno, ceramica) – consumi diurni con peak points</option>
+                <option value="cold_chain">Catena del freddo (celle frigorifere, logistica alimentare, GDO) – consumi H24</option>
+                <option value="artigianato">Artigianato – consumo diurno 5 giorni a settimana</option>
+                <option value="terziario">Uffici e terziario (centri commerciali, hotel, ospedali privati, sedi aziendali) – consumi concentrati in fasce diurne/serali, molto prevedibile</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label>5. Hai picchi di assorbimento elevati durante la giornata? <span class="req">*</span></label>
+              <div class="radio-group">
+                <label class="radio-pill"><input type="radio" name="picchi" value="si_frequenti" /> Sì, frequenti</label>
+                <label class="radio-pill"><input type="radio" name="picchi" value="si_occasionali" /> Sì, occasionali</label>
+                <label class="radio-pill"><input type="radio" name="picchi" value="no" /> No</label>
+                <label class="radio-pill"><input type="radio" name="picchi" value="nonso" /> Non lo so</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="piccoMassimo">Picco massimo di assorbimento (se lo conosci)</label>
+              <div class="hint">Dato facoltativo ma utile per affinare la simulazione.</div>
+              <div class="input-wrap with-suffix">
+                <input id="piccoMassimo" type="text" inputmode="numeric" placeholder="Es. 530" />
+                <span class="suffix">kW</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="potenzaImpegnata">6. Potenza impegnata <span class="req">*</span></label>
+              <div class="hint">Inserisci la potenza impegnata indicata in bolletta.</div>
+              <div class="input-wrap with-suffix">
+                <input id="potenzaImpegnata" type="text" inputmode="numeric" placeholder="Es. 120" />
+                <span class="suffix">kW</span>
+              </div>
+            </div>
+
+            <div class="field full">
+              <label>7. Hai già un impianto fotovoltaico? <span class="req">*</span></label>
               <div class="radio-group">
                 <label class="radio-pill"><input type="radio" name="fv" value="si" /> Sì</label>
                 <label class="radio-pill"><input type="radio" name="fv" value="no" /> No</label>
               </div>
             </div>
+
             <div class="field" id="fvField" style="display:none;">
               <label for="fvPower">Potenza fotovoltaico installata</label>
-              <div class="hint">Da mostrare solo se il cliente risponde Sì alla domanda precedente.</div>
+              <div class="hint">Da compilare solo se hai già un impianto fotovoltaico.</div>
               <div class="input-wrap with-suffix">
-                <input id="fvPower" type="text" placeholder="Es. 100" />
+                <input id="fvPower" type="text" inputmode="numeric" placeholder="Es. 100" />
                 <span class="suffix">kWp</span>
               </div>
             </div>
-            <div class="field">
-              <label for="profiloConsumo">Quando consumi di più? <span class="req">*</span></label>
-              <select id="profiloConsumo">
-                <option value="">Seleziona un'opzione</option>
-                <option value="giorno">Giorno (8–18)</option>
-                <option value="sera">Sera (18–24)</option>
-                <option value="notte">Notte (24–8)</option>
-                <option value="uniforme">Sempre uguale</option>
-              </select>
-            </div>
-            <div class="field full">
-              <label>Hai bollette alte per potenza o picchi di assorbimento? <span class="req">*</span></label>
-              <div class="radio-group">
-                <label class="radio-pill"><input type="radio" name="picchi" value="si" /> Sì</label>
-                <label class="radio-pill"><input type="radio" name="picchi" value="no" /> No</label>
-                <label class="radio-pill"><input type="radio" name="picchi" value="nonso" /> Non so</label>
-              </div>
-            </div>
-            <div class="field full">
-              <label for="potenzaImpegnata">Potenza impegnata</label>
-              <div class="hint">Facoltativa, ma utile per affinare la stima.</div>
-              <div class="input-wrap with-suffix">
-                <input id="potenzaImpegnata" type="text" placeholder="Es. 120" />
-                <span class="suffix">kW</span>
-              </div>
-            </div>
           </div>
+
           <div class="note-box">Nota: per una valutazione precisa saranno necessari bollette, profilo di carico e dati tecnici dell'impianto.</div>
           <div id="errorBox" class="error-box"></div>
           <button type="submit" class="btn btn-calc">Calcola la convenienza</button>
@@ -357,11 +388,31 @@
         <h3>Stima preliminare di convenienza</h3>
         <div class="section-copy">Il calcolo è indicativo e si basa sui dati inseriti e su coefficienti prudenziali pensati per una pre-analisi commerciale.</div>
       </div>
+
       <div id="resultsGrid" class="results-grid">
-        <div class="result-card"><div class="label">Batteria consigliata</div><div class="big" id="resBattery">80–120 kWh</div><p id="detail1">Stima preliminare in base ai dati inseriti.</p></div>
-        <div class="result-card"><div class="label">Risparmio annuo stimato</div><div class="big" id="resSavings">€ 11.400</div><p id="detail2">Valore indicativo basato su autoconsumo e peak shaving.</p></div>
-        <div class="result-card"><div class="label">Tempo di rientro</div><div class="big" id="resPayback">5,2 anni</div><p id="detail3">Calcolo orientativo, da verificare con analisi tecnica.</p></div>
-        <div class="result-card"><div class="label">Valutazione</div><div class="big" id="resScore">Convenienza alta</div><p id="detail4">Ottimo potenziale per accumulo industriale.</p></div>
+        <div class="result-card">
+          <div class="label">Storage consigliato</div>
+          <div class="big" id="resBattery">120 kWh / 60 kW</div>
+          <p id="detail1">Stima preliminare in base ai dati inseriti.</p>
+        </div>
+
+        <div class="result-card">
+          <div class="label">Fotovoltaico consigliato</div>
+          <div class="big" id="resPv">150 kWp</div>
+          <p id="detail2">Valore orientativo in base al profilo di consumo.</p>
+        </div>
+
+        <div class="result-card">
+          <div class="label">Risparmio annuo stimato</div>
+          <div class="big" id="resSavings">€ 11.400</div>
+          <p id="detail3">Valore indicativo basato su FV + accumulo.</p>
+        </div>
+
+        <div class="result-card">
+          <div class="label">Valutazione</div>
+          <div class="big" id="resScore">Convenienza alta</div>
+          <p id="detail4">Ottimo potenziale per accumulo industriale.</p>
+        </div>
       </div>
 
       <div id="leadBox" class="card">
@@ -397,65 +448,98 @@
   <section class="section">
     <div class="container">
       <div class="info-grid">
+        <div class="info-card">
+          <h4>Perché un sistema di accumulo energetico industriale?</h4>
+          <p>L’Italia è tra i mercati europei più dinamici per l’accumulo energetico. Oggi conta circa <strong>19 GWh installati</strong>, con una crescita accelerata. Terna e il piano di sviluppo della rete indicano un’espansione oltre i <strong>70 GWh entro il 2030</strong>, a conferma del ruolo sempre più strategico delle batterie nel sistema energetico.</p>
+        </div>
 
-        
-<h3>Perché un sistema di accumulo energetico industriale?</h3>
-<p>
-  L’Italia è tra i mercati europei più dinamici per l’accumulo energetico.
-  Oggi conta circa <strong>19 GWh installati</strong>, con una crescita accelerata (<strong>+6 GWh nel solo 2025</strong>).
-</p>
-<p>
-  Terna e il piano di sviluppo della rete indicano un’espansione oltre i <strong>70 GWh entro il 2030</strong>, a conferma del ruolo sempre più strategico delle batterie nel sistema energetico.
-</p>
-            
-       
-        <div class="info-card"><h4>Riduzione dei picchi di potenza</h4><p>I <strong>picchi di consumo</strong>  incidono in modo significativo sulla bolletta energetica delle imprese.
-  Grazie ai sistemi di accumulo, è possibile fare <strong>- peak shaving -</strong> ossia coprire questi momenti utilizzando l’energia immagazzinata,
-  evitando di prelevare dalla rete nei <strong>momenti più critici</strong>.
-</p>
-<p>
-  Il risultato è una <strong>riduzione dei costi</strong> legati alla potenza e una maggiore stabilità dei consumi.</p></div>
-    
-        <div class="info-card"><h4>Valorizza l'energia prodotta</h4><p>L’energia prodotta dall'<strong>impianto fotovoltaico</strong> ma non utilizzata immediatamente rappresenta un’opportunità spesso sottovalutata.
-  Grazie ai sistemi di accumulo, può essere conservata e <strong>utilizzata o ceduta</strong> quando il suo valore è più elevato,
-  anziché nei momenti meno favorevoli.
-</p>
-<p>
-  In questo modo è possibile <strong>massimizzare il valore dell’energia prodotta,</strong>
-  migliorando la redditività dell’impianto.</p></div>
+        <div class="info-card">
+          <h4>Riduzione dei picchi di potenza</h4>
+          <p>I <strong>picchi di consumo</strong> incidono in modo significativo sulla bolletta energetica delle imprese. Grazie ai sistemi di accumulo, è possibile fare <strong>peak shaving</strong>, ossia coprire questi momenti utilizzando l’energia immagazzinata, evitando di prelevare dalla rete nei <strong>momenti più critici</strong>. Il risultato è una <strong>riduzione dei costi</strong> legati alla potenza e una maggiore stabilità dei consumi.</p>
+        </div>
 
-         <div class="info-card"><h4>Continuità operativa</h4><p>Anche brevi interruzioni della rete possono causare <strong>rallentamenti o costosi fermi produttivi.</strong>
-  I sistemi di accumulo intervengono automaticamente, <strong>garantendo energia nei momenti critici</strong>
-  e mantenendo attivi i processi aziendali.</p>
-</p>
-<p>
-  Il risultato è una maggiore continuità operativa con una significativa <strong>riduzione dei costi.</strong>
-</p></div>
+        <div class="info-card">
+          <h4>Valorizza l'energia prodotta</h4>
+          <p>L’energia prodotta dall'<strong>impianto fotovoltaico</strong> ma non utilizzata immediatamente rappresenta un’opportunità spesso sottovalutata. Grazie ai sistemi di accumulo, può essere conservata e <strong>utilizzata o ceduta</strong> quando il suo valore è più elevato, anziché nei momenti meno favorevoli. In questo modo è possibile <strong>massimizzare il valore dell’energia prodotta</strong>, migliorando la redditività dell’impianto.</p>
+        </div>
 
-
-
-
-        
+        <div class="info-card">
+          <h4>Continuità operativa</h4>
+          <p>Anche brevi interruzioni della rete possono causare <strong>rallentamenti o costosi fermi produttivi</strong>. I sistemi di accumulo intervengono automaticamente, <strong>garantendo energia nei momenti critici</strong> e mantenendo attivi i processi aziendali. Il risultato è una maggiore continuità operativa con una significativa <strong>riduzione dei costi</strong>.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <script>
-    const profileMap = {
-      giorno: { autoconsumo: 0.75, utilizzo: 0.35, taglia: 0.30 },
-      uniforme: { autoconsumo: 0.60, utilizzo: 0.50, taglia: 0.50 },
-      sera: { autoconsumo: 0.40, utilizzo: 0.70, taglia: 0.80 },
-      notte: { autoconsumo: 0.25, utilizzo: 0.75, taglia: 1.00 }
+    const sectorMap = {
+      industria: {
+        label: "Industria",
+        pvCoverage: 0.16,
+        pvAutoconsumo: 0.85,
+        storageFactor: 0.18,
+        pcsFactor: 0.45,
+        storageCycles: 220,
+        deltaPrice: 0.045,
+        scoreBoost: 1.1
+      },
+      cold_chain: {
+        label: "Catena del freddo",
+        pvCoverage: 0.18,
+        pvAutoconsumo: 0.95,
+        storageFactor: 0.16,
+        pcsFactor: 0.35,
+        storageCycles: 280,
+        deltaPrice: 0.04,
+        scoreBoost: 1.15
+      },
+      artigianato: {
+        label: "Artigianato",
+        pvCoverage: 0.14,
+        pvAutoconsumo: 0.90,
+        storageFactor: 0.12,
+        pcsFactor: 0.30,
+        storageCycles: 180,
+        deltaPrice: 0.04,
+        scoreBoost: 0.95
+      },
+      terziario: {
+        label: "Uffici e terziario",
+        pvCoverage: 0.12,
+        pvAutoconsumo: 0.92,
+        storageFactor: 0.10,
+        pcsFactor: 0.25,
+        storageCycles: 150,
+        deltaPrice: 0.035,
+        scoreBoost: 0.90
+      }
     };
-    const peakMap = { si: 0.20, no: 0.00, nonso: 0.08 };
+
+    const profileMap = {
+      giorno: { pvBonus: 1.00, storageBonus: 0.85 },
+      sera: { pvBonus: 0.70, storageBonus: 1.10 },
+      notte: { pvBonus: 0.45, storageBonus: 1.15 },
+      uniforme: { pvBonus: 0.90, storageBonus: 1.00 },
+      variabile: { pvBonus: 0.85, storageBonus: 1.05 }
+    };
+
+    const peakMap = {
+      si_frequenti: 1.15,
+      si_occasionali: 1.05,
+      no: 0.90,
+      nonso: 1.00
+    };
+
     const constants = {
-      produzionePerKwp: 1100,
+      produzionePerKwp: 1250,
       rendimentoBatteria: 0.90,
-      valoreUnitarioAccumulo: 0.12,
-      costoPerBlocco100kwh: 40000,
-      tagliaBloccoKwh: 100,
       batteriaMin: 100,
-      batteriaMax: 500
+      batteriaMax: 3000,
+      tagliaBloccoKwh: 10,
+      pcsMin: 50,
+      valoreStorageDefault: 0.04,
+      costoStoragePerKwh: 380,
+      costoPvPerKwp: 950
     };
 
     const form = document.getElementById('simulatorForm');
@@ -468,6 +552,9 @@
     const leadErrorBox = document.getElementById('leadErrorBox');
     const leadSuccessBox = document.getElementById('leadSuccessBox');
     const consumoAnnuoInput = document.getElementById('consumoAnnuo');
+    const potenzaImpegnataInput = document.getElementById('potenzaImpegnata');
+    const piccoMassimoInput = document.getElementById('piccoMassimo');
+    const fvPowerNumericInput = document.getElementById('fvPower');
 
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwLRoBAj4dA9vd3lFa6b_x0pDV7qZeE93JPwqhQ0ixsyUuJ39wxvUmCHU8UdhRQrMmpHg/exec';
 
@@ -492,11 +579,19 @@
     }
 
     function formatNumber(value, decimals) {
-      return new Intl.NumberFormat('it-IT', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(value);
+      return new Intl.NumberFormat('it-IT', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      }).format(value);
     }
 
     function formatCurrency(value, decimals) {
-      return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(value);
+      return new Intl.NumberFormat('it-IT', {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      }).format(value);
     }
 
     function setResult(id, text) {
@@ -537,27 +632,36 @@
       }
     }
 
-    function getRating(payback) {
-      if (!isFinite(payback)) return 'Non calcolabile';
-      if (payback < 4) return 'Convenienza molto alta';
-      if (payback < 6) return 'Convenienza alta';
-      if (payback < 8) return 'Convenienza media';
-      return 'Convenienza debole';
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function roundToStep(value, step) {
+      return Math.round(value / step) * step;
+    }
+
+    function getRating(score) {
+      if (score >= 8) return 'Convenienza molto alta';
+      if (score >= 6.5) return 'Convenienza alta';
+      if (score >= 5) return 'Convenienza media';
+      return 'Convenienza da approfondire';
     }
 
     document.querySelectorAll('input[name="fv"]').forEach(function (radio) {
       radio.addEventListener('change', toggleFvField);
     });
 
-    consumoAnnuoInput.addEventListener('input', function (event) {
-      const current = event.target.value;
-      const before = current.length;
-      const selection = event.target.selectionStart || current.length;
-      const formatted = formatThousandsInput(current);
-      event.target.value = formatted;
-      const diff = formatted.length - before;
-      const pos = Math.max(0, selection + diff);
-      event.target.setSelectionRange(pos, pos);
+    [consumoAnnuoInput, potenzaImpegnataInput, piccoMassimoInput, fvPowerNumericInput].forEach(function(input) {
+      input.addEventListener('input', function (event) {
+        const current = event.target.value;
+        const before = current.length;
+        const selection = event.target.selectionStart || current.length;
+        const formatted = formatThousandsInput(current);
+        event.target.value = formatted;
+        const diff = formatted.length - before;
+        const pos = Math.max(0, selection + diff);
+        event.target.setSelectionRange(pos, pos);
+      });
     });
 
     form.addEventListener('submit', function (event) {
@@ -567,11 +671,13 @@
 
       const consumoAnnuo = parseItalianNumber(document.getElementById('consumoAnnuo').value);
       const costoEnergia = parseItalianNumber(document.getElementById('costoEnergia').value);
-      const fvSelection = document.querySelector('input[name="fv"]:checked');
       const profilo = document.getElementById('profiloConsumo').value;
+      const settore = document.getElementById('settoreMerceologico').value;
       const picchiSelection = document.querySelector('input[name="picchi"]:checked');
-      const fvPower = parseItalianNumber(document.getElementById('fvPower').value);
+      const piccoMassimo = parseItalianNumber(document.getElementById('piccoMassimo').value);
       const potenzaImpegnata = parseItalianNumber(document.getElementById('potenzaImpegnata').value);
+      const fvSelection = document.querySelector('input[name="fv"]:checked');
+      const fvPower = parseItalianNumber(document.getElementById('fvPower').value);
 
       if (!isFinite(consumoAnnuo) || consumoAnnuo <= 0) {
         showError('Inserisci un consumo annuo valido.');
@@ -581,16 +687,24 @@
         showError("Inserisci un costo medio dell'energia valido.");
         return;
       }
-      if (!fvSelection) {
-        showError('Seleziona se hai già un impianto fotovoltaico.');
-        return;
-      }
       if (!profilo || !profileMap[profilo]) {
         showError('Seleziona quando consumi di più.');
         return;
       }
+      if (!settore || !sectorMap[settore]) {
+        showError('Seleziona il settore della tua azienda.');
+        return;
+      }
       if (!picchiSelection) {
-        showError('Indica se hai bollette alte per potenza o picchi di assorbimento.');
+        showError('Indica se hai picchi di assorbimento elevati.');
+        return;
+      }
+      if (!isFinite(potenzaImpegnata) || potenzaImpegnata <= 0) {
+        showError('Inserisci una potenza impegnata valida.');
+        return;
+      }
+      if (!fvSelection) {
+        showError('Seleziona se hai già un impianto fotovoltaico.');
         return;
       }
       if (fvSelection.value === 'si' && (!isFinite(fvPower) || fvPower <= 0)) {
@@ -598,58 +712,96 @@
         return;
       }
 
-      if (fvSelection.value === 'no') {
-        setResult('resBattery', 'Da valutare con FV');
-        setResult('resSavings', 'Stima non disponibile');
-        setResult('resPayback', 'Non calcolabile');
-        setResult('resScore', 'Serve valutazione FV + accumulo');
-        setResult('detail1', "Senza un impianto fotovoltaico esistente, questo simulatore non fornisce una stima affidabile dell'accumulo standalone.");
-        setResult('detail2', "Il massimo valore economico dell'accumulo emerge quando la batteria è abbinata a un impianto fotovoltaico con eccedenze da spostare.");
-        setResult('detail3', 'Ti conviene fare una simulazione combinata FV + accumulo per ottenere un business case più credibile.');
-        setResult('detail4', 'Hai inserito un consumo annuo di ' + formatNumber(consumoAnnuo, 0) + ' kWh e un costo energia di ' + formatCurrency(costoEnergia, 2) + '/kWh.');
-        resultsGrid.style.display = 'grid';
-        leadBox.style.display = 'block';
-        resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
+      const sector = sectorMap[settore];
+      const profile = profileMap[profilo];
+      const peakFactor = peakMap[picchiSelection.value];
+
+      const potenzaMedia = consumoAnnuo / 8760;
+      const piccoStimato = isFinite(piccoMassimo) && piccoMassimo > 0
+        ? piccoMassimo
+        : (
+          picchiSelection.value === 'si_frequenti' ? potenzaMedia * 2.4 :
+          picchiSelection.value === 'si_occasionali' ? potenzaMedia * 1.8 :
+          picchiSelection.value === 'no' ? potenzaMedia * 1.2 :
+          potenzaMedia * 1.6
+        );
+
+      const peakToAverageRatio = potenzaMedia > 0 ? piccoStimato / potenzaMedia : 1;
+
+      let pvConsigliato = 0;
+      if (fvSelection.value === 'si') {
+        pvConsigliato = fvPower;
+      } else {
+        pvConsigliato = consumoAnnuo * sector.pvCoverage / constants.produzionePerKwp;
+        pvConsigliato = clamp(roundToStep(pvConsigliato, 10), 30, 1000);
       }
 
-      const coeff = profileMap[profilo];
-      const produzioneFV = fvPower * constants.produzionePerKwp;
-      const autoconsumoDiretto = produzioneFV * coeff.autoconsumo;
-      const eccedenzaFV = Math.max(produzioneFV - autoconsumoDiretto, 0);
-      const energiaSpostataLorda = eccedenzaFV * coeff.utilizzo;
-      const energiaSpostataNetta = energiaSpostataLorda * constants.rendimentoBatteria;
-      const batteriaBase = fvPower * coeff.taglia;
-      const batteriaArrotondata = Math.ceil(Math.max(batteriaBase, constants.batteriaMin) / constants.tagliaBloccoKwh) * constants.tagliaBloccoKwh;
-      const batteriaKwh = Math.min(batteriaArrotondata, constants.batteriaMax);
-      const valoreUnitario = constants.valoreUnitarioAccumulo;
-      const risparmioEnergyShifting = energiaSpostataNetta * valoreUnitario;
-      const bonusPeak = risparmioEnergyShifting * peakMap[picchiSelection.value];
-      const risparmioTotale = risparmioEnergyShifting + bonusPeak;
-      const numeroBlocchi = batteriaKwh / constants.tagliaBloccoKwh;
-      const costoBatteria = numeroBlocchi * constants.costoPerBlocco100kwh;
-      const payback = risparmioTotale > 0 ? costoBatteria / risparmioTotale : Infinity;
-      const autoconsumoPercent = produzioneFV > 0 ? autoconsumoDiretto / produzioneFV * 100 : 0;
-      const coperturaConsumi = consumoAnnuo > 0 ? energiaSpostataNetta / consumoAnnuo * 100 : 0;
-      let potenzaText = 'Potenza impegnata non indicata: il beneficio da peak shaving è stimato in modo prudenziale.';
-      if (isFinite(potenzaImpegnata) && potenzaImpegnata > 0) {
-        potenzaText = 'Potenza impegnata indicata: ' + formatNumber(potenzaImpegnata, 0) + ' kW.';
-      }
+      const produzioneFV = pvConsigliato * constants.produzionePerKwp;
+      const autoconsumoPercentuale = clamp(sector.pvAutoconsumo * profile.pvBonus, 0.55, 0.97);
+      const autoconsumoFV = produzioneFV * autoconsumoPercentuale;
+      const risparmioFV = autoconsumoFV * costoEnergia;
 
-      setResult('resBattery', formatNumber(batteriaKwh, 0) + ' kWh');
+      let storageKwh = (consumoAnnuo * sector.storageFactor) / 365;
+      storageKwh = storageKwh * profile.storageBonus * peakFactor;
+      storageKwh = clamp(roundToStep(storageKwh, 10), constants.batteriaMin, constants.batteriaMax);
+
+      let pcsKw = potenzaImpegnata * sector.pcsFactor * peakFactor;
+      pcsKw = clamp(roundToStep(pcsKw, 5), constants.pcsMin, potenzaImpegnata);
+
+      const deltaPrezzo = Math.max(sector.deltaPrice, constants.valoreStorageDefault);
+      const energiaSpostataAnnua = storageKwh * sector.storageCycles;
+      const energiaUtileAnnua = energiaSpostataAnnua * constants.rendimentoBatteria;
+      const risparmioStorage = energiaUtileAnnua * deltaPrezzo;
+
+      const risparmioTotale = risparmioFV + risparmioStorage;
+
+      const costoStorage = storageKwh * constants.costoStoragePerKwh;
+      const costoPv = pvConsigliato * constants.costoPvPerKwp;
+      const investimentoTotale = costoStorage + costoPv;
+      const payback = risparmioTotale > 0 ? investimentoTotale / risparmioTotale : Infinity;
+
+      let score = 5.5;
+      score += sector.scoreBoost;
+      if (autoconsumoPercentuale > 0.9) score += 0.8;
+      if (peakToAverageRatio > 1.8) score += 0.8;
+      if (fvSelection.value === 'si') score += 0.4;
+      if (picchiSelection.value === 'si_frequenti') score += 0.7;
+      if (picchiSelection.value === 'no') score -= 0.4;
+      score = clamp(score, 3.5, 9.5);
+
+      setResult('resBattery', formatNumber(storageKwh, 0) + ' kWh / ' + formatNumber(pcsKw, 0) + ' kW');
+      setResult('resPv', formatNumber(pvConsigliato, 0) + ' kWp');
       setResult('resSavings', formatCurrency(risparmioTotale, 0));
-      setResult('resPayback', isFinite(payback) ? formatNumber(payback, 1) + ' anni' : 'Non calcolabile');
-      setResult('resScore', getRating(payback));
-      setResult('detail1', 'Produzione FV stimata: ' + formatNumber(produzioneFV, 0) + ' kWh/anno. Autoconsumo diretto stimato: ' + formatNumber(autoconsumoPercent, 0) + '%.');
-      setResult('detail2', 'Energia annuale spostata dalla batteria: ' + formatNumber(energiaSpostataNetta, 0) + ' kWh. Valore unitario dell\'accumulo: ' + formatCurrency(valoreUnitario, 2) + '/kWh.');
-      setResult('detail3', 'Costo indicativo del sistema di accumulo: ' + formatCurrency(costoBatteria, 0) + ' (' + formatNumber(numeroBlocchi, 0) + ' blocchi da 100 kWh). Copertura sui consumi annuali: ' + formatNumber(coperturaConsumi, 1) + '%.');
-      setResult('detail4', potenzaText);
+      setResult('resScore', getRating(score));
+
+      setResult(
+        'detail1',
+        'Profilo rilevato: ' + sector.label + '. Storage orientativo calcolato su priorità energetica e presenza di picchi.'
+      );
+
+      setResult(
+        'detail2',
+        'Produzione FV stimata: ' + formatNumber(produzioneFV, 0) + ' kWh/anno. Autoconsumo stimato: ' + formatNumber(autoconsumoPercentuale * 100, 0) + '%.'
+      );
+
+      setResult(
+        'detail3',
+        'Risparmio annuo stimato da FV + storage: ' + formatCurrency(risparmioTotale, 0) + '. Il contributo dello storage è calcolato sullo spostamento energetico.'
+      );
+
+      let detail4 = 'Potenza media stimata: ' + formatNumber(potenzaMedia, 1) + ' kW. Picco stimato: ' + formatNumber(piccoStimato, 0) + ' kW.';
+      if (isFinite(payback)) {
+        detail4 += ' Tempo di rientro orientativo: ' + formatNumber(payback, 1) + ' anni.';
+      }
+      detail4 += ' Il beneficio da riduzione kW/picchi non è ancora incluso in modo analitico.';
+      setResult('detail4', detail4);
+
       resultsGrid.style.display = 'grid';
       leadBox.style.display = 'block';
       resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-        leadForm.addEventListener('submit', async function (event) {
+    leadForm.addEventListener('submit', async function (event) {
       event.preventDefault();
       clearLeadMessages();
 
@@ -660,18 +812,20 @@
         telefono: document.getElementById('telefonoLead').value.trim(),
         consumoAnnuo: document.getElementById('consumoAnnuo').value.trim(),
         costoEnergia: document.getElementById('costoEnergia').value.trim(),
+        profiloConsumo: document.getElementById('profiloConsumo').value,
+        settoreMerceologico: document.getElementById('settoreMerceologico').value,
+        picchi: document.querySelector('input[name="picchi"]:checked')
+          ? document.querySelector('input[name="picchi"]:checked').value
+          : '',
+        piccoMassimo: document.getElementById('piccoMassimo').value.trim(),
+        potenzaImpegnata: document.getElementById('potenzaImpegnata').value.trim(),
         haFotovoltaico: document.querySelector('input[name="fv"]:checked')
           ? document.querySelector('input[name="fv"]:checked').value
           : '',
         potenzaFotovoltaico: document.getElementById('fvPower').value.trim(),
-        profiloConsumo: document.getElementById('profiloConsumo').value,
-        picchi: document.querySelector('input[name="picchi"]:checked')
-          ? document.querySelector('input[name="picchi"]:checked').value
-          : '',
-        potenzaImpegnata: document.getElementById('potenzaImpegnata').value.trim(),
         batteriaConsigliata: document.getElementById('resBattery').textContent,
+        fotovoltaicoConsigliato: document.getElementById('resPv').textContent,
         risparmioStimato: document.getElementById('resSavings').textContent,
-        paybackStimato: document.getElementById('resPayback').textContent,
         valutazione: document.getElementById('resScore').textContent,
         origine: window.location.href
       };
@@ -709,6 +863,16 @@
         leadSuccessBox.textContent =
           'Grazie ' + payload.nomeCognome + ', la richiesta per ' + payload.azienda + ' è stata inviata correttamente.';
         leadForm.reset();
+
+        const fvChecked = document.querySelector('input[name="fv"]:checked');
+        if (fvChecked) {
+          fvChecked.checked = false;
+        }
+        const picchiChecked = document.querySelector('input[name="picchi"]:checked');
+        if (picchiChecked) {
+          picchiChecked.checked = false;
+        }
+        toggleFvField();
       } catch (error) {
         showLeadError('Invio non riuscito: ' + error.message);
       }
