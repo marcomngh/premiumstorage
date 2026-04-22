@@ -745,8 +745,11 @@ const constants = {
 
       let storageKwh = (consumoAnnuo * sector.storageFactor) / 365;
       storageKwh = storageKwh * profile.storageBonus * peakFactor;
-      storageKwh = clamp(roundToStep(storageKwh, 10), constants.batteriaMin, constants.batteriaMax);
-
+storageKwh = clamp(
+  roundToStep(storageKwh, constants.tagliaBloccoKwh),
+  constants.batteriaMin,
+  constants.batteriaMax
+);
       let pcsKw = potenzaImpegnata * sector.pcsFactor * peakFactor;
       pcsKw = clamp(roundToStep(pcsKw, 5), constants.pcsMin, potenzaImpegnata);
 
