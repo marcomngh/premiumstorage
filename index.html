@@ -638,9 +638,9 @@ const constants = {
       return Math.min(Math.max(value, min), max);
     }
 
-    function roundToStep(value, step) {
-      return Math.round(value / step) * step;
-    }
+function roundToStep(value, step) {
+  return Math.floor(value / step) * step;
+}
 
     function getRating(score) {
       if (score >= 8) return 'Convenienza molto alta';
