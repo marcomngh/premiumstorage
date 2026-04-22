@@ -535,7 +535,7 @@ const constants = {
   rendimentoBatteria: 0.90,
   batteriaMin: 100,
   batteriaMax: 3000,
-  tagliaBloccoKwh: 10,
+  tagliaBloccoKwh: 100,
   pcsMin: 50,
   valoreStorageTimeShift: 0.04,
   valoreStoragePv: 0.10,
@@ -782,7 +782,7 @@ const risparmioStorage = risparmioStorageTimeShift + risparmioStoragePv;
       if (picchiSelection.value === 'no') score -= 0.4;
       score = clamp(score, 3.5, 9.5);
 
-      setResult('resBattery', formatNumber(storageKwh, 0) + ' kWh / ' + formatNumber(pcsKw, 0) + ' kW');
+      setResult('resBattery', formatNumber(storageKwh, 0) + ' kWh');
       setResult('resPv', formatNumber(pvConsigliato, 0) + ' kWp');
       setResult('resSavings', formatCurrency(risparmioTotale, 0));
       setResult('resScore', getRating(score));
