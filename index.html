@@ -264,6 +264,13 @@
       .hero { padding-top: 26px; }
       .card { padding: 20px; }
     }
+    .icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.5;
+  margin-right: 6px;
+  vertical-align: middle;
+}
   </style>
 </head>
 <body>
@@ -393,7 +400,13 @@
 
       <div id="resultsGrid" class="results-grid">
        <div class="result-card">
-          <div class="label">Fotovoltaico consigliato</div>
+          <div class="label">
+  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <circle cx="12" cy="12" r="4"></circle>
+    ...
+  </svg>
+  Fotovoltaico consigliato
+</div>
           <div class="big" id="resPv">150 kWp</div>
           <p id="detail2">Valore orientativo in base al profilo di consumo.</p>
         </div>
