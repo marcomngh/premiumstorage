@@ -18,7 +18,9 @@
       --shadow: 0 10px 30px rgba(0,0,0,0.06);
       --radius: 24px;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Inter, Arial, Helvetica, sans-serif;
@@ -26,17 +28,21 @@
       color: var(--text);
       line-height: 1.5;
     }
+
     .container {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
     }
+
     .hero { padding: 48px 0 24px; }
+
     .grid {
       display: grid;
       grid-template-columns: 1.08fr 0.92fr;
       gap: 32px;
       align-items: start;
     }
+
     .pill {
       display: inline-block;
       padding: 8px 14px;
@@ -46,82 +52,101 @@
       color: var(--muted);
       font-size: 14px;
     }
+
     h1 {
       font-size: clamp(34px, 5vw, 56px);
       line-height: 1.05;
       margin: 18px 0 14px;
       letter-spacing: -0.03em;
     }
+
     .lead {
       font-size: 18px;
       color: var(--muted);
       max-width: 760px;
     }
+
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
       margin-top: 28px;
     }
+
     .stat, .card, .result-card, .info-card {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
+
     .stat { padding: 18px; }
-    .stat .label, .result-card .label {
+
+    .stat .label,
+    .result-card .label {
       font-size: 13px;
       color: var(--muted);
     }
+
     .stat .value {
       margin-top: 6px;
       font-size: 24px;
       font-weight: 700;
       letter-spacing: -0.03em;
     }
+
     .card {
       padding: 26px;
       background: linear-gradient(180deg, #fff 0%, #fbfbfb 100%);
     }
+
     .card h2 {
       margin: 0 0 8px;
       font-size: 28px;
       letter-spacing: -0.03em;
     }
+
     .card p.top-note {
       margin: 0 0 22px;
       color: var(--muted);
       font-size: 14px;
     }
+
     form {
       display: grid;
       gap: 18px;
     }
+
     .two-col {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
     }
+
     .field {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
+
     .field.full { grid-column: 1 / -1; }
+
     label {
       font-size: 14px;
       font-weight: 600;
     }
+
     .req {
       color: #999;
       margin-left: 4px;
     }
+
     .hint {
       font-size: 12px;
       color: var(--muted);
       margin-top: -2px;
     }
+
     input, select {
       width: 100%;
       padding: 15px 16px;
@@ -132,11 +157,14 @@
       outline: none;
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
+
     input:focus, select:focus {
       border-color: #bdbdbd;
       box-shadow: 0 0 0 4px rgba(0,0,0,0.04);
     }
+
     .input-wrap { position: relative; }
+
     .suffix {
       position: absolute;
       right: 14px;
@@ -146,12 +174,15 @@
       color: var(--muted);
       pointer-events: none;
     }
+
     .with-suffix input { padding-right: 90px; }
+
     .radio-group {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
+
     .radio-pill {
       display: inline-flex;
       align-items: center;
@@ -162,6 +193,7 @@
       background: #fff;
       font-size: 14px;
     }
+
     .note-box {
       padding: 16px 18px;
       border: 1px solid var(--line);
@@ -170,6 +202,7 @@
       color: var(--muted);
       font-size: 14px;
     }
+
     .error-box {
       display: none;
       padding: 16px 18px;
@@ -179,6 +212,7 @@
       color: #9b2c2c;
       font-size: 14px;
     }
+
     .btn {
       border: 0;
       border-radius: 20px;
@@ -190,14 +224,19 @@
       box-shadow: var(--shadow);
       transition: transform 0.15s ease, opacity 0.15s ease;
     }
+
     .btn:hover {
       opacity: 0.94;
       transform: translateY(-1px);
     }
+
     .btn-calc { background: var(--orange); }
     .btn-lead { background: var(--green); }
+
     .section { padding: 16px 0 28px; }
+
     .section-head { margin-bottom: 18px; }
+
     .eyebrow {
       font-size: 12px;
       letter-spacing: 0.18em;
@@ -206,37 +245,44 @@
       font-weight: 700;
       margin-bottom: 8px;
     }
+
     h3 {
       font-size: 30px;
       letter-spacing: -0.03em;
       margin: 0 0 6px;
     }
+
     .section-copy {
       color: var(--muted);
       max-width: 760px;
       font-size: 14px;
     }
+
     .results-grid {
       display: none;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin-top: 20px;
     }
+
     .result-card {
       padding: 20px;
       background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
     }
+
     .result-card .big {
       margin-top: 8px;
       font-size: 30px;
       font-weight: 800;
       letter-spacing: -0.04em;
     }
+
     .result-card p {
       margin: 10px 0 0;
       color: var(--muted);
       font-size: 14px;
     }
+
     .info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -244,36 +290,53 @@
       margin-top: 12px;
       padding-bottom: 40px;
     }
+
     .info-card { padding: 22px; }
+
     .info-card h4 {
       margin: 0 0 10px;
       font-size: 20px;
       letter-spacing: -0.02em;
     }
+
     .info-card p {
       margin: 0;
       color: var(--muted);
       font-size: 14px;
     }
+
     #leadBox {
       display: none;
       margin-top: 24px;
     }
+
+    .label-with-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      fill: none;
+      flex-shrink: 0;
+    }
+
     @media (max-width: 980px) {
-      .grid, .results-grid, .info-grid, .stats, .two-col { grid-template-columns: 1fr; }
+      .grid,
+      .results-grid,
+      .info-grid,
+      .stats,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
       .hero { padding-top: 26px; }
       .card { padding: 20px; }
     }
-    .icon {
-  width: 18px;
-  height: 18px;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  fill: none;
-  margin-right: 8px;
-  vertical-align: -3px;
-  flex-shrink: 0;
-}
   </style>
 </head>
 <body>
@@ -283,10 +346,20 @@
         <div class="pill">Simulatore preliminare di convenienza</div>
         <h1>Scopri se fotovoltaico e batteria di accumulo convengono davvero alla tua azienda.</h1>
         <p class="lead">Inserisci pochi dati essenziali e ottieni una prima stima orientativa di fotovoltaico, storage e risparmio economico per la tua attività.</p>
+
         <div class="stats">
-          <div class="stat"><div class="label">Compilazione</div><div class="value">2 minuti</div></div>
-          <div class="stat"><div class="label">Output</div><div class="value">Stima immediata</div></div>
-          <div class="stat"><div class="label">Target</div><div class="value">Imprese e industria</div></div>
+          <div class="stat">
+            <div class="label">Compilazione</div>
+            <div class="value">2 minuti</div>
+          </div>
+          <div class="stat">
+            <div class="label">Output</div>
+            <div class="value">Stima immediata</div>
+          </div>
+          <div class="stat">
+            <div class="label">Target</div>
+            <div class="value">Imprese e industria</div>
+          </div>
         </div>
       </div>
 
@@ -383,9 +456,10 @@
             </div>
           </div>
 
-        <div class="note-box">
-  <strong>Nota:</strong> i campi contrassegnati con <strong>*</strong> sono obbligatori.<br>
-</div>
+          <div class="note-box">
+            <strong>Nota:</strong> i campi contrassegnati con <strong>*</strong> sono obbligatori.
+          </div>
+
           <div id="errorBox" class="error-box"></div>
           <button type="submit" class="btn btn-calc">Calcola la convenienza</button>
         </form>
@@ -402,53 +476,71 @@
       </div>
 
       <div id="resultsGrid" class="results-grid">
-       <div class="result-card">
-          <div class="label">
-  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-    <circle cx="12" cy="12" r="4"></circle>
-    ...
- <div class="label label-with-icon">
-  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-    <circle cx="12" cy="12" r="4"></circle>
-    <line x1="12" y1="2" x2="12" y2="5"></line>
-    <line x1="12" y1="19" x2="12" y2="22"></line>
-    <line x1="2" y1="12" x2="5" y2="12"></line>
-    <line x1="19" y1="12" x2="22" y2="12"></line>
-    <line x1="4.2" y1="4.2" x2="6.3" y2="6.3"></line>
-    <line x1="17.7" y1="17.7" x2="19.8" y2="19.8"></line>
-    <line x1="4.2" y1="19.8" x2="6.3" y2="17.7"></line>
-    <line x1="17.7" y1="6.3" x2="19.8" y2="4.2"></line>
-  </svg>
-  <span>Fotovoltaico consigliato</span>
-</div>
+        <div class="result-card">
+          <div class="label label-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <line x1="12" y1="2" x2="12" y2="5"></line>
+              <line x1="12" y1="19" x2="12" y2="22"></line>
+              <line x1="2" y1="12" x2="5" y2="12"></line>
+              <line x1="19" y1="12" x2="22" y2="12"></line>
+              <line x1="4.2" y1="4.2" x2="6.3" y2="6.3"></line>
+              <line x1="17.7" y1="17.7" x2="19.8" y2="19.8"></line>
+              <line x1="4.2" y1="19.8" x2="6.3" y2="17.7"></line>
+              <line x1="17.7" y1="6.3" x2="19.8" y2="4.2"></line>
+            </svg>
+            <span>Fotovoltaico consigliato</span>
+          </div>
           <div class="big" id="resPv">150 kWp</div>
           <p id="detail2">Valore orientativo in base al profilo di consumo.</p>
         </div>
-      
+
         <div class="result-card">
-          <div class="label">Storage consigliato</div>
-          <div class="big" id="resBattery">120 kWh / 60 kW</div>
+          <div class="label label-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="2" y="7" width="18" height="10" rx="2"></rect>
+              <line x1="22" y1="11" x2="22" y2="13"></line>
+            </svg>
+            <span>Storage consigliato</span>
+          </div>
+          <div class="big" id="resBattery">120 kWh</div>
           <p id="detail1">Stima preliminare in base ai dati inseriti.</p>
         </div>
 
         <div class="result-card">
-          <div class="label">Risparmio annuo stimato</div>
+          <div class="label label-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M9 12h6"></path>
+              <path d="M12 9v6"></path>
+            </svg>
+            <span>Risparmio annuo stimato</span>
+          </div>
           <div class="big" id="resSavings">€ 11.400</div>
           <p id="detail3">Valore indicativo basato su FV + accumulo.</p>
         </div>
 
         <div class="result-card">
-          <div class="label">Valutazione</div>
+          <div class="label label-with-icon">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="4" y1="20" x2="20" y2="20"></line>
+              <rect x="6" y="10" width="2" height="6"></rect>
+              <rect x="11" y="7" width="2" height="9"></rect>
+              <rect x="16" y="4" width="2" height="12"></rect>
+            </svg>
+            <span>Valutazione</span>
+          </div>
           <div class="big" id="resScore">Convenienza alta</div>
           <p id="detail4">Ottimo potenziale per accumulo industriale.</p>
         </div>
       </div>
-
-      <div id="leadBox" class="card">
+            <div id="leadBox" class="card">
         <h2 style="font-size:24px; margin:0 0 8px;">Vuoi una simulazione precisa per la tua azienda?</h2>
-        <p class="top-note" style="margin-bottom:18px;">Lascia i tuoi riferimenti e ti ricontatteremo per un'analisi più accurata.
-  Per una valutazione precisa saranno necessari bollette, profilo di carico e dati tecnici dell'impianto.
-</div></p>
+        <p class="top-note" style="margin-bottom:18px;">
+          Lascia i tuoi riferimenti e ti ricontatteremo per un'analisi più accurata.
+          Per una valutazione precisa saranno necessari bollette, profilo di carico e dati tecnici dell'impianto.
+        </p>
+
         <form id="leadForm">
           <div class="two-col">
             <div class="field">
@@ -468,6 +560,7 @@
               <input id="telefonoLead" type="text" placeholder="Es. 333 1234567" />
             </div>
           </div>
+
           <div id="leadErrorBox" class="error-box"></div>
           <div id="leadSuccessBox" class="note-box" style="display:none;">Grazie, richiesta registrata.</div>
           <button type="submit" class="btn btn-lead">Invia richiesta</button>
@@ -561,19 +654,19 @@
       nonso: 1.00
     };
 
-const constants = {
-  produzionePerKwp: 1250,
-  rendimentoBatteria: 0.90,
-  batteriaMin: 100,
-  batteriaMax: 3000,
-  tagliaBloccoKwh: 100,
-  pcsMin: 50,
-  valoreStorageTimeShift: 0.04,
-  valoreStoragePv: 0.10,
-  quotaEnergiaStorageDaFV: 0.50,
-  costoStoragePerKwh: 380,
-  costoPvPerKwp: 950
-};
+    const constants = {
+      produzionePerKwp: 1250,
+      rendimentoBatteria: 0.90,
+      batteriaMin: 100,
+      batteriaMax: 3000,
+      tagliaBloccoKwh: 100,
+      pcsMin: 50,
+      valoreStorageTimeShift: 0.04,
+      valoreStoragePv: 0.10,
+      quotaEnergiaStorageDaFV: 0.50,
+      costoStoragePerKwh: 380,
+      costoPvPerKwp: 950
+    };
 
     const form = document.getElementById('simulatorForm');
     const fvField = document.getElementById('fvField');
@@ -669,9 +762,9 @@ const constants = {
       return Math.min(Math.max(value, min), max);
     }
 
-function roundToStep(value, step) {
-  return Math.floor(value / step) * step;
-}
+    function roundToStep(value, step) {
+      return Math.floor(value / step) * step;
+    }
 
     function getRating(score) {
       if (score >= 8) return 'Convenienza molto alta';
@@ -776,29 +869,30 @@ function roundToStep(value, step) {
 
       let storageKwh = (consumoAnnuo * sector.storageFactor) / 365;
       storageKwh = storageKwh * profile.storageBonus * peakFactor;
-storageKwh = clamp(
-  roundToStep(storageKwh, constants.tagliaBloccoKwh),
-  constants.batteriaMin,
-  constants.batteriaMax
-);
+      storageKwh = clamp(
+        roundToStep(storageKwh, constants.tagliaBloccoKwh),
+        constants.batteriaMin,
+        constants.batteriaMax
+      );
+
       let pcsKw = potenzaImpegnata * sector.pcsFactor * peakFactor;
       pcsKw = clamp(roundToStep(pcsKw, 5), constants.pcsMin, potenzaImpegnata);
 
       const energiaSpostataAnnua = storageKwh * sector.storageCycles;
-const energiaUtileAnnua = energiaSpostataAnnua * constants.rendimentoBatteria;
+      const energiaUtileAnnua = energiaSpostataAnnua * constants.rendimentoBatteria;
 
-const quotaEnergiaDaFV = constants.quotaEnergiaStorageDaFV;
-const quotaEnergiaTimeShift = 1 - quotaEnergiaDaFV;
+      const quotaEnergiaDaFV = constants.quotaEnergiaStorageDaFV;
+      const quotaEnergiaTimeShift = 1 - quotaEnergiaDaFV;
 
-const deltaPrezzoTimeShift = Math.max(sector.deltaPrice, constants.valoreStorageTimeShift);
-const deltaPrezzoPv = constants.valoreStoragePv;
+      const deltaPrezzoTimeShift = Math.max(sector.deltaPrice, constants.valoreStorageTimeShift);
+      const deltaPrezzoPv = constants.valoreStoragePv;
 
-const energiaTimeShift = energiaUtileAnnua * quotaEnergiaTimeShift;
-const energiaDaFV = energiaUtileAnnua * quotaEnergiaDaFV;
+      const energiaTimeShift = energiaUtileAnnua * quotaEnergiaTimeShift;
+      const energiaDaFV = energiaUtileAnnua * quotaEnergiaDaFV;
 
-const risparmioStorageTimeShift = energiaTimeShift * deltaPrezzoTimeShift;
-const risparmioStoragePv = energiaDaFV * deltaPrezzoPv;
-const risparmioStorage = risparmioStorageTimeShift + risparmioStoragePv;
+      const risparmioStorageTimeShift = energiaTimeShift * deltaPrezzoTimeShift;
+      const risparmioStoragePv = energiaDaFV * deltaPrezzoPv;
+      const risparmioStorage = risparmioStorageTimeShift + risparmioStoragePv;
 
       const risparmioTotale = risparmioFV + risparmioStorage;
 
@@ -919,6 +1013,7 @@ const risparmioStorage = risparmioStorageTimeShift + risparmioStoragePv;
         if (picchiChecked) {
           picchiChecked.checked = false;
         }
+
         toggleFvField();
       } catch (error) {
         showLeadError('Invio non riuscito: ' + error.message);
