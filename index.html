@@ -337,6 +337,72 @@
       .hero { padding-top: 26px; }
       .card { padding: 20px; }
     }
+
+.box-iper {
+  width: 100%;
+  padding: 40px;
+  margin: 40px 0;
+  border-radius: 16px;
+
+  /* Colore premium */
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #ffffff;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.box-iper h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.box-iper p {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.box-iper .highlight {
+  font-size: 22px;
+  font-weight: bold;
+  color: #22c55e; /* verde energia */
+}
+
+.box-iper .numeri {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.box-iper .numeri div {
+  margin: 10px;
+}
+
+.box-iper .numeri span {
+  display: block;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.box-iper .numeri strong {
+  font-size: 22px;
+}
+
+.box-iper .risparmio strong {
+  color: #22c55e;
+  font-size: 24px;
+}
+
+.box-iper .nota {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+
+
+
+    
   </style>
 </head>
 <body>
@@ -1059,7 +1125,43 @@ I sistemi di accumulo stanno diventando una leva strategica per ridurre i costi 
         showLeadError('Invio non riuscito: ' + error.message);
       }
     });
+<div class="box-iper">
+  <h2> Novità Iperammortamento 2026!</h2>
+  
+  <p>
+    Se il tuo impianto di accumulo è <strong>interconnesso e gestito da sistemi intelligenti (EMS/HEMS)</strong>, 
+    può rientrare tra le tecnologie <strong>4.0</strong>.
+  </p>
 
+  <p class="highlight">
+     Ammortamento fino al <strong>280%</strong> della spesa
+  </p>
+
+  <div class="numeri">
+    <div>
+      <span>Investi</span>
+      <strong>100.000 €</strong>
+    </div>
+    <div>
+      <span>Ammortizzi</span>
+      <strong>280.000 €</strong>
+    </div>
+    <div class="risparmio">
+      <span>Risparmio fiscale</span>
+      <strong>fino a 40.000 – 45.000 €</strong>
+    </div>
+  </div>
+
+  <p class="nota">
+     Valido solo per sistemi conformi ai requisiti 4.0
+  </p>
+</div>
+
+
+
+
+
+    
     toggleFvField();
   </script>
 </body>
