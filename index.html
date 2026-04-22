@@ -530,17 +530,19 @@
       nonso: 1.00
     };
 
-    const constants = {
-      produzionePerKwp: 1250,
-      rendimentoBatteria: 0.90,
-      batteriaMin: 100,
-      batteriaMax: 3000,
-      tagliaBloccoKwh: 10,
-      pcsMin: 50,
-      valoreStorageDefault: 0.04,
-      costoStoragePerKwh: 380,
-      costoPvPerKwp: 950
-    };
+const constants = {
+  produzionePerKwp: 1250,
+  rendimentoBatteria: 0.90,
+  batteriaMin: 100,
+  batteriaMax: 3000,
+  tagliaBloccoKwh: 10,
+  pcsMin: 50,
+  valoreStorageTimeShift: 0.04,
+  valoreStoragePv: 0.10,
+  quotaEnergiaStorageDaFV: 0.50,
+  costoStoragePerKwh: 380,
+  costoPvPerKwp: 950
+};
 
     const form = document.getElementById('simulatorForm');
     const fvField = document.getElementById('fvField');
@@ -748,10 +750,21 @@
       let pcsKw = potenzaImpegnata * sector.pcsFactor * peakFactor;
       pcsKw = clamp(roundToStep(pcsKw, 5), constants.pcsMin, potenzaImpegnata);
 
-      const deltaPrezzo = Math.max(sector.deltaPrice, constants.valoreStorageDefault);
       const energiaSpostataAnnua = storageKwh * sector.storageCycles;
-      const energiaUtileAnnua = energiaSpostataAnnua * constants.rendimentoBatteria;
-      const risparmioStorage = energiaUtileAnnua * deltaPrezzo;
+const energiaUtileAnnua = energiaSpostataAnnua * constants.rendimentoBatteria;
+
+const quotaEnergiaDaFV = constants.quotaEnergiaStorageDaFV;
+const quotaEnergiaTimeShift = 1 - quotaEnergiaDaFV;
+
+const deltaPrezzoTimeShift = Math.max(sector.deltaPrice, constants.valoreStorageTimeShift);
+const deltaPrezzoPv = constants.valoreStoragePv;
+
+const energiaTimeShift = energiaUtileAnnua * quotaEnergiaTimeShift;
+const energiaDaFV = energiaUtileAnnua * quotaEnergiaDaFV;
+
+const risparmioStorageTimeShift = energiaTimeShift * deltaPrezzoTimeShift;
+const risparmioStoragePv = energiaDaFV * deltaPrezzoPv;
+const risparmioStorage = risparmioStorageTimeShift + risparmioStoragePv;
 
       const risparmioTotale = risparmioFV + risparmioStorage;
 
@@ -776,7 +789,7 @@
 
       setResult(
         'detail1',
-        'Profilo rilevato: ' + sector.label + '. Storage orientativo calcolato su priorità energetica e presenza di picchi.'
+        'Profilo rilevato: ' + sector.label + '. Storage orientativo calcolato su priorità energetica, presenza di picchi e valorizzazione dell’energia FV accumulata.'
       );
 
       setResult(
@@ -786,7 +799,7 @@
 
       setResult(
         'detail3',
-        'Risparmio annuo stimato da FV + storage: ' + formatCurrency(risparmioTotale, 0) + '. Il contributo dello storage è calcolato sullo spostamento energetico.'
+        'Risparmio annuo stimato da FV + storage: ' + formatCurrency(risparmioTotale, 0) + '. Lo storage è calcolato considerando sia il time shifting sia la valorizzazione dell’energia fotovoltaica accumulata invece che ceduta.'
       );
 
       let detail4 = 'Potenza media stimata: ' + formatNumber(potenzaMedia, 1) + ' kW. Picco stimato: ' + formatNumber(piccoStimato, 0) + ' kW.';
