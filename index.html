@@ -5,37 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Premium Storage - Simulatore Accumulo Industriale</title>
   <style>
-   <head>
-  <meta charset="UTF-8">
-  <title>Premium Storage</title>
+    .ps-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid #eee;
+    }
 
- .ps-navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid #eee;
-}
+    .ps-nav-container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 20px 0 8px 0;
+      display: flex;
+      align-items: center;
+    }
 
-.ps-nav-container {
-  width: min(1180px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 20px 0 8px 0;
-  display: flex;
-  align-items: center;
-}
+    .ps-logo img {
+      height: 34px;
+      width: auto;
+      display: block;
+    }
 
-.ps-logo img {
-  height: 34px;
-  width: auto;
-  display: block;
-}
-
-</head>
-      
+    :root {
     :root {
       --bg: #f6f7f8;
       --card: #ffffff;
@@ -58,6 +53,7 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
+      padding-top: 72px;
     }
 
     .container {
@@ -476,12 +472,12 @@
 
   .box-iper .numeri strong {
     font-size: 24px;
-  }
+  
   }
 .spazio-contatto {
   width: min(1180px, calc(100% - 32px));
   margin: 70px auto 0 auto;
-}
+
 }
 .contatto-rapido {
   width: 100%;
@@ -570,7 +566,7 @@
   background: #16a34a;
 }
 
-}
+
   </style>
 </head>
 <body>
