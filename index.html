@@ -454,9 +454,9 @@
 }
 .contatto-rapido {
   width: 100%;
-  max-width: 1100px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 34px;
+  padding: 32px;
   border-radius: 18px;
   background: #f8fafc;
   border: 1px solid #e5e7eb;
@@ -468,7 +468,6 @@
   font-size: 22px;
   line-height: 1.25;
   color: #0f172a;
-  text-align: left;
 }
 
 .contatto-rapido p {
@@ -476,7 +475,6 @@
   font-size: 16px;
   line-height: 1.5;
   color: #334155;
-  text-align: left;
 }
 
 .contatto-rapido .sub {
@@ -486,14 +484,13 @@
 }
 
 .mini-form-contatto {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  width: 100%;
 }
 
 .mini-field {
   display: flex;
   flex-direction: column;
+  margin-bottom: 16px;
 }
 
 .mini-field label {
@@ -501,7 +498,6 @@
   font-size: 14px;
   font-weight: 600;
   color: #0f172a;
-  text-align: left;
 }
 
 .mini-field input,
@@ -523,11 +519,10 @@
 }
 
 .mini-submit {
-  grid-column: 1 / -1;
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
-.mini-submit button {
+.btn-mini-submit {
   width: 100%;
   padding: 16px 24px;
   background: #22c55e;
@@ -537,21 +532,12 @@
   font-size: 17px;
   font-weight: 700;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
-.mini-submit button:hover {
+.btn-mini-submit:hover {
   background: #16a34a;
 }
-
-@media (max-width: 768px) {
-  .contatto-rapido {
-    padding: 24px 18px;
-  }
-
-  .mini-form-contatto {
-    grid-template-columns: 1fr;
-  }
-
 
 }
   </style>
@@ -960,7 +946,7 @@ I sistemi di accumulo stanno diventando una leva strategica per ridurre i costi 
       Lasciaci i tuoi contatti e ti richiamiamo noi.
     </p>
 
-    <div class="mini-form-contatto">
+    <form class="mini-form-contatto" id="miniLeadForm">
       <div class="mini-field">
         <label for="azienda_rapida">Azienda</label>
         <input type="text" id="azienda_rapida" name="azienda_rapida" placeholder="Nome azienda">
@@ -1044,9 +1030,9 @@ I sistemi di accumulo stanno diventando una leva strategica per ridurre i costi 
       </div>
 
       <div class="mini-submit">
-        <button type="button">Ti richiamiamo noi</button>
+        <button type="submit" class="btn-mini-submit">Invia richiesta</button>
       </div>
-    </div>
+    </form>
   </div>
 </div>
       
