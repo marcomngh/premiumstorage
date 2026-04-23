@@ -452,47 +452,107 @@
   max-width: 1100px;
   margin: 70px auto 0 auto;
 }
-
 .contatto-rapido {
   width: 100%;
-  padding: 28px;
-  border-radius: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 34px;
+  border-radius: 18px;
   background: #f8fafc;
-  text-align: center;
   border: 1px solid #e5e7eb;
   box-sizing: border-box;
 }
 
 .contatto-rapido h3 {
-  font-size: 22px;
   margin: 0 0 12px 0;
+  font-size: 22px;
+  line-height: 1.25;
   color: #0f172a;
+  text-align: left;
 }
 
 .contatto-rapido p {
-  font-size: 16px;
   margin: 0 0 10px 0;
+  font-size: 16px;
+  line-height: 1.5;
   color: #334155;
+  text-align: left;
 }
 
 .contatto-rapido .sub {
-  font-size: 14px;
+  margin-bottom: 22px;
+  font-size: 15px;
   color: #64748b;
 }
 
-.btn-contatto {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 14px 28px;
-  background: #22c55e;
-  color: #0f172a;
-  border-radius: 10px;
-  font-weight: bold;
-  text-decoration: none;
+.mini-form-contatto {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
-.btn-contatto:hover {
+.mini-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-field label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  text-align: left;
+}
+
+.mini-field input,
+.mini-field select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 16px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.mini-field input:focus,
+.mini-field select:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+}
+
+.mini-submit {
+  grid-column: 1 / -1;
+  margin-top: 6px;
+}
+
+.mini-submit button {
+  width: 100%;
+  padding: 16px 24px;
+  background: #22c55e;
+  color: #0f172a;
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mini-submit button:hover {
   background: #16a34a;
+}
+
+@media (max-width: 768px) {
+  .contatto-rapido {
+    padding: 24px 18px;
+  }
+
+  .mini-form-contatto {
+    grid-template-columns: 1fr;
+  }
+
+
 }
   </style>
 </head>
@@ -892,7 +952,7 @@ I sistemi di accumulo stanno diventando una leva strategica per ridurre i costi 
     <h3>Non hai tutti i dati a portata di mano?</h3>
 
     <p>
-      Nessun problema. Possiamo comunque prepararti una simulazione preliminare e spiegarti 
+      Nessun problema. Possiamo comunque prepararti una simulazione preliminare e spiegarti
       come ottenere il massimo risparmio dal tuo impianto.
     </p>
 
@@ -900,14 +960,93 @@ I sistemi di accumulo stanno diventando una leva strategica per ridurre i costi 
       Lasciaci i tuoi contatti e ti richiamiamo noi.
     </p>
 
-    <div class="cta-box">
-      <a href="#form-contatto" class="btn-contatto">
-        Richiedi una consulenza gratuita
-      </a>
+    <div class="mini-form-contatto">
+      <div class="mini-field">
+        <label for="azienda_rapida">Azienda</label>
+        <input type="text" id="azienda_rapida" name="azienda_rapida" placeholder="Nome azienda">
+      </div>
+
+      <div class="mini-field">
+        <label for="nome_rapido">Nome e Cognome</label>
+        <input type="text" id="nome_rapido" name="nome_rapido" placeholder="Nome e cognome">
+      </div>
+
+      <div class="mini-field">
+        <label for="email_rapida">Email</label>
+        <input type="email" id="email_rapida" name="email_rapida" placeholder="nome@azienda.it">
+      </div>
+
+      <div class="mini-field">
+        <label for="telefono_rapido">Telefono</label>
+        <input type="tel" id="telefono_rapido" name="telefono_rapido" placeholder="Numero di telefono">
+      </div>
+
+      <div class="mini-field">
+        <label for="provincia_rapida">Provincia</label>
+        <select id="provincia_rapida" name="provincia_rapida">
+          <option value="">Seleziona provincia</option>
+
+          <optgroup label="Friuli Venezia Giulia">
+            <option value="GO">Gorizia</option>
+            <option value="PN">Pordenone</option>
+            <option value="TS">Trieste</option>
+            <option value="UD">Udine</option>
+          </optgroup>
+
+          <optgroup label="Veneto">
+            <option value="BL">Belluno</option>
+            <option value="PD">Padova</option>
+            <option value="RO">Rovigo</option>
+            <option value="TV">Treviso</option>
+            <option value="VE">Venezia</option>
+            <option value="VR">Verona</option>
+            <option value="VI">Vicenza</option>
+          </optgroup>
+
+          <optgroup label="Lombardia">
+            <option value="BG">Bergamo</option>
+            <option value="BS">Brescia</option>
+            <option value="CO">Como</option>
+            <option value="CR">Cremona</option>
+            <option value="LC">Lecco</option>
+            <option value="LO">Lodi</option>
+            <option value="MN">Mantova</option>
+            <option value="MI">Milano</option>
+            <option value="MB">Monza e Brianza</option>
+            <option value="PV">Pavia</option>
+            <option value="SO">Sondrio</option>
+            <option value="VA">Varese</option>
+          </optgroup>
+
+          <optgroup label="Emilia-Romagna">
+            <option value="BO">Bologna</option>
+            <option value="FC">Forlì-Cesena</option>
+            <option value="FE">Ferrara</option>
+            <option value="MO">Modena</option>
+            <option value="PR">Parma</option>
+            <option value="PC">Piacenza</option>
+            <option value="RA">Ravenna</option>
+            <option value="RE">Reggio Emilia</option>
+            <option value="RN">Rimini</option>
+          </optgroup>
+
+          <optgroup label="Piemonte">
+            <option value="AL">Alessandria</option>
+            <option value="AT">Asti</option>
+            <option value="BI">Biella</option>
+            <option value="CN">Cuneo</option>
+            <option value="NO">Novara</option>
+            <option value="TO">Torino</option>
+            <option value="VB">Verbano-Cusio-Ossola</option>
+            <option value="VC">Vercelli</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="mini-submit">
+        <button type="button">Ti richiamiamo noi</button>
+      </div>
     </div>
-    <input type="text" placeholder="Nome">
-<input type="tel" placeholder="Telefono">
-<button>Ti richiamiamo noi</button>
   </div>
 </div>
       
