@@ -1450,7 +1450,58 @@ I sistemi di accumulo stanno diventando una leva strategica per ridurre i costi 
     });
 
 
+const miniForm = document.getElementById('miniLeadForm');
 
+miniForm.addEventListener('submit', async function (event) {
+  event.preventDefault();
+
+  const payload = {
+    azienda: document.getElementById('azienda_rapida').value.trim(),
+    nomeCognome: document.getElementById('nome_rapido').value.trim(),
+    email: document.getElementById('email_rapida').value.trim(),
+    telefono: document.getElementById('telefono_rapido').value.trim(),
+    provincia: document.getElementById('provincia_rapida').value,
+    origine: window.location.href + ' - contatto rapido'
+  };
+
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
+
+  if (!payload.azienda) {
+    alert("Inserisci l'azienda");
+    return;
+  }
+
+  if (!payload.nomeCognome) {
+    alert("Inserisci nome e cognome");
+    return;
+  }
+
+  if (!emailOk) {
+    alert("Email non valida");
+    return;
+  }
+
+  try {
+    const formBody = new URLSearchParams(payload);
+
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: formBody
+    });
+
+    const result = await response.json();
+
+    if (!result.ok) {
+      throw new Error(result.error || 'Errore invio');
+    }
+
+    alert("Richiesta inviata! Ti ricontattiamo a breve.");
+    miniForm.reset();
+
+  } catch (error) {
+    alert("Errore invio: " + error.message);
+  }
+});
 
 
     
