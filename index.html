@@ -947,94 +947,78 @@ I sistemi di accumulo stanno diventando una leva strategica per ridurre i costi 
     </p>
 
     <form class="mini-form-contatto" id="miniLeadForm">
-      <div class="mini-field">
-        <label for="azienda_rapida">Azienda</label>
-        <input type="text" id="azienda_rapida" name="azienda_rapida" placeholder="Nome azienda">
-      </div>
 
-      <div class="mini-field">
-        <label for="nome_rapido">Nome e Cognome</label>
-        <input type="text" id="nome_rapido" name="nome_rapido" placeholder="Nome e cognome">
-      </div>
+  <div class="two-col">
 
-      <div class="mini-field">
-        <label for="email_rapida">Email</label>
-        <input type="email" id="email_rapida" name="email_rapida" placeholder="nome@azienda.it">
-      </div>
+    <div class="field">
+      <label>Azienda</label>
+      <input type="text" id="azienda_rapida" placeholder="Es. Rossi Srl">
+    </div>
 
-      <div class="mini-field">
-        <label for="telefono_rapido">Telefono</label>
-        <input type="tel" id="telefono_rapido" name="telefono_rapido" placeholder="Numero di telefono">
-      </div>
+    <div class="field">
+      <label>Nome e Cognome</label>
+      <input type="text" id="nome_rapido" placeholder="Es. Marco Rossi">
+    </div>
 
-      <div class="mini-field">
-        <label for="provincia_rapida">Provincia</label>
-        <select id="provincia_rapida" name="provincia_rapida">
-          <option value="">Seleziona provincia</option>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="email_rapida" placeholder="Es. nome@azienda.it">
+    </div>
 
-          <optgroup label="Friuli Venezia Giulia">
-            <option value="GO">Gorizia</option>
-            <option value="PN">Pordenone</option>
-            <option value="TS">Trieste</option>
-            <option value="UD">Udine</option>
-          </optgroup>
+    <div class="field">
+      <label>Telefono</label>
+      <input type="tel" id="telefono_rapido" placeholder="Es. 333 1234567">
+    </div>
 
-          <optgroup label="Veneto">
-            <option value="BL">Belluno</option>
-            <option value="PD">Padova</option>
-            <option value="RO">Rovigo</option>
-            <option value="TV">Treviso</option>
-            <option value="VE">Venezia</option>
-            <option value="VR">Verona</option>
-            <option value="VI">Vicenza</option>
-          </optgroup>
+    <div class="field full">
+      <label>Provincia</label>
+      <select id="provincia_rapida">
+        <option value="">Seleziona provincia</option>
 
-          <optgroup label="Lombardia">
-            <option value="BG">Bergamo</option>
-            <option value="BS">Brescia</option>
-            <option value="CO">Como</option>
-            <option value="CR">Cremona</option>
-            <option value="LC">Lecco</option>
-            <option value="LO">Lodi</option>
-            <option value="MN">Mantova</option>
-            <option value="MI">Milano</option>
-            <option value="MB">Monza e Brianza</option>
-            <option value="PV">Pavia</option>
-            <option value="SO">Sondrio</option>
-            <option value="VA">Varese</option>
-          </optgroup>
+        <optgroup label="Friuli Venezia Giulia">
+          <option>Gorizia</option>
+          <option>Pordenone</option>
+          <option>Trieste</option>
+          <option>Udine</option>
+        </optgroup>
 
-          <optgroup label="Emilia-Romagna">
-            <option value="BO">Bologna</option>
-            <option value="FC">Forlì-Cesena</option>
-            <option value="FE">Ferrara</option>
-            <option value="MO">Modena</option>
-            <option value="PR">Parma</option>
-            <option value="PC">Piacenza</option>
-            <option value="RA">Ravenna</option>
-            <option value="RE">Reggio Emilia</option>
-            <option value="RN">Rimini</option>
-          </optgroup>
+        <optgroup label="Veneto">
+          <option>Padova</option>
+          <option>Treviso</option>
+          <option>Venezia</option>
+          <option>Verona</option>
+        </optgroup>
 
-          <optgroup label="Piemonte">
-            <option value="AL">Alessandria</option>
-            <option value="AT">Asti</option>
-            <option value="BI">Biella</option>
-            <option value="CN">Cuneo</option>
-            <option value="NO">Novara</option>
-            <option value="TO">Torino</option>
-            <option value="VB">Verbano-Cusio-Ossola</option>
-            <option value="VC">Vercelli</option>
-          </optgroup>
-        </select>
-      </div>
+        <optgroup label="Lombardia">
+          <option>Milano</option>
+          <option>Brescia</option>
+          <option>Bergamo</option>
+        </optgroup>
 
-      <div class="mini-submit">
-        <button type="submit" class="btn-mini-submit">Invia richiesta</button>
-      </div>
-    </form>
+        <optgroup label="Emilia-Romagna">
+          <option>Bologna</option>
+          <option>Modena</option>
+        </optgroup>
+
+        <optgroup label="Piemonte">
+          <option>Torino</option>
+          <option>Cuneo</option>
+        </optgroup>
+
+      </select>
+    </div>
+
   </div>
-</div>
+
+  <div style="margin-top:20px;">
+    <button type="submit" class="btn btn-lead">
+      Invia richiesta
+    </button>
+  </div>
+
+</form>
+    
+
       
       </div>
     </div>
