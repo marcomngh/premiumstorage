@@ -564,7 +564,131 @@
 .btn-mini-submit:hover {
   background: #16a34a;
 }
+.storage-flow-card {
+  margin-top: 28px;
+  background: #ffffff;
+  border: 2px solid #8ccf8a;
+  border-radius: 22px;
+  padding: 18px 16px 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+}
 
+.storage-flow-card h3 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.storage-flow-sub {
+  margin: 0 0 18px;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.storage-flow-steps {
+  display: grid;
+  grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr;
+  gap: 8px;
+  align-items: start;
+}
+
+.flow-step {
+  min-width: 0;
+}
+
+.flow-icon {
+  width: 56px;
+  height: 56px;
+  color: #59a95a;
+  margin-bottom: 8px;
+}
+
+.flow-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.flow-icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #59a95a;
+  color: #ffffff;
+  width: 56px;
+  height: 56px;
+}
+
+.flow-step h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 1.25;
+  color: #4d9a4d;
+}
+
+.flow-step p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #5f6368;
+}
+
+.flow-arrow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 18px;
+  font-size: 34px;
+  line-height: 1;
+  color: #67b266;
+  font-weight: 500;
+}
+
+.storage-flow-result {
+  margin-top: 18px;
+  background: #eef5ef;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.result-icon {
+  width: 36px;
+  height: 36px;
+  color: #59a95a;
+  flex: 0 0 auto;
+}
+
+.result-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.storage-flow-result p {
+  margin: 0;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+@media (max-width: 980px) {
+  .storage-flow-steps {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .flow-arrow {
+    display: none;
+  }
+
+  .storage-flow-card {
+    padding: 18px 16px;
+  }
+}
 
   </style>
 </head>
@@ -589,6 +713,93 @@
         <p class="lead">Inserisci pochi dati essenziali e ottieni una prima stima orientativa di fotovoltaico, storage e risparmio economico per la tua attività.</p>
 
         <div class="stats">
+          <div class="storage-flow-card">
+  <h3>Come funziona un sistema di accumulo</h3>
+  <p class="storage-flow-sub">Più controllo, più efficienza, più risparmio.</p>
+
+  <div class="storage-flow-steps">
+    <div class="flow-step">
+      <div class="flow-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="32" cy="14" r="6"></circle>
+            <path d="M14 30h36l6 18H8z"></path>
+            <path d="M22 30l4-10"></path>
+            <path d="M32 30V20"></path>
+            <path d="M42 30l-4-10"></path>
+            <path d="M32 4v4"></path>
+            <path d="M20 10l3 3"></path>
+            <path d="M44 10l-3 3"></path>
+          </g>
+        </svg>
+      </div>
+      <h4>1. Produci</h4>
+      <p>L’energia solare viene prodotta dal tuo impianto fotovoltaico.</p>
+    </div>
+
+    <div class="flow-arrow">›</div>
+
+    <div class="flow-step">
+      <div class="flow-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="20" y="10" width="24" height="44" rx="6"></rect>
+            <path d="M28 6h8"></path>
+            <path d="M34 22l-8 12h8l-4 10 12-16h-8l4-6z"></path>
+          </g>
+        </svg>
+      </div>
+      <h4>2. Accumuli</h4>
+      <p>L’energia in eccesso viene immagazzinata nelle batterie invece di essere sprecata.</p>
+    </div>
+
+    <div class="flow-arrow">→</div>
+
+    <div class="flow-step">
+      <div class="flow-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 52V26l20-14 20 14v26"></path>
+            <path d="M24 52V36h16v16"></path>
+            <path d="M52 20h6v12"></path>
+            <circle cx="54" cy="18" r="4"></circle>
+          </g>
+        </svg>
+      </div>
+      <h4>3. Utilizzi</h4>
+      <p>Usi l’energia quando ne hai bisogno e quando conviene di più.</p>
+    </div>
+
+    <div class="flow-arrow">→</div>
+
+    <div class="flow-step">
+      <div class="flow-icon flow-icon-circle">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <text x="32" y="40" text-anchor="middle" font-size="30" font-weight="700" fill="currentColor">€</text>
+        </svg>
+      </div>
+      <h4>4. Risparmi</h4>
+      <p>Riduci i costi in bolletta e aumenti l’indipendenza energetica della tua azienda.</p>
+    </div>
+  </div>
+
+  <div class="storage-flow-result">
+    <div class="result-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20V10"></path>
+          <path d="M10 20V6"></path>
+          <path d="M16 20V12"></path>
+          <path d="M22 20V4"></path>
+        </g>
+      </svg>
+    </div>
+    <p><strong>Risultato:</strong> meno sprechi, più efficienza, costi sotto controllo.</p>
+  </div>
+</div>
+          
+          
+          
           <div class="stat">
             <div class="label">Compilazione</div>
             <div class="value">2 minuti</div>
