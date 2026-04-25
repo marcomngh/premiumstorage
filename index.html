@@ -736,14 +736,24 @@
 
 .case-label {
   width: min(1180px, calc(100% - 32px));
-  margin: 0 auto 22px;
-  font-size: 22px;
+  margin: 0 auto 18px;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.case-tag {
+  font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #16a34a;
-}
-
+  }
+    .case-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+     }   
 .case-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1406,7 +1416,8 @@ I sistemi di accumulo stanno diventando una leva strategica per ridurre i costi 
   <div class="container">
 
     <!-- IMMAGINI -->
-    <div class="case-label">CASE STUDY: azienda metalmeccanica con 50kWp fotovoltaico e accumulo da 100kWh</div>
+    <span class="case-tag">CASE STUDY:</span>
+      <span class="case-title">Azienda metalmeccanica in BT con consumi di ca. 200.000 kWh/anno</span>
     <div class="case-images">
 <img src="https://raw.githubusercontent.com/marcomngh/premiumstorage/main/fotovoltaico%20C&I.png">
 <img src="https://raw.githubusercontent.com/marcomngh/premiumstorage/main/storage%20C%26I%2050kWh.png">   
