@@ -377,6 +377,118 @@
   width: 42px;
   height: 42px;
 }
+/* HERO SCURO IMPATTANTE */
+.about-premium-hero {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #ffffff;
+}
+
+.about-hero-inner {
+  width: min(900px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.about-text h2 {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  color: rgba(255,255,255,0.85);
+}
+
+.about-text .lead {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.about-text .highlight {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.about-text .final {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+
+/* BLOCCO PROCESSO */
+.about-process-premium {
+  padding: 80px 0;
+  background: #f6f7f8;
+}
+
+.about-process-premium h3 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.process-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.process-step {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid #e7e7e7;
+  text-align: center;
+}
+
+.process-step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #16a34a;
+  color: #fff;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.process-step h4 {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.process-step p {
+  font-size: 14px;
+  color: #666;
+}
+
+.process-final {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .process-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .about-text h2 {
+    font-size: 32px;
+  }
+}
+
     
     @media (max-width: 980px) {
       .grid,
@@ -1746,6 +1858,82 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
   <a href="#simulatorForm" class="btn btn-calc">Calcola la convenienza</a>
 </div>
     
+  </div>
+</section>
+
+  <section class="about-premium-hero">
+
+  <div class="about-hero-inner">
+    
+    <div class="about-text">
+      <h2>Chi c’è dietro Premium Storage</h2>
+
+      <p class="lead">
+        Siamo un gruppo di professionisti con oltre 15 anni di esperienza nel settore del fotovoltaico.
+      </p>
+
+      <p>
+        Abbiamo vissuto in prima persona l’evoluzione del mercato e conosciamo a fondo le esigenze di chi sceglie di investire nell’energia.
+      </p>
+
+      <p>
+        Crediamo che fotovoltaico e storage siano strumenti concreti per dare alle aziende 
+        <strong>più controllo, più efficienza e costi energetici più sostenibili.</strong>
+      </p>
+
+      <p class="highlight">
+        Da questa esperienza è nato <strong>Premium Storage</strong>: un progetto indipendente pensato per aiutare gli imprenditori italiani ad orientarsi con semplicità e trasparenza.
+      </p>
+
+      <p class="final">
+        Non vendiamo direttamente impianti.  
+        Ti aiutiamo a fare <strong>scelte consapevoli, senza errori.</strong>
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section class="about-process-premium">
+
+  <div class="container">
+
+    <h3>Come funziona</h3>
+
+    <div class="process-flow">
+
+      <div class="process-step">
+        <span>1</span>
+        <h4>Compili il simulatore</h4>
+        <p>Inserisci i dati della tua azienda e ottieni una prima stima.</p>
+      </div>
+
+      <div class="process-step">
+        <span>2</span>
+        <h4>Ti contatta un consulente</h4>
+        <p>Un esperto analizza il tuo caso con un breve questionario.</p>
+      </div>
+
+      <div class="process-step">
+        <span>3</span>
+        <h4>Analisi tecnica</h4>
+        <p>Valutiamo consumi, profilo energetico e opportunità reali.</p>
+      </div>
+
+      <div class="process-step">
+        <span>4</span>
+        <h4>Offerta su misura</h4>
+        <p>Un installatore qualificato sviluppa la soluzione più adatta.</p>
+      </div>
+
+    </div>
+
+    <p class="process-final">
+      Nessuna proposta standard: solo soluzioni costruite sui dati reali della tua azienda.
+    </p>
+
   </div>
 </section>
 
