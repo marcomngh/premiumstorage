@@ -660,9 +660,17 @@
 }
 
 .flow-arrow {
- font-size: 26px;
-  color: #22c55e;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6px;
+  color: #2e7d32; /* verde più deciso */
+}
+
+.flow-arrow svg {
+  width: 32px;
+  height: 32px;
+  opacity: 0.9;
 }
 
 .storage-flow-result {
@@ -918,7 +926,16 @@
       <p>L’energia solare viene prodotta dal tuo impianto fotovoltaico.</p>
     </div>
 
-    <div class="flow-arrow">›</div>
+   <div class="flow-arrow">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M5 12h12M13 6l6 6-6 6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </svg>
+</div>
 
     <div class="flow-step">
       <div class="flow-icon">
@@ -932,7 +949,16 @@
       <p>L’energia in eccesso viene immagazzinata nelle batterie invece di essere sprecata.</p>
     </div>
 
-    <div class="flow-arrow">→</div>
+    <div class="flow-arrow">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M5 12h12M13 6l6 6-6 6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </svg>
+</div>
 
     <div class="flow-step">
       <div class="flow-icon">
@@ -949,7 +975,16 @@
       <p>Usi l’energia quando ne hai bisogno e quando conviene di più.</p>
     </div>
 
-    <div class="flow-arrow">→</div>
+    <div class="flow-arrow">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M5 12h12M13 6l6 6-6 6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </svg>
+</div>
 
     <div class="flow-step">
       <div class="flow-icon flow-icon-circle">
