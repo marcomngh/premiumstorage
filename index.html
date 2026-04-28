@@ -147,6 +147,12 @@
   scroll-margin-top: 120px;
 }
 
+    .scroll-anchor {
+  position: relative;
+  top: -120px;
+  height: 0;
+  visibility: hidden;
+}
     .two-col {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1306,8 +1312,10 @@
 </div>
               </div>
   </div>
-      <div class="card">
-        <h2 class="brand-green">Ottieni subito una stima, gratis.</h2>
+      <div id="simulatorFormAnchor" class="scroll-anchor"></div>
+
+<div class="card">
+  <h2 class="brand-green">Ottieni subito una stima, gratis.</h2>
         <p class="top-note">Compila il form: i risultati sono indicativi e servono per capire rapidamente se ha senso approfondire.</p>
 
         <form id="simulatorForm">
@@ -2042,7 +2050,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
 <div class="cta-case">
   <h3>Vuoi ottenere lo stesso risultato per la tua azienda?</h3>
   <p>Scopri quanto puoi risparmiare con fotovoltaico e accumulo partendo dai tuoi dati reali.</p>
-  <a href="#simulatorForm" class="btn btn-calc">Calcola la convenienza</a>
+  <a href="#simulatorFormAnchor" class="btn btn-calc">Calcola la convenienza</a>
 </div>
     
   </div>
@@ -2324,7 +2332,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
         Usa il simulatore gratuito Premium Storage e ottieni una prima stima
         del risparmio ottenibile con un sistema di accumulo industriale.
       </p>
-       <a href="#simulatorForm" class="btn btn-calc">Calcola la convenienza</a>
+       <a href="#simulatorFormAnchor" class="btn btn-calc">Calcola la convenienza</a>
     </div>
 
   </div>
