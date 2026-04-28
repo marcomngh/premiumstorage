@@ -29,21 +29,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 44px;
-  padding: 0 18px;
+  height: 38px;              /* 👈 più basso */
+  padding: 0 14px;           /* 👈 meno largo */
   border-radius: 999px;
   background: var(--green);
   color: #ffffff;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 13px;           /* 👈 più piccolo */
+  font-weight: 600;          /* 👈 meno “pesante” */
   white-space: nowrap;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .ps-nav-cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(31,157,85,0.25);
+  box-shadow: 0 6px 16px rgba(31,157,85,0.2);
 }
     }
 
