@@ -17,11 +17,34 @@
     }
 
     .ps-nav-container {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 20px 0 8px 0;
-      display: flex;
-      align-items: center;
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 20px 0 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 🔥 fondamentale */
+}
+
+.ps-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ps-nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(31,157,85,0.25);
+}
     }
 
     .ps-logo img {
@@ -1199,7 +1222,10 @@
     <div class="ps-logo">
       <img src="logo-premium-storage.png" alt="Premium Storage" />
     </div>
-  </div>
+   <a href="#simulatorFormAnchor" class="ps-nav-cta">
+    Calcola la convenienza
+  </a>
+</div>
 </header>
   
 
