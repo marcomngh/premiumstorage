@@ -142,6 +142,18 @@
       display: grid;
       gap: 18px;
     }
+
+.simulator-card {
+  position: relative;
+}
+
+.scroll-target {
+  position: absolute;
+  top: -130px;
+  left: 0;
+  width: 1px;
+  height: 1px;
+}
     
     #simulatorForm {
   scroll-margin-top: 120px;
@@ -1312,9 +1324,10 @@
 </div>
               </div>
   </div>
-      <div id="simulatorFormAnchor" class="scroll-anchor"></div>
+     
 
-<div class="card">
+<div class="card simulator-card">
+  <span id="simulatorFormAnchor" class="scroll-target"></span>
   <h2 class="brand-green">Ottieni subito una stima, gratis.</h2>
         <p class="top-note">Compila il form: i risultati sono indicativi e servono per capire rapidamente se ha senso approfondire.</p>
 
