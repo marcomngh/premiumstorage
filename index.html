@@ -787,106 +787,141 @@
 .btn-mini-submit:hover {
   background: #16a34a;
 }
+
 .storage-flow-card {
   margin-top: 30px;
   width: 100%;
   background: #ffffff;
   border: 2px solid #8ccf8a;
   border-radius: 22px;
-  padding: 18px 16px 14px;
+  padding: 28px 24px 24px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.04);
 }
 
-.storage-flow-card h3 {
+.storage-flow-card h2 {
   margin: 0 0 6px;
-  font-size: 24px;
+  font-size: 26px;
   line-height: 1.15;
   letter-spacing: -0.02em;
+  text-align: center;
 }
 
 .storage-flow-sub {
-  margin: 0 0 18px;
+  margin: 0 0 28px;
   color: #6b7280;
-  font-size: 16px;
+  font-size: 15px;
+  text-align: center;
 }
 
 .storage-flow-steps {
   display: grid;
-  grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr;
-  gap: 8px;
+  grid-template-columns: 1fr 24px 1fr 24px 1fr 24px 1fr;
+  gap: 6px;
   align-items: start;
 }
 
 .flow-step {
   min-width: 0;
+  text-align: center;
+  position: relative;
+  padding-top: 12px;
+}
+
+.flow-step-number {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(22,163,74,0.25);
 }
 
 .flow-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
   background: linear-gradient(135deg, #e8f5e9, #d1f2d3);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #2e7d32;
   box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  margin: 8px auto 14px;
+}
+
+.flow-step:hover .flow-icon {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(46,125,50,0.18);
 }
 
 .flow-icon svg {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   display: block;
 }
 
 .flow-icon-circle {
-  background: #59a95a;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
   color: #ffffff;
 }
 
-.flow-step h4 {
-  margin: 0 0 6px;
-  font-size: 16px;
-  line-height: 1.25;
-  color: #3f8f45;
+.flow-step h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #171717;
+  letter-spacing: -0.01em;
 }
 
 .flow-step p {
   margin: 0;
   font-size: 13px;
-  line-height: 1.55;
-  color: #5f6368;
+  line-height: 1.4;
+  color: #6b7280;
 }
 
 .flow-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 6px;
-  color: #2e7d32; /* verde più deciso */
+  padding-top: 38px;
+  color: #16a34a;
 }
 
 .flow-arrow svg {
-  width: 32px;
-  height: 32px;
-  opacity: 0.9;
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
 }
 
 .storage-flow-result {
-  margin-top: 18px;
-  background: #eef5ef;
-  border-radius: 12px;
-  padding: 12px 14px;
+  margin-top: 24px;
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border: 1px solid #bbf7d0;
+  border-radius: 14px;
+  padding: 14px 18px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 12px;
 }
 
 .result-icon {
-  width: 36px;
-  height: 36px;
-  color: #59a95a;
+  width: 28px;
+  height: 28px;
+  color: #16a34a;
   flex: 0 0 auto;
 }
 
@@ -899,24 +934,26 @@
 .storage-flow-result p {
   margin: 0;
   font-size: 14px;
-  color: #4b5563;
+  font-weight: 600;
+  color: #166534;
+  letter-spacing: 0.01em;
 }
 
-    .euro-icon {
-  font-size: 38px;
+.euro-icon {
+  font-size: 36px;
   font-weight: 800;
   line-height: 1;
 }
 
-.flow-icon-circle {
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-  color: #ffffff;
+.flow-step-fv .flow-icon svg {
+  width: 44px;
+  height: 44px;
 }
 
 @media (max-width: 980px) {
   .storage-flow-steps {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 12px;
   }
 
   .flow-arrow {
@@ -924,9 +961,26 @@
   }
 
   .storage-flow-card {
-    padding: 18px 16px;
+    padding: 22px 18px;
   }
+
+  .flow-icon {
+    width: 64px;
+    height: 64px;
   }
+}
+
+@media (max-width: 480px) {
+  .storage-flow-steps {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .storage-flow-result {
+    flex-direction: column;
+    text-align: center;
+  }
+}
 .case-study {
   padding: 40px 0 80px;
   background: #f6f7f8;
@@ -1340,6 +1394,7 @@
   <div class="storage-flow-steps">
 
     <div class="flow-step flow-step-fv">
+      <div class="flow-step-number">1</div>
       <div class="flow-icon">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="18" cy="6" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/>
@@ -1351,8 +1406,8 @@
                 fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
         </svg>
       </div>
-      <h3>1. Produci</h3>
-      <p>L’energia solare viene prodotta dal tuo impianto fotovoltaico.</p>
+      <h3>Produci</h3>
+      <p>Energia dal sole</p>
     </div>
 
     <div class="flow-arrow">
@@ -1362,6 +1417,7 @@
     </div>
 
     <div class="flow-step">
+      <div class="flow-step-number">2</div>
       <div class="flow-icon">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <rect x="7" y="4" width="10" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -1370,8 +1426,8 @@
           <rect x="9.5" y="13" width="5" height="3" rx="0.8" fill="currentColor"/>
         </svg>
       </div>
-      <h3>2. Accumuli</h3>
-      <p>L’energia in eccesso viene immagazzinata nelle batterie invece di essere sprecata.</p>
+      <h3>Accumuli</h3>
+      <p>Nelle batterie</p>
     </div>
 
     <div class="flow-arrow">
@@ -1381,6 +1437,7 @@
     </div>
 
     <div class="flow-step">
+      <div class="flow-step-number">3</div>
       <div class="flow-icon">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M3 20h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1390,8 +1447,8 @@
           <rect x="15" y="15" width="2" height="2" fill="currentColor"/>
         </svg>
       </div>
-      <h3>3. Utilizzi</h3>
-      <p>Usi l’energia quando ne hai bisogno e quando conviene di più.</p>
+      <h3>Utilizzi</h3>
+      <p>Quando serve</p>
     </div>
 
     <div class="flow-arrow">
@@ -1401,17 +1458,15 @@
     </div>
 
     <div class="flow-step">
+      <div class="flow-step-number">4</div>
       <div class="flow-icon flow-icon-circle">
         <span class="euro-icon">€</span>
       </div>
-      <h3>4. Risparmi</h3>
-      <p>Riduci i costi in bolletta e aumenti l’indipendenza energetica della tua azienda.</p>
+      <h3>Risparmi</h3>
+      <p>Meno costi in bolletta</p>
+    </div>
 
-
-
-      </div>
-
-</div>
+  </div>
 
   <div class="storage-flow-result">
     <div class="result-icon">
@@ -1424,10 +1479,12 @@
         </g>
       </svg>
     </div>
-    <p><strong>Risultato:</strong> meno sprechi, più efficienza, costi sotto controllo.</p>
+    <p>Meno sprechi · Più efficienza · Costi sotto controllo</p>
   </div>
 </div>
-              </div>
+      </div>
+
+
   </div>
   
 
