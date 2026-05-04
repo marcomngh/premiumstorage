@@ -1275,337 +1275,328 @@
   
   
   <section class="hero">
-    <div class="container grid">
-      <div>
-        <div>
-  <div class="pill">Simulatore di convenienza storage industriale</div>
-  <h1> Riduci i costi  della tua azienda grazie a fotovoltaico + batteria di accumulo.</h1>
-  <p class="lead">Inserisci pochi dati essenziali e scopri in 2 minuti quanto puoi risparmiare con il nostro simulatore gratuito.</p>
+  <div class="container grid">
 
-  <div class="stats">
-  <div class="stat">
-    <div class="label">Compilazione</div>
-    <div class="value">2 minuti</div>
-  </div>
+    <!-- COLONNA SINISTRA: testo + flow card -->
+    <div>
 
-  <div class="stat">
-    <div class="label">Output</div>
-    <div class="value">Stima immediata</div>
-  </div>
+      <div class="pill">Simulatore di convenienza storage industriale</div>
+      <h1>Riduci i costi della tua azienda grazie a fotovoltaico + batteria di accumulo.</h1>
+      <p class="lead">Inserisci pochi dati essenziali e scopri in 2 minuti quanto puoi risparmiare con il nostro simulatore gratuito.</p>
 
-
-  <div class="stat">
-    <div class="label">Target</div>
-    <div class="value">Imprese e industria</div>
-  </div>
-</div>
-
-<div class="storage-flow-card">
-  <h2>Come funziona una batteria industriale</h2>
-  <p class="storage-flow-sub">Massimizza il risparmio generato dal fotovoltaico.</p>
-
- <svg viewBox="0 0 800 280" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="flowTitle flowDesc">
-  <title id="flowTitle">Flusso energetico: sole, fotovoltaico, batteria, industria, rete</title>
-  <desc id="flowDesc">Schema del flusso energetico di un sistema di accumulo industriale: il sole alimenta i pannelli fotovoltaici (Produci), l'energia carica le batterie (Accumuli) e alimenta l'azienda (Risparmi) con scambio bidirezionale; la rete elettrica funge da backup.</desc>
-
-  <!-- SOLE -->
-  <g transform="translate(70, 120)">
-    <circle cx="0" cy="0" r="38" fill="none" stroke="#111111" stroke-width="2"/>
-    <circle cx="0" cy="0" r="14" fill="#f28c28"/>
-    <g stroke="#f28c28" stroke-width="2.5" stroke-linecap="round">
-      <line x1="0" y1="-26" x2="0" y2="-22"/>
-      <line x1="0" y1="22" x2="0" y2="26"/>
-      <line x1="-26" y1="0" x2="-22" y2="0"/>
-      <line x1="22" y1="0" x2="26" y2="0"/>
-      <line x1="-18" y1="-18" x2="-15" y2="-15"/>
-      <line x1="15" y1="15" x2="18" y2="18"/>
-      <line x1="-18" y1="18" x2="-15" y2="15"/>
-      <line x1="15" y1="-15" x2="18" y2="-18"/>
-    </g>
-  </g>
-
-  <!-- FOTOVOLTAICO -->
-  <g transform="translate(220, 120)">
-    <circle cx="0" cy="0" r="38" fill="none" stroke="#111111" stroke-width="2"/>
-    <g stroke="#111111" stroke-width="2" fill="none" stroke-linejoin="round">
-      <polygon points="-20,12 20,12 16,-12 -16,-12"/>
-    </g>
-    <g fill="#1f9d55" stroke="#111111" stroke-width="1" stroke-linejoin="round">
-      <polygon points="-15,-10 -1,-10 -2,-1 -16,-1"/>
-      <polygon points="1,-10 15,-10 14,-1 0,-1"/>
-      <polygon points="-16,1 -2,1 -4,11 -18,11"/>
-      <polygon points="0,1 14,1 12,11 -2,11"/>
-    </g>
-    <line x1="0" y1="12" x2="0" y2="20" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
-    <line x1="-6" y1="20" x2="6" y2="20" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
-  </g>
-  <text x="220" y="185" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1f9d55" text-anchor="middle" letter-spacing="0.08em">PRODUCI</text>
-
-  <!-- BATTERIA -->
-  <g transform="translate(400, 120)">
-    <circle cx="0" cy="0" r="38" fill="none" stroke="#111111" stroke-width="2"/>
-    <rect x="-18" y="-14" width="36" height="28" rx="3" fill="none" stroke="#111111" stroke-width="2"/>
-    <rect x="-9" y="-19" width="18" height="5" fill="#111111"/>
-    <rect x="-14" y="-9" width="24" height="3.5" fill="#1f9d55"/>
-    <rect x="-14" y="-2" width="24" height="3.5" fill="#1f9d55"/>
-    <rect x="-14" y="5" width="14" height="3.5" fill="#1f9d55"/>
-    <rect x="0" y="5" width="10" height="3.5" fill="none" stroke="#1f9d55" stroke-width="1"/>
-  </g>
-  <text x="400" y="185" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1f9d55" text-anchor="middle" letter-spacing="0.08em">ACCUMULI</text>
-
-  <!-- INDUSTRIA -->
-  <g transform="translate(580, 120)">
-    <circle cx="0" cy="0" r="38" fill="none" stroke="#111111" stroke-width="2"/>
-    <line x1="-13" y1="-18" x2="-13" y2="-4" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="-9" y1="-18" x2="-9" y2="-4" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M -14 -18 Q -11 -22 -8 -18" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
-    <polygon points="-22,18 -22,-4 -2,-4 -2,4 22,4 22,18" fill="none" stroke="#111111" stroke-width="2.5" stroke-linejoin="round"/>
-    <rect x="3" y="9" width="6" height="9" fill="#1f9d55"/>
-    <rect x="13" y="9" width="6" height="9" fill="#1f9d55"/>
-    <rect x="-17" y="2" width="4" height="4" fill="#1f9d55"/>
-    <rect x="-10" y="2" width="4" height="4" fill="#1f9d55"/>
-    <rect x="-17" y="9" width="4" height="4" fill="#1f9d55"/>
-    <rect x="-10" y="9" width="4" height="4" fill="#1f9d55"/>
-  </g>
-  <text x="580" y="185" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1f9d55" text-anchor="middle" letter-spacing="0.08em">RISPARMI</text>
-
-  <!-- RETE -->
-  <g transform="translate(730, 120)">
-    <circle cx="0" cy="0" r="38" fill="none" stroke="#111111" stroke-width="2"/>
-    <line x1="-12" y1="22" x2="-3" y2="-22" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="12" y1="22" x2="3" y2="-22" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="-3" y1="-22" x2="3" y2="-22" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="-5" y1="-12" x2="5" y2="-12" stroke="#111111" stroke-width="2"/>
-    <line x1="-8" y1="0" x2="8" y2="0" stroke="#111111" stroke-width="2"/>
-    <line x1="-12" y1="22" x2="12" y2="22" stroke="#111111" stroke-width="2.5"/>
-    <line x1="-5" y1="-12" x2="5" y2="0" stroke="#111111" stroke-width="1.3" opacity="0.65"/>
-    <line x1="5" y1="-12" x2="-5" y2="0" stroke="#111111" stroke-width="1.3" opacity="0.65"/>
-    <line x1="-8" y1="0" x2="8" y2="22" stroke="#111111" stroke-width="1.3" opacity="0.65"/>
-    <line x1="8" y1="0" x2="-8" y2="22" stroke="#111111" stroke-width="1.3" opacity="0.65"/>
-    <circle cx="-5" cy="-12" r="1.5" fill="#111111"/>
-    <circle cx="5" cy="-12" r="1.5" fill="#111111"/>
-    <circle cx="-8" cy="0" r="1.5" fill="#111111"/>
-    <circle cx="8" cy="0" r="1.5" fill="#111111"/>
-  </g>
-
-  <!-- FRECCIA: Sole -> FV -->
-  <g stroke="#f28c28" stroke-width="2" fill="none" stroke-linecap="round">
-    <line x1="115" y1="120" x2="173" y2="120"/>
-  </g>
-  <polygon points="182,120 170,114 170,126" fill="#f28c28"/>
-
-  <!-- FRECCIA: FV -> Batteria -->
-  <g stroke="#f28c28" stroke-width="2" fill="none" stroke-linecap="round">
-    <line x1="265" y1="120" x2="353" y2="120"/>
-  </g>
-  <polygon points="362,120 350,114 350,126" fill="#f28c28"/>
-
-  <!-- FRECCE: Batteria <-> Industria (bidirezionale) -->
-  <g stroke="#f28c28" stroke-width="2" fill="none" stroke-linecap="round">
-    <line x1="445" y1="112" x2="533" y2="112"/>
-    <line x1="533" y1="128" x2="445" y2="128"/>
-  </g>
-  <polygon points="542,112 530,106 530,118" fill="#f28c28"/>
-  <polygon points="436,128 448,122 448,134" fill="#f28c28"/>
-
-  <!-- FRECCIA: FV -> Industria (curva sopra) -->
-  <g stroke="#f28c28" stroke-width="2" fill="none" stroke-linecap="round">
-    <path d="M 235 88 Q 400 30 565 88"/>
-  </g>
-  <polygon points="565,88 553,82 556,94" fill="#f28c28"/>
-
-  <!-- FRECCIA: Rete -> Industria (tratteggiata) -->
-  <g stroke="#f28c28" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="4 4">
-    <line x1="691" y1="120" x2="625" y2="120"/>
-  </g>
-  <polygon points="617,120 629,114 629,126" fill="#f28c28"/>
-</svg>
-  <div class="storage-flow-result">
-  <div class="result-icon-euro">€</div>
-  <p><strong>Risultato:</strong> minori costi, maggiore autonomia, più controllo!</p>
-</div>
-    </div>
-    <p><strong>Risultato:</strong> minori costi, maggiore autonomia, più controllo!</p>
-  </div>
-</div>
-
- </div>
-  
-  </div>
-  
-
-<div class="card simulator-card">
-  <span id="simulatorFormAnchor" class="scroll-target"></span>
-  <h2 class="brand-green">Ottieni subito una stima, gratis.</h2>
-        <p class="top-note">Compila il form: i risultati sono indicativi e servono per capire rapidamente se ha senso approfondire.</p>
-
-        <form id="simulatorForm">
-          <div class="two-col">
-            <div class="field">
-              <label for="consumoAnnuo">1. Consumo annuo di energia <span class="req">*</span></label>
-              <div class="hint">Inserisci il consumo totale annuo in kWh.</div>
-              <div class="input-wrap with-suffix">
-                <input id="consumoAnnuo" type="text" inputmode="numeric" placeholder="Es. 250.000" />
-                <span class="suffix">kWh/anno</span>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="costoEnergia">2. Costo medio dell'energia <span class="req">*</span></label>
-              <div class="hint">Il costo medio pagato in bolletta per kWh.</div>
-              <div class="input-wrap with-suffix">
-                <input id="costoEnergia" type="text" placeholder="Es. 0,22" />
-                <span class="suffix">€/kWh</span>
-              </div>
-            </div>
-
-            <div class="field full">
-              <label for="profiloConsumo">3. Quando consumi di più? <span class="req">*</span></label>
-              <select id="profiloConsumo">
-                <option value="">Seleziona un'opzione</option>
-                <option value="giorno">Principalmente di giorno</option>
-                <option value="sera">Principalmente di sera</option>
-                <option value="notte">Principalmente di notte</option>
-                <option value="uniforme">In modo uniforme nelle 24 ore</option>
-                <option value="variabile">Variabile / dipende dai turni produttivi</option>
-              </select>
-            </div>
-
-            <div class="field full">
-              <label for="settoreMerceologico">4. A quale settore appartiene la tua azienda? <span class="req">*</span></label>
-              <select id="settoreMerceologico">
-                <option value="">Seleziona un'opzione</option>
-                <option value="industria">Industria (metalmeccanica, plastica, legno, ceramica) – consumi diurni con peak points</option>
-                <option value="cold_chain">Catena del freddo (celle frigorifere, logistica alimentare, GDO) – consumi H24</option>
-                <option value="artigianato">Artigianato – consumo diurno 5 giorni a settimana</option>
-                <option value="terziario">Uffici e terziario (centri commerciali, hotel, ospedali privati, sedi aziendali) – consumi concentrati in fasce diurne/serali, molto prevedibile</option>
-              </select>
-            </div>
-
-            <div class="field full">
-              <label>5. Hai picchi di assorbimento elevati durante la giornata? <span class="req">*</span></label>
-              <div class="radio-group">
-                <label class="radio-pill"><input type="radio" name="picchi" value="si_frequenti" /> Sì, frequenti</label>
-                <label class="radio-pill"><input type="radio" name="picchi" value="si_occasionali" /> Sì, occasionali</label>
-                <label class="radio-pill"><input type="radio" name="picchi" value="no" /> No</label>
-                <label class="radio-pill"><input type="radio" name="picchi" value="nonso" /> Non lo so</label>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="piccoMassimo">Picco massimo di assorbimento (se lo conosci)</label>
-              <div class="hint">Dato facoltativo ma utile per affinare la simulazione.</div>
-              <div class="input-wrap with-suffix">
-                <input id="piccoMassimo" type="text" inputmode="numeric" placeholder="Es. 530" />
-                <span class="suffix">kW</span>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="potenzaImpegnata">6. Potenza impegnata <span class="req">*</span></label>
-              <div class="hint">Inserisci la potenza impegnata indicata in bolletta.</div>
-              <div class="input-wrap with-suffix">
-                <input id="potenzaImpegnata" type="text" inputmode="numeric" placeholder="Es. 120" />
-                <span class="suffix">kW</span>
-              </div>
-            </div>
-
-            <div class="field full">
-              <label>7. Hai già un impianto fotovoltaico? <span class="req">*</span></label>
-              <div class="radio-group">
-                <label class="radio-pill"><input type="radio" name="fv" value="si" /> Sì</label>
-                <label class="radio-pill"><input type="radio" name="fv" value="no" /> No</label>
-              </div>
-            </div>
-
-            <div class="field" id="fvField" style="display:none;">
-              <label for="fvPower">Potenza fotovoltaico installata</label>
-              <div class="hint">Da compilare solo se hai già un impianto fotovoltaico.</div>
-              <div class="input-wrap with-suffix">
-                <input id="fvPower" type="text" inputmode="numeric" placeholder="Es. 100" />
-                <span class="suffix">kWp</span>
-              </div>
-            </div>
-          </div>
-
-         <div class="form-group">
-
- <label for="provincia">
-    8. Dove si trova la tua azienda?
-  </label>
-  <select id="provincia" name="provincia" required>
-    <option value="">Seleziona provincia</option>
-
-    <optgroup label="Friuli Venezia Giulia">
-      <option value="GO">Gorizia</option>
-      <option value="PN">Pordenone</option>
-      <option value="TS">Trieste</option>
-      <option value="UD">Udine</option>
-    </optgroup>
-
-    <optgroup label="Veneto">
-      <option value="BL">Belluno</option>
-      <option value="PD">Padova</option>
-      <option value="RO">Rovigo</option>
-      <option value="TV">Treviso</option>
-      <option value="VE">Venezia</option>
-      <option value="VR">Verona</option>
-      <option value="VI">Vicenza</option>
-    </optgroup>
-
-    <optgroup label="Lombardia">
-      <option value="BG">Bergamo</option>
-      <option value="BS">Brescia</option>
-      <option value="CO">Como</option>
-      <option value="CR">Cremona</option>
-      <option value="LC">Lecco</option>
-      <option value="LO">Lodi</option>
-      <option value="MN">Mantova</option>
-      <option value="MI">Milano</option>
-      <option value="MB">Monza e Brianza</option>
-      <option value="PV">Pavia</option>
-      <option value="SO">Sondrio</option>
-      <option value="VA">Varese</option>
-    </optgroup>
-
-    <optgroup label="Emilia-Romagna">
-      <option value="BO">Bologna</option>
-      <option value="FC">Forlì-Cesena</option>
-      <option value="FE">Ferrara</option>
-      <option value="MO">Modena</option>
-      <option value="PR">Parma</option>
-      <option value="PC">Piacenza</option>
-      <option value="RA">Ravenna</option>
-      <option value="RE">Reggio Emilia</option>
-      <option value="RN">Rimini</option>
-    </optgroup>
-
-    <optgroup label="Piemonte">
-      <option value="AL">Alessandria</option>
-      <option value="AT">Asti</option>
-      <option value="BI">Biella</option>
-      <option value="CN">Cuneo</option>
-      <option value="NO">Novara</option>
-      <option value="TO">Torino</option>
-      <option value="VB">Verbano-Cusio-Ossola</option>
-      <option value="VC">Vercelli</option>
-    </optgroup>
-  </select>           
-          </div>
-
-          <div class="note-box">
-            <strong>Nota:</strong> i campi contrassegnati con <strong>*</strong> sono obbligatori.
-          </div>
-
-          <div id="errorBox" class="error-box"></div>
-          <button type="submit" class="btn btn-calc">Calcola la convenienza</button>
-        </form>
+      <div class="stats">
+        <div class="stat">
+          <div class="label">Compilazione</div>
+          <div class="value">2 minuti</div>
+        </div>
+        <div class="stat">
+          <div class="label">Output</div>
+          <div class="value">Stima immediata</div>
+        </div>
+        <div class="stat">
+          <div class="label">Target</div>
+          <div class="value">Imprese e industria</div>
+        </div>
       </div>
+
+      <div class="storage-flow-card">
+        <h2>Come funziona una batteria industriale</h2>
+        <p class="storage-flow-sub">Massimizza il risparmio generato dal fotovoltaico.</p>
+
+        <svg viewBox="0 0 800 280" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="flowTitle flowDesc">
+          <title id="flowTitle">Flusso energetico: sole, fotovoltaico, batteria, industria, rete</title>
+          <desc id="flowDesc">Schema del flusso energetico di un sistema di accumulo industriale: il sole alimenta i pannelli fotovoltaici (Produci), l'energia carica le batterie (Accumuli) e alimenta l'azienda (Risparmi) con scambio bidirezionale; la rete elettrica funge da backup.</desc>
+
+          <!-- SOLE -->
+          <g transform="translate(70, 120)">
+            <circle cx="0" cy="0" r="38" fill="none" stroke="#111111" stroke-width="2"/>
+            <circle cx="0" cy="0" r="14" fill="#f28c28"/>
+            <g stroke="#f28c28" stroke-width="2.5" stroke-linecap="round">
+              <line x1="0" y1="-26" x2="0" y2="-22"/>
+              <line x1="0" y1="22" x2="0" y2="26"/>
+              <line x1="-26" y1="0" x2="-22" y2="0"/>
+              <line x1="22" y1="0" x2="26" y2="0"/>
+              <line x1="-18" y1="-18" x2="-15" y2="-15"/>
+              <line x1="15" y1="15" x2="18" y2="18"/>
+              <line x1="-18" y1="18" x2="-15" y2="15"/>
+              <line x1="15" y1="-15" x2="18" y2="-18"/>
+            </g>
+          </g>
+
+          <!-- FOTOVOLTAICO -->
+          <g transform="translate(220, 120)">
+            <circle cx="0" cy="0" r="38" fill="none" stroke="#111111" stroke-width="2"/>
+            <g stroke="#111111" stroke-width="2" fill="none" stroke-linejoin="round">
+              <polygon points="-20,12 20,12 16,-12 -16,-12"/>
+            </g>
+            <g fill="#1f9d55" stroke="#111111" stroke-width="1" stroke-linejoin="round">
+              <polygon points="-15,-10 -1,-10 -2,-1 -16,-1"/>
+              <polygon points="1,-10 15,-10 14,-1 0,-1"/>
+              <polygon points="-16,1 -2,1 -4,11 -18,11"/>
+              <polygon points="0,1 14,1 12,11 -2,11"/>
+            </g>
+            <line x1="0" y1="12" x2="0" y2="20" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
+            <line x1="-6" y1="20" x2="6" y2="20" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <text x="220" y="185" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1f9d55" text-anchor="middle" letter-spacing="0.08em">PRODUCI</text>
+
+          <!-- BATTERIA -->
+          <g transform="translate(400, 120)">
+            <circle cx="0" cy="0" r="38" fill="none" stroke="#111111" stroke-width="2"/>
+            <rect x="-18" y="-14" width="36" height="28" rx="3" fill="none" stroke="#111111" stroke-width="2"/>
+            <rect x="-9" y="-19" width="18" height="5" fill="#111111"/>
+            <rect x="-14" y="-9" width="24" height="3.5" fill="#1f9d55"/>
+            <rect x="-14" y="-2" width="24" height="3.5" fill="#1f9d55"/>
+            <rect x="-14" y="5" width="14" height="3.5" fill="#1f9d55"/>
+            <rect x="0" y="5" width="10" height="3.5" fill="none" stroke="#1f9d55" stroke-width="1"/>
+          </g>
+          <text x="400" y="185" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1f9d55" text-anchor="middle" letter-spacing="0.08em">ACCUMULI</text>
+
+          <!-- INDUSTRIA -->
+          <g transform="translate(580, 120)">
+            <circle cx="0" cy="0" r="38" fill="none" stroke="#111111" stroke-width="2"/>
+            <line x1="-13" y1="-18" x2="-13" y2="-4" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="-9" y1="-18" x2="-9" y2="-4" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M -14 -18 Q -11 -22 -8 -18" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
+            <polygon points="-22,18 -22,-4 -2,-4 -2,4 22,4 22,18" fill="none" stroke="#111111" stroke-width="2.5" stroke-linejoin="round"/>
+            <rect x="3" y="9" width="6" height="9" fill="#1f9d55"/>
+            <rect x="13" y="9" width="6" height="9" fill="#1f9d55"/>
+            <rect x="-17" y="2" width="4" height="4" fill="#1f9d55"/>
+            <rect x="-10" y="2" width="4" height="4" fill="#1f9d55"/>
+            <rect x="-17" y="9" width="4" height="4" fill="#1f9d55"/>
+            <rect x="-10" y="9" width="4" height="4" fill="#1f9d55"/>
+          </g>
+          <text x="580" y="185" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1f9d55" text-anchor="middle" letter-spacing="0.08em">RISPARMI</text>
+
+          <!-- RETE -->
+          <g transform="translate(730, 120)">
+            <circle cx="0" cy="0" r="38" fill="none" stroke="#111111" stroke-width="2"/>
+            <line x1="-12" y1="22" x2="-3" y2="-22" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="12" y1="22" x2="3" y2="-22" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="-3" y1="-22" x2="3" y2="-22" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="-5" y1="-12" x2="5" y2="-12" stroke="#111111" stroke-width="2"/>
+            <line x1="-8" y1="0" x2="8" y2="0" stroke="#111111" stroke-width="2"/>
+            <line x1="-12" y1="22" x2="12" y2="22" stroke="#111111" stroke-width="2.5"/>
+            <line x1="-5" y1="-12" x2="5" y2="0" stroke="#111111" stroke-width="1.3" opacity="0.65"/>
+            <line x1="5" y1="-12" x2="-5" y2="0" stroke="#111111" stroke-width="1.3" opacity="0.65"/>
+            <line x1="-8" y1="0" x2="8" y2="22" stroke="#111111" stroke-width="1.3" opacity="0.65"/>
+            <line x1="8" y1="0" x2="-8" y2="22" stroke="#111111" stroke-width="1.3" opacity="0.65"/>
+            <circle cx="-5" cy="-12" r="1.5" fill="#111111"/>
+            <circle cx="5" cy="-12" r="1.5" fill="#111111"/>
+            <circle cx="-8" cy="0" r="1.5" fill="#111111"/>
+            <circle cx="8" cy="0" r="1.5" fill="#111111"/>
+          </g>
+
+          <!-- FRECCIA: Sole -> FV -->
+          <g stroke="#f28c28" stroke-width="2" fill="none" stroke-linecap="round">
+            <line x1="115" y1="120" x2="173" y2="120"/>
+          </g>
+          <polygon points="182,120 170,114 170,126" fill="#f28c28"/>
+
+          <!-- FRECCIA: FV -> Batteria -->
+          <g stroke="#f28c28" stroke-width="2" fill="none" stroke-linecap="round">
+            <line x1="265" y1="120" x2="353" y2="120"/>
+          </g>
+          <polygon points="362,120 350,114 350,126" fill="#f28c28"/>
+
+          <!-- FRECCE: Batteria <-> Industria (bidirezionale) -->
+          <g stroke="#f28c28" stroke-width="2" fill="none" stroke-linecap="round">
+            <line x1="445" y1="112" x2="533" y2="112"/>
+            <line x1="533" y1="128" x2="445" y2="128"/>
+          </g>
+          <polygon points="542,112 530,106 530,118" fill="#f28c28"/>
+          <polygon points="436,128 448,122 448,134" fill="#f28c28"/>
+
+          <!-- FRECCIA: FV -> Industria (curva sopra) -->
+          <g stroke="#f28c28" stroke-width="2" fill="none" stroke-linecap="round">
+            <path d="M 235 88 Q 400 30 565 88"/>
+          </g>
+          <polygon points="565,88 553,82 556,94" fill="#f28c28"/>
+
+          <!-- FRECCIA: Rete -> Industria (tratteggiata) -->
+          <g stroke="#f28c28" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="4 4">
+            <line x1="691" y1="120" x2="625" y2="120"/>
+          </g>
+          <polygon points="617,120 629,114 629,126" fill="#f28c28"/>
+        </svg>
+
+        <div class="storage-flow-result">
+          <div class="result-icon-euro">€</div>
+          <p><strong>Risultato:</strong> minori costi, maggiore autonomia, più controllo!</p>
+        </div>
+
+      </div>
+      <!-- /storage-flow-card -->
+
     </div>
+    <!-- /colonna sinistra -->
+
+
+    <!-- COLONNA DESTRA: form simulatore -->
+    <div class="card simulator-card">
+      <span id="simulatorFormAnchor" class="scroll-target"></span>
+      <h2 class="brand-green">Ottieni subito una stima, gratis.</h2>
+      <p class="top-note">Compila il form: i risultati sono indicativi e servono per capire rapidamente se ha senso approfondire.</p>
+
+      <form id="simulatorForm">
+        <div class="two-col">
+          <div class="field">
+            <label for="consumoAnnuo">1. Consumo annuo di energia <span class="req">*</span></label>
+            <div class="hint">Inserisci il consumo totale annuo in kWh.</div>
+            <div class="input-wrap with-suffix">
+              <input id="consumoAnnuo" type="text" inputmode="numeric" placeholder="Es. 250.000" />
+              <span class="suffix">kWh/anno</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="costoEnergia">2. Costo medio dell'energia <span class="req">*</span></label>
+            <div class="hint">Il costo medio pagato in bolletta per kWh.</div>
+            <div class="input-wrap with-suffix">
+              <input id="costoEnergia" type="text" placeholder="Es. 0,22" />
+              <span class="suffix">€/kWh</span>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label for="profiloConsumo">3. Quando consumi di più? <span class="req">*</span></label>
+            <select id="profiloConsumo">
+              <option value="">Seleziona un'opzione</option>
+              <option value="giorno">Principalmente di giorno</option>
+              <option value="sera">Principalmente di sera</option>
+              <option value="notte">Principalmente di notte</option>
+              <option value="uniforme">In modo uniforme nelle 24 ore</option>
+              <option value="variabile">Variabile / dipende dai turni produttivi</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="settoreMerceologico">4. A quale settore appartiene la tua azienda? <span class="req">*</span></label>
+            <select id="settoreMerceologico">
+              <option value="">Seleziona un'opzione</option>
+              <option value="industria">Industria (metalmeccanica, plastica, legno, ceramica) – consumi diurni con peak points</option>
+              <option value="cold_chain">Catena del freddo (celle frigorifere, logistica alimentare, GDO) – consumi H24</option>
+              <option value="artigianato">Artigianato – consumo diurno 5 giorni a settimana</option>
+              <option value="terziario">Uffici e terziario (centri commerciali, hotel, ospedali privati, sedi aziendali) – consumi concentrati in fasce diurne/serali, molto prevedibile</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label>5. Hai picchi di assorbimento elevati durante la giornata? <span class="req">*</span></label>
+            <div class="radio-group">
+              <label class="radio-pill"><input type="radio" name="picchi" value="si_frequenti" /> Sì, frequenti</label>
+              <label class="radio-pill"><input type="radio" name="picchi" value="si_occasionali" /> Sì, occasionali</label>
+              <label class="radio-pill"><input type="radio" name="picchi" value="no" /> No</label>
+              <label class="radio-pill"><input type="radio" name="picchi" value="nonso" /> Non lo so</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="piccoMassimo">Picco massimo di assorbimento (se lo conosci)</label>
+            <div class="hint">Dato facoltativo ma utile per affinare la simulazione.</div>
+            <div class="input-wrap with-suffix">
+              <input id="piccoMassimo" type="text" inputmode="numeric" placeholder="Es. 530" />
+              <span class="suffix">kW</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="potenzaImpegnata">6. Potenza impegnata <span class="req">*</span></label>
+            <div class="hint">Inserisci la potenza impegnata indicata in bolletta.</div>
+            <div class="input-wrap with-suffix">
+              <input id="potenzaImpegnata" type="text" inputmode="numeric" placeholder="Es. 120" />
+              <span class="suffix">kW</span>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label>7. Hai già un impianto fotovoltaico? <span class="req">*</span></label>
+            <div class="radio-group">
+              <label class="radio-pill"><input type="radio" name="fv" value="si" /> Sì</label>
+              <label class="radio-pill"><input type="radio" name="fv" value="no" /> No</label>
+            </div>
+          </div>
+
+          <div class="field" id="fvField" style="display:none;">
+            <label for="fvPower">Potenza fotovoltaico installata</label>
+            <div class="hint">Da compilare solo se hai già un impianto fotovoltaico.</div>
+            <div class="input-wrap with-suffix">
+              <input id="fvPower" type="text" inputmode="numeric" placeholder="Es. 100" />
+              <span class="suffix">kWp</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="provincia">8. Dove si trova la tua azienda?</label>
+          <select id="provincia" name="provincia" required>
+            <option value="">Seleziona provincia</option>
+            <optgroup label="Friuli Venezia Giulia">
+              <option value="GO">Gorizia</option>
+              <option value="PN">Pordenone</option>
+              <option value="TS">Trieste</option>
+              <option value="UD">Udine</option>
+            </optgroup>
+            <optgroup label="Veneto">
+              <option value="BL">Belluno</option>
+              <option value="PD">Padova</option>
+              <option value="RO">Rovigo</option>
+              <option value="TV">Treviso</option>
+              <option value="VE">Venezia</option>
+              <option value="VR">Verona</option>
+              <option value="VI">Vicenza</option>
+            </optgroup>
+            <optgroup label="Lombardia">
+              <option value="BG">Bergamo</option>
+              <option value="BS">Brescia</option>
+              <option value="CO">Como</option>
+              <option value="CR">Cremona</option>
+              <option value="LC">Lecco</option>
+              <option value="LO">Lodi</option>
+              <option value="MN">Mantova</option>
+              <option value="MI">Milano</option>
+              <option value="MB">Monza e Brianza</option>
+              <option value="PV">Pavia</option>
+              <option value="SO">Sondrio</option>
+              <option value="VA">Varese</option>
+            </optgroup>
+            <optgroup label="Emilia-Romagna">
+              <option value="BO">Bologna</option>
+              <option value="FC">Forlì-Cesena</option>
+              <option value="FE">Ferrara</option>
+              <option value="MO">Modena</option>
+              <option value="PR">Parma</option>
+              <option value="PC">Piacenza</option>
+              <option value="RA">Ravenna</option>
+              <option value="RE">Reggio Emilia</option>
+              <option value="RN">Rimini</option>
+            </optgroup>
+            <optgroup label="Piemonte">
+              <option value="AL">Alessandria</option>
+              <option value="AT">Asti</option>
+              <option value="BI">Biella</option>
+              <option value="CN">Cuneo</option>
+              <option value="NO">Novara</option>
+              <option value="TO">Torino</option>
+              <option value="VB">Verbano-Cusio-Ossola</option>
+              <option value="VC">Vercelli</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="note-box">
+          <strong>Nota:</strong> i campi contrassegnati con <strong>*</strong> sono obbligatori.
+        </div>
+
+        <div id="errorBox" class="error-box"></div>
+        <button type="submit" class="btn btn-calc">Calcola la convenienza</button>
+      </form>
     </div>
-    </div>
-    </div>
-  </section>
+    <!-- /colonna destra -->
+
+  </div>
+  <!-- /container grid -->
+</section>
 
   <section class="section">
     <div class="container">
