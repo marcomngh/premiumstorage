@@ -1489,3 +1489,15 @@
 
   color: #0f172a;
 }
+.metodo-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.metodo-logo {
+  height: 52px;
+  width: auto;
+  display: inline-block;
+}
