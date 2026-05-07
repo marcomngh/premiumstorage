@@ -2218,6 +2218,11 @@ detail4 += ' Il beneficio da riduzione kW/picchi non è ancora incluso in modo a
 
 setResult('detail4', detail4);
 
+      resultsGrid.style.display = 'grid';
+leadBox.style.display = 'block';
+resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
     leadForm.addEventListener('submit', async function (event) {
       event.preventDefault();
       clearLeadMessages();
