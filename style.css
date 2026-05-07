@@ -337,23 +337,140 @@
       margin-top: 20px;
     }
 
-    .result-card {
-      padding: 20px;
-      background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
-    }
+   /* ===== RISULTATI SIMULAZIONE PREMIUM ===== */
 
-    .result-card .big {
-      margin-top: 8px;
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-    }
+.result-card {
 
-    .result-card p {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
+  position: relative;
+
+  background: #ffffff;
+
+  border: 2px solid #f28c28;
+
+  border-radius: 28px;
+
+  padding: 26px 24px 28px;
+
+  overflow: hidden;
+
+  transform: translateY(0);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  box-shadow:
+    0 14px 38px rgba(0,0,0,0.08),
+    0 0 28px rgba(242,140,40,0.10);
+}
+
+/* glow leggero */
+.result-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 10px;
+
+  border-radius: 22px;
+
+  border: 1px solid rgba(242,140,40,0.16);
+
+  pointer-events: none;
+}
+
+/* hover */
+.result-card:hover {
+
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 24px 55px rgba(0,0,0,0.14),
+    0 0 46px rgba(242,140,40,0.24);
+
+  border-color: #fb923c;
+}
+
+/* icona */
+.result-card .icon-wrap {
+
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+
+  background: #fff7ed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 18px;
+
+  color: #a16207;
+}
+
+/* titolo piccolo */
+.result-card .label {
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  color: #171717;
+
+  margin-bottom: 10px;
+}
+
+/* numero grande */
+.result-card .big {
+
+  font-size: 52px;
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: -0.05em;
+
+  color: #166534;
+
+  margin-bottom: 18px;
+}
+
+/* testo */
+.result-card p {
+
+  font-size: 15px;
+
+  line-height: 1.7;
+
+  color: #334155;
+
+  margin: 0;
+}
+
+/* linea decorativa */
+.result-card::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 24px;
+
+  bottom: 20px;
+
+  width: 56px;
+
+  height: 4px;
+
+  border-radius: 999px;
+
+  background: #f28c28;
+}
 
     .info-grid {
       display: grid;
