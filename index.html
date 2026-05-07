@@ -1994,8 +1994,8 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
     }
 
     function setResult(id, text) {
-      document.getElementById(id).textContent = text;
-    }
+  document.getElementById(id).innerHTML = text;
+}
 
     function showError(message) {
       errorBox.style.display = 'block';
@@ -2194,27 +2194,37 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
       );
 
       setResult(
-        'detail2',
-        'Produzione FV stimata: <strong>' + formatNumber(produzioneFV, 0) + ' kWh/anno</strong>. Autoconsumo stimato: <strong>' + formatNumber(autoconsumoPercentuale * 100, 0) + </strong>'%
-        
-      );
+  'detail2',
+  'Produzione FV stimata: <strong>' +
+  formatNumber(produzioneFV, 0) +
+  ' kWh/anno</strong>. Autoconsumo stimato: <strong>' +
+  formatNumber(autoconsumoPercentuale * 100, 0) +
+  '%</strong>.'
+);
 
       setResult(
-        'detail3',
-        'Risparmio annuo stimato da FV + storage: ' + formatCurrency(risparmioTotale, 0) + '. Lo storage è calcolato considerando sia il time shifting sia la valorizzazione dell’energia fotovoltaica accumulata invece che ceduta.'
-      );
+  'detail3',
+  'Risparmio annuo stimato da FV + storage: <strong>' +
+  formatCurrency(risparmioTotale, 0) +
+  '</strong>. Lo storage è calcolato considerando sia il time shifting sia la valorizzazione dell’energia fotovoltaica accumulata invece che ceduta.'
+);
+     let detail4 =
+  'Potenza media stimata: <strong>' +
+  formatNumber(potenzaMedia, 1) +
+  ' kW</strong>. Picco stimato: <strong>' +
+  formatNumber(piccoStimato, 0) +
+  ' kW</strong>.';
 
-      let detail4 = 'Potenza media stimata: ' + formatNumber(potenzaMedia, 1) + ' kW. Picco stimato: ' + formatNumber(piccoStimato, 0) + ' kW.';
-      if (isFinite(payback)) {
-        detail4 += ' Tempo di rientro orientativo: ' + formatNumber(payback, 1) + ' anni.';
-      }
-      detail4 += ' Il beneficio da riduzione kW/picchi non è ancora incluso in modo analitico.';
-      setResult('detail4', detail4);
+if (isFinite(payback)) {
+  detail4 +=
+    ' Tempo di rientro orientativo: <strong>' +
+    formatNumber(payback, 1) +
+    ' anni</strong>.';
+}
 
-      resultsGrid.style.display = 'grid';
-      leadBox.style.display = 'block';
-      resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+detail4 += ' Il beneficio da riduzione kW/picchi non è ancora incluso in modo analitico.';
+
+setResult('detail4', detail4);
 
     leadForm.addEventListener('submit', async function (event) {
       event.preventDefault();
