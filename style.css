@@ -427,9 +427,9 @@
 /* numero grande */
 .result-card .big {
 
-  font-size: 52px;
+  font-size: clamp(42px, 3.2vw, 52px);
 
-  line-height: 1;
+  line-height: 1.02;
 
   font-weight: 800;
 
@@ -438,8 +438,9 @@
   color: #166534;
 
   margin-bottom: 18px;
-}
 
+  word-break: break-word;
+}
 /* testo */
 .result-card p {
 
@@ -1479,4 +1480,12 @@
   font-size: 18px;
 
   line-height: 1;
+}
+/* numeri e valori evidenziati */
+
+.result-card p strong {
+
+  font-weight: 800;
+
+  color: #0f172a;
 }
