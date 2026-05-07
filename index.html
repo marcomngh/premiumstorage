@@ -440,7 +440,7 @@
               <rect x="11" y="7" width="2" height="9"></rect>
               <rect x="16" y="4" width="2" height="12"></rect>
             </svg>
-            <span>Valutazione</span>
+            <span>Convenienza</span>
           </div>
           <div class="big" id="resScore">Convenienza alta</div>
           <p id="detail4">Ottimo potenziale per accumulo industriale.</p>
@@ -2040,10 +2040,10 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
     }
 
     function getRating(score) {
-      if (score >= 8) return 'Convenienza molto alta';
-      if (score >= 6.5) return 'Convenienza alta';
-      if (score >= 5) return 'Convenienza media';
-      return 'Convenienza da approfondire';
+      if (score >= 8) return 'Molto alta';
+      if (score >= 6.5) return 'Alta';
+      if (score >= 5) return 'Media';
+      return 'Da approfondire';
     }
 
     document.querySelectorAll('input[name="fv"]').forEach(function (radio) {
@@ -2241,7 +2241,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
         batteriaConsigliata: document.getElementById('resBattery').textContent,
         fotovoltaicoConsigliato: document.getElementById('resPv').textContent,
         risparmioStimato: document.getElementById('resSavings').textContent,
-        valutazione: document.getElementById('resScore').textContent,
+        convenienza: document.getElementById('resScore').textContent,
         origine: window.location.href
       };
 
