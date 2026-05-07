@@ -2220,7 +2220,18 @@ setResult('detail4', detail4);
 
       resultsGrid.style.display = 'grid';
 leadBox.style.display = 'block';
-resultsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+resultsGrid.style.display = 'grid';
+leadBox.style.display = 'block';
+
+const offset = 120;
+const top =
+  resultsGrid.getBoundingClientRect().top +
+  window.pageYOffset -
+  offset;
+
+window.scrollTo({
+  top: top,
+  behavior: 'smooth'
 });
 
     leadForm.addEventListener('submit', async function (event) {
