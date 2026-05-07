@@ -1321,22 +1321,45 @@
 .mini-proof-line {
 
   display: flex;
-  flex-wrap: wrap;
-  gap: 26px;
+  flex-wrap: nowrap;
+
+  align-items: center;
+
+  gap: 22px;
 
   margin-bottom: 22px;
 
   font-size: 15px;
-  font-weight: 700;
 
-  color: #171717;
+  font-weight: 800;
+
+  color: #166534;
 
   letter-spacing: -0.01em;
+
+  white-space: nowrap;
 }
 
 .mini-proof-line span {
 
   position: relative;
 
-  padding-left: 2px;
+  display: inline-flex;
+
+  align-items: center;
+
+  white-space: nowrap;
+}
+
+.mini-proof-line span::before {
+
+  content: "•";
+
+  color: #f28c28;
+
+  margin-right: 8px;
+
+  font-size: 18px;
+
+  line-height: 1;
 }
