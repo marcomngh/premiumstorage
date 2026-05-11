@@ -1931,8 +1931,9 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
       variabile: { pvBonus: 0.85, storageBonus: 1.05 }
     };
    
-    // Autoconsumo FV STIMATO SENZA storage, per profilo orario
-// Serve a calcolare l'eccesso di produzione FV che la batteria può "salvare"
+   // Autoconsumo FV STIMATO SENZA storage, per profilo orario.
+// Usato per calcolare l'eccesso di produzione FV catturabile dalla batteria
+// e per dimensionare il PCS sulla potenza FV non autoconsumata istantaneamente.
 const autoconsumoSenzaStorageMap = {
   giorno: 0.60,
   sera: 0.35,
