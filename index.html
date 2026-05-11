@@ -2157,33 +2157,46 @@ const autoconsumoSenzaStorageMap = {
         pvConsigliato = clamp(roundToStep(pvConsigliato, 10), 30, 1000);
       }
 
-      const produzioneFV = pvConsigliato * constants.produzionePerKwp;
-const autoconsumoBase =
-  sector.pvAutoconsumoBase * profile.pvBonus;
+// =====================================================
+// PRODUZIONE FV E AUTOCONSUMO
+// =====================================================
 
-const autoconsumoPercentuale =
-  clamp(
-    autoconsumoBase + sector.incrementoStorage,
-    0.55,
-    0.97
-  );
-      
-      
-      const autoconsumoFV = produzioneFV * autoconsumoPercentuale;
-      const risparmioFV = autoconsumoFV * costoEnergia;
+const produzioneFV = pvConsigliato * constants.produzionePerKwp;
 
-    // --- DIMENSIONAMENTO STORAGE (logica ibrida) ---
+// Autoconsumo SENZA storage (situazione di partenza)
+const autoconsumoBase = clamp(
+  sector.pvAutoconsumoBase * profile.pvBonus,
+  0.30,
+  0.85
+);
 
-// Caso A: storage dimensionato sull'eccesso FV
-// produzione non autoconsumata × fattore di cattura / cicli annui
+// Autoconsumo CON storage (situazione finale)
+const autoconsumoPercentuale = clamp(
+  autoconsumoBase + sector.incrementoStorage,
+  0.55,
+  0.97
+);
+
+// Risparmio dal solo FV (autoconsumo base, senza beneficio storage)
+const autoconsumoFV_base = produzioneFV * autoconsumoBase;
+const risparmioFV = autoconsumoFV_base * costoEnergia;
+
+// Energia FV "salvata" grazie allo storage (passa da autoconsumoBase a autoconsumoPercentuale)
+const energiaFVrecuperataDaStorage = produzioneFV * (autoconsumoPercentuale - autoconsumoBase);
+
+  // =====================================================
+// DIMENSIONAMENTO STORAGE (logica ibrida)
+// =====================================================
+
 const autoconsumoSenzaStorage = autoconsumoSenzaStorageMap[profilo] || 0.50;
-const eccessoFVannuo = produzioneFV * (1 - autoconsumoSenzaStorage);
-const fattoreCattura = 0.7; // % di eccesso effettivamente catturabile dalla batteria
-const cicliUtili = sector.storageCycles;
-let storageKwh_FV = (eccessoFVannuo * fattoreCattura) / cicliUtili;
 
-// Caso B: storage dimensionato sul peak shaving
-// (picco - soglia target) × ore di durata picco tipica
+// Driver A: storage dimensionato sull'eccesso FV catturabile
+const eccessoFVannuo = produzioneFV * (1 - autoconsumoSenzaStorage);
+const fattoreCattura = 0.7;
+const cicliUtili = sector.storageCycles;
+const storageKwh_FV = (eccessoFVannuo * fattoreCattura) / cicliUtili;
+
+// Driver B: storage dimensionato sul peak shaving
 let storageKwh_peak = 0;
 if (picchiSelection.value !== 'no') {
   const piccoTarget = potenzaMedia * 1.5;
@@ -2194,37 +2207,86 @@ if (picchiSelection.value !== 'no') {
   }
 }
 
-// Dimensionamento finale: prendi il maggiore tra i due
+// Dimensionamento finale: max dei due driver, modulato da bonus
 let storageKwh = Math.max(storageKwh_FV, storageKwh_peak);
-
-// Applica i bonus di profilo e picchi (modulazione fine)
 storageKwh = storageKwh * profile.storageBonus * peakFactor;
 
-// Arrotonda al blocco modulare e applica i limiti
+const driverStorage = storageKwh_FV >= storageKwh_peak
+  ? 'autoconsumo FV'
+  : 'peak shaving';
+
+// =====================================================
+// DIMENSIONAMENTO PCS (3 driver)
+// =====================================================
+
+// Driver 1: classico (proporzione della potenza impegnata)
+const pcsKw_potenza = potenzaImpegnata * sector.pcsFactor * peakFactor;
+
+// Driver 2: cattura del picco FV non autoconsumato istantaneamente
+const piccoFV = pvConsigliato * 0.85;
+const piccoFVdaCatturare = piccoFV * (1 - autoconsumoSenzaStorage);
+const pcsKw_FV = piccoFVdaCatturare * 0.8;
+
+// Driver 3: peak shaving lato scarica
+let pcsKw_picco = 0;
+if (picchiSelection.value !== 'no') {
+  const deltaPicco = piccoStimato - potenzaMedia * 1.5;
+  if (deltaPicco > 0) {
+    pcsKw_picco = deltaPicco * 1.2;
+  }
+}
+
+let pcsKw = Math.max(pcsKw_potenza, pcsKw_FV, pcsKw_picco);
+
+// =====================================================
+// SANITY CHECK C-RATE (coerenza storage <-> PCS)
+// =====================================================
+
+let cRate = storageKwh > 0 ? pcsKw / storageKwh : 0;
+
+if (cRate > 1) {
+  // PCS troppo alto rispetto ai kWh: alziamo i kWh
+  storageKwh = pcsKw;
+} else if (cRate < 0.25 && storageKwh > 0) {
+  // PCS troppo basso: lo alziamo a 0.25C
+  pcsKw = storageKwh * 0.25;
+}
+
+// Arrotondamenti e clamp finali
 storageKwh = clamp(
   roundToStep(storageKwh, constants.tagliaBloccoKwh),
   constants.batteriaMin,
   constants.batteriaMax
 );
 
-      let pcsKw = potenzaImpegnata * sector.pcsFactor * peakFactor;
-      pcsKw = clamp(roundToStep(pcsKw, 5), constants.pcsMin, potenzaImpegnata);
+pcsKw = clamp(
+  roundToStep(pcsKw, 5),
+  constants.pcsMin,
+  potenzaImpegnata
+);
 
-      const energiaSpostataAnnua = storageKwh * sector.storageCycles;
-      const energiaUtileAnnua = energiaSpostataAnnua * constants.rendimentoBatteria;
+// =====================================================
+// RISPARMIO STORAGE (senza doppi conteggi)
+// =====================================================
 
-      const quotaEnergiaDaFV = constants.quotaEnergiaStorageDaFV;
-      const quotaEnergiaTimeShift = 1 - quotaEnergiaDaFV;
+const energiaSpostataAnnua = storageKwh * sector.storageCycles;
+const energiaUtileAnnua = energiaSpostataAnnua * constants.rendimentoBatteria;
 
-      const deltaPrezzoTimeShift = Math.max(sector.deltaPrice, constants.valoreStorageTimeShift);
-      const deltaPrezzoPv = constants.valoreStoragePv;
+// Componente 1: maggior autoconsumo FV (energia recuperata dallo storage)
+// Capped sul realistico: non può superare l'energia utile della batteria
+const energiaFVrecuperata = Math.min(
+  energiaFVrecuperataDaStorage,
+  energiaUtileAnnua * 0.5
+);
+const risparmioStoragePv = energiaFVrecuperata * (costoEnergia - 0.05);
+// (costoEnergia - 0.05) = differenza tra "ricomprato in rete" e "venduto a poco"
 
-      const energiaTimeShift = energiaUtileAnnua * quotaEnergiaTimeShift;
-      const energiaDaFV = energiaUtileAnnua * quotaEnergiaDaFV;
+// Componente 2: time-shift puro (energia caricata da rete in fascia bassa)
+const energiaTimeShift = energiaUtileAnnua - energiaFVrecuperata;
+const deltaPrezzoTimeShift = Math.max(sector.deltaPrice, constants.valoreStorageTimeShift);
+const risparmioStorageTimeShift = energiaTimeShift * deltaPrezzoTimeShift;
 
-      const risparmioStorageTimeShift = energiaTimeShift * deltaPrezzoTimeShift;
-      const risparmioStoragePv = energiaDaFV * deltaPrezzoPv;
-      const risparmioStorage = risparmioStorageTimeShift + risparmioStoragePv;
+const risparmioStorage = risparmioStoragePv + risparmioStorageTimeShift;
 
       const risparmioTotale = risparmioFV + risparmioStorage;
 
@@ -2267,11 +2329,12 @@ storageKwh = clamp(
   '%</strong>.'
 );
 
-      setResult(
+      
+  setResult(
   'detail3',
-  'Risparmio annuo stimato da FV + storage: <strong>' +
-  formatCurrency(risparmioTotale, 0) +
-  '</strong>. Lo storage è calcolato considerando sia il time shifting sia la valorizzazione dell’energia fotovoltaica accumulata invece che ceduta.'
+  'Risparmio totale: <strong>' + formatCurrency(risparmioTotale, 0) + '/anno</strong>.<br>' +
+  '• Da FV (autoconsumo base): <strong>' + formatCurrency(risparmioFV, 0) + '</strong><br>' +
+  '• Da storage (maggior autoconsumo + time-shift): <strong>' + formatCurrency(risparmioStorage, 0) + '</strong>'
 );
      let detail4 =
   'Potenza media stimata: <strong>' +
