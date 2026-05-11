@@ -2144,7 +2144,17 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
       }
 
       const produzioneFV = pvConsigliato * constants.produzionePerKwp;
-      const autoconsumoPercentuale = clamp(sector.pvAutoconsumo * profile.pvBonus, 0.55, 0.97);
+const autoconsumoBase =
+  sector.pvAutoconsumoBase * profile.pvBonus;
+
+const autoconsumoPercentuale =
+  clamp(
+    autoconsumoBase + sector.incrementoStorage,
+    0.55,
+    0.97
+  );
+      
+      
       const autoconsumoFV = produzioneFV * autoconsumoPercentuale;
       const risparmioFV = autoconsumoFV * costoEnergia;
 
@@ -2201,11 +2211,17 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
         'Profilo rilevato: ' + sector.label + '. Storage orientativo calcolato su priorità energetica, presenza di picchi e valorizzazione dell’energia FV accumulata.'
       );
 
-      setResult(
+     setResult(
   'detail2',
   'Produzione FV stimata: <strong>' +
   formatNumber(produzioneFV, 0) +
-  ' kWh/anno</strong>. Autoconsumo stimato: <strong>' +
+  ' kWh/anno</strong>.<br>' +
+
+  'Autoconsumo senza storage: <strong>' +
+  formatNumber(autoconsumoBase * 100, 0) +
+  '%</strong>.<br>' +
+
+  'Autoconsumo con storage: <strong>' +
   formatNumber(autoconsumoPercentuale * 100, 0) +
   '%</strong>.'
 );
