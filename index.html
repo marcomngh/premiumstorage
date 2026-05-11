@@ -1917,7 +1917,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
     incrementoStorage: 0.18,
     storageFactor: 0.08,
     pcsFactor: 0.25,
-    storageCycles: 200,
+    storageCycles: 280,
     deltaPrice: 0.035,
     scoreBoost: 0.90
   }
@@ -1930,7 +1930,22 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
       uniforme: { pvBonus: 0.90, storageBonus: 1.00 },
       variabile: { pvBonus: 0.85, storageBonus: 1.05 }
     };
-   
+   // Modulatori sui cicli annui dello storage in base al profilo orario.
+// Moltiplicano la base settoriale (sector.storageCycles).
+const cicliProfileMap = {
+  giorno: 0.95,
+  sera: 1.05,
+  notte: 1.10,
+  uniforme: 0.90,
+  variabile: 1.00
+};
+
+// Modulatore "presenza FV": senza FV la batteria fa solo time-shift,
+// quindi cicla meno della base settoriale.
+const cicliFVMap = {
+  conFV: 1.00,
+  senzaFV: 0.70
+};
    // Autoconsumo FV STIMATO SENZA storage, per profilo orario.
 // Usato per calcolare l'eccesso di produzione FV catturabile dalla batteria
 // e per dimensionare il PCS sulla potenza FV non autoconsumata istantaneamente.
@@ -2068,6 +2083,22 @@ const autoconsumoSenzaStorageMap = {
       return 'Da approfondire';
     }
 
+    function calcolaCicliEffettivi(sector, profilo, hasFV) {
+  const cicliBase = sector.storageCycles;
+  const moduloProfilo = cicliProfileMap[profilo] || 1.00;
+  const moduloFV = hasFV ? cicliFVMap.conFV : cicliFVMap.senzaFV;
+  
+  let cicliEffettivi = cicliBase * moduloProfilo * moduloFV;
+  
+  // Cap fisico: max 400 cicli/anno (più di 1 ciclo/giorno è raro)
+  cicliEffettivi = Math.min(cicliEffettivi, 400);
+  
+  // Floor: min 120 cicli/anno (sotto questa soglia lo storage non ha senso economico)
+  cicliEffettivi = Math.max(cicliEffettivi, 120);
+  
+  return Math.round(cicliEffettivi);
+}
+
     document.querySelectorAll('input[name="fv"]').forEach(function (radio) {
       radio.addEventListener('change', toggleFvField);
     });
@@ -2156,6 +2187,9 @@ const autoconsumoSenzaStorageMap = {
         pvConsigliato = consumoAnnuo * sector.pvCoverage / constants.produzionePerKwp;
         pvConsigliato = clamp(roundToStep(pvConsigliato, 10), 30, 1000);
       }
+      // Calcola una sola volta i cicli effettivi (servono in più punti)
+const hasFV = pvConsigliato > 0;
+const cicliEffettivi = calcolaCicliEffettivi(sector, profilo, hasFV);
 
 // =====================================================
 // PRODUZIONE FV E AUTOCONSUMO
@@ -2193,8 +2227,11 @@ const autoconsumoSenzaStorage = autoconsumoSenzaStorageMap[profilo] || 0.50;
 // Driver A: storage dimensionato sull'eccesso FV catturabile
 const eccessoFVannuo = produzioneFV * (1 - autoconsumoSenzaStorage);
 const fattoreCattura = 0.7;
-const cicliUtili = sector.storageCycles;
-const storageKwh_FV = (eccessoFVannuo * fattoreCattura) / cicliUtili;
+// Usa i cicli effettivi anche per dimensionare lo storage da FV
+// (la batteria deve essere abbastanza grande da assorbire l'eccesso ai cicli reali)
+const hasFV_temp = pvConsigliato > 0;
+const cicliUtili = calcolaCicliEffettivi(sector, profilo, hasFV_temp);
+let storageKwh_FV = (eccessoFVannuo * fattoreCattura) / cicliUtili;
 
 // Driver B: storage dimensionato sul peak shaving
 let storageKwh_peak = 0;
@@ -2269,7 +2306,9 @@ pcsKw = clamp(
 // RISPARMIO STORAGE (senza doppi conteggi)
 // =====================================================
 
-const energiaSpostataAnnua = storageKwh * sector.storageCycles;
+const hasFV = pvConsigliato > 0;
+const cicliEffettivi = calcolaCicliEffettivi(sector, profilo, hasFV);
+const energiaSpostataAnnua = storageKwh * cicliEffettivi;
 const energiaUtileAnnua = energiaSpostataAnnua * constants.rendimentoBatteria;
 
 // Componente 1: maggior autoconsumo FV (energia recuperata dallo storage)
