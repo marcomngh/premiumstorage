@@ -1927,6 +1927,16 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
       uniforme: { pvBonus: 0.90, storageBonus: 1.00 },
       variabile: { pvBonus: 0.85, storageBonus: 1.05 }
     };
+   
+    // Autoconsumo FV STIMATO SENZA storage, per profilo orario
+// Serve a calcolare l'eccesso di produzione FV che la batteria può "salvare"
+const autoconsumoSenzaStorageMap = {
+  giorno: 0.60,
+  sera: 0.35,
+  notte: 0.20,
+  uniforme: 0.50,
+  variabile: 0.45
+};
 
     const peakMap = {
       si_frequenti: 1.15,
@@ -2158,13 +2168,40 @@ const autoconsumoPercentuale =
       const autoconsumoFV = produzioneFV * autoconsumoPercentuale;
       const risparmioFV = autoconsumoFV * costoEnergia;
 
-      let storageKwh = (consumoAnnuo * sector.storageFactor) / 365;
-      storageKwh = storageKwh * profile.storageBonus * peakFactor;
-      storageKwh = clamp(
-        roundToStep(storageKwh, constants.tagliaBloccoKwh),
-        constants.batteriaMin,
-        constants.batteriaMax
-      );
+    // --- DIMENSIONAMENTO STORAGE (logica ibrida) ---
+
+// Caso A: storage dimensionato sull'eccesso FV
+// produzione non autoconsumata × fattore di cattura / cicli annui
+const autoconsumoSenzaStorage = autoconsumoSenzaStorageMap[profilo] || 0.50;
+const eccessoFVannuo = produzioneFV * (1 - autoconsumoSenzaStorage);
+const fattoreCattura = 0.7; // % di eccesso effettivamente catturabile dalla batteria
+const cicliUtili = sector.storageCycles;
+let storageKwh_FV = (eccessoFVannuo * fattoreCattura) / cicliUtili;
+
+// Caso B: storage dimensionato sul peak shaving
+// (picco - soglia target) × ore di durata picco tipica
+let storageKwh_peak = 0;
+if (picchiSelection.value !== 'no') {
+  const piccoTarget = potenzaMedia * 1.5;
+  const deltaPicco = piccoStimato - piccoTarget;
+  if (deltaPicco > 0) {
+    const oreDuratapicco = 2;
+    storageKwh_peak = deltaPicco * oreDuratapicco;
+  }
+}
+
+// Dimensionamento finale: prendi il maggiore tra i due
+let storageKwh = Math.max(storageKwh_FV, storageKwh_peak);
+
+// Applica i bonus di profilo e picchi (modulazione fine)
+storageKwh = storageKwh * profile.storageBonus * peakFactor;
+
+// Arrotonda al blocco modulare e applica i limiti
+storageKwh = clamp(
+  roundToStep(storageKwh, constants.tagliaBloccoKwh),
+  constants.batteriaMin,
+  constants.batteriaMax
+);
 
       let pcsKw = potenzaImpegnata * sector.pcsFactor * peakFactor;
       pcsKw = clamp(roundToStep(pcsKw, 5), constants.pcsMin, potenzaImpegnata);
