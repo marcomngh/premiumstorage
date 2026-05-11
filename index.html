@@ -1972,22 +1972,22 @@ const autoconsumoSenzaStorageMap = {
     };
 
     const constants = {
-      produzionePerKwp: 1200,
-      rendimentoBatteria: 0.90,
-      batteriaMin: 20,
-      batteriaMax: 2000,
-   // Granularità modulare:
+  produzionePerKwp: 1200,
+  rendimentoBatteria: 0.90,
+  batteriaMin: 20,
+  batteriaMax: 2000,
+  // Granularità modulare:
   // - sotto la soglia: modulari piccoli (es. batterie impilabili da 20 kWh)
   // - sopra la soglia: cabinet all-in-one (taglie standard da 50 kWh)
   tagliaBloccoSmallKwh: 20,
   tagliaBloccoLargeKwh: 50,
   sogliaTagliaBlocco: 100,
-      pcsMin: 20,
-      valoreStorageTimeShift: 0.04,
-      costoStoragePerKwh: 400,
-      costoPvPerKwp: 750
-      prezzoVenditaFV: 0.05,
-    };
+  pcsMin: 20,
+  valoreStorageTimeShift: 0.04,
+  costoStoragePerKwh: 400,
+  costoPvPerKwp: 750,
+  prezzoVenditaFV: 0.05
+};
 
     const form = document.getElementById('simulatorForm');
     const fvField = document.getElementById('fvField');
