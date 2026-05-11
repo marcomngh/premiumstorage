@@ -2336,12 +2336,22 @@ const risparmioStorage = risparmioStoragePv + risparmioStorageTimeShift;
   '• Da FV (autoconsumo base): <strong>' + formatCurrency(risparmioFV, 0) + '</strong><br>' +
   '• Da storage (maggior autoconsumo + time-shift): <strong>' + formatCurrency(risparmioStorage, 0) + '</strong>'
 );
-     let detail4 =
-  'Potenza media stimata: <strong>' +
-  formatNumber(potenzaMedia, 1) +
-  ' kW</strong>. Picco stimato: <strong>' +
-  formatNumber(piccoStimato, 0) +
-  ' kW</strong>.';
+const rapportoPiccoMedia = potenzaMedia > 0 ? piccoStimato / potenzaMedia : 0;
+let interpretazionePicco = '';
+if (rapportoPiccoMedia < 1.5) {
+  interpretazionePicco = 'profilo molto regolare';
+} else if (rapportoPiccoMedia < 2.0) {
+  interpretazionePicco = 'profilo con picchi moderati';
+} else if (rapportoPiccoMedia < 3.0) {
+  interpretazionePicco = 'profilo con picchi marcati';
+} else {
+  interpretazionePicco = 'profilo molto sbilanciato';
+}
+
+let detail4 =
+  'Picco stimato: <strong>' + formatNumber(piccoStimato, 0) + ' kW</strong> ' +
+  'contro un assorbimento medio di <strong>' + formatNumber(potenzaMedia, 1) + ' kW</strong> ' +
+  '(' + interpretazionePicco + ', rapporto ' + formatNumber(rapportoPiccoMedia, 1) + 'x).';
 
 if (isFinite(payback)) {
   detail4 +=
