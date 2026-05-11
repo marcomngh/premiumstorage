@@ -1974,9 +1974,14 @@ const autoconsumoSenzaStorageMap = {
     const constants = {
       produzionePerKwp: 1200,
       rendimentoBatteria: 0.90,
-      batteriaMin: 50,
+      batteriaMin: 20,
       batteriaMax: 2000,
-      tagliaBloccoKwh: 50,
+   // Granularità modulare:
+  // - sotto la soglia: modulari piccoli (es. batterie impilabili da 20 kWh)
+  // - sopra la soglia: cabinet all-in-one (taglie standard da 50 kWh)
+  tagliaBloccoSmallKwh: 20,
+  tagliaBloccoLargeKwh: 50,
+  sogliaTagliaBlocco: 100,
       pcsMin: 50,
       valoreStorageTimeShift: 0.04,
       valoreStoragePv: 0.10,
@@ -2294,8 +2299,14 @@ if (cRate > 1) {
 }
 
 // Arrotondamenti e clamp finali
+// Sotto i 100 kWh: arrotondamento modulare a 20 kWh (sistemi impilabili)
+// Sopra i 100 kWh: arrotondamento a 50 kWh (cabinet all-in-one)
+const tagliaBlocco = storageKwh <= constants.sogliaTagliaBlocco
+  ? constants.tagliaBloccoSmallKwh
+  : constants.tagliaBloccoLargeKwh;
+
 storageKwh = clamp(
-  roundToStep(storageKwh, constants.tagliaBloccoKwh),
+  roundToStep(storageKwh, tagliaBlocco),
   constants.batteriaMin,
   constants.batteriaMax
 );
