@@ -1872,17 +1872,14 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
   industria: {
     label: "Industria",
     pvCoverage: 0.35,
-
     // autoconsumo FV SENZA batteria
     pvAutoconsumoBase: 0.55,
-
     // incremento grazie allo storage
     incrementoStorage: 0.30,
-
     storageFactor: 0.15,
     pcsFactor: 0.45,
     storageCycles: 320,
-    deltaPrice: 0.045,
+    deltaPriceRatio: 0.22,
     scoreBoost: 1.1
   },
 
@@ -1894,7 +1891,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
     storageFactor: 0.15,
     pcsFactor: 0.35,
     storageCycles: 360,
-    deltaPrice: 0.04,
+    deltaPriceRatio: 0.18,
     scoreBoost: 1.15
   },
 
@@ -1906,7 +1903,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
     storageFactor: 0.10,
     pcsFactor: 0.30,
     storageCycles: 250,
-    deltaPrice: 0.04,
+   deltaPriceRatio: 0.18,
     scoreBoost: 0.95
   },
 
@@ -1918,7 +1915,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
     storageFactor: 0.08,
     pcsFactor: 0.25,
     storageCycles: 280,
-    deltaPrice: 0.035,
+    deltaPriceRatio: 0.15,
     scoreBoost: 0.90
   }
 };
@@ -1938,6 +1935,16 @@ const cicliProfileMap = {
   notte: 1.10,
   uniforme: 0.90,
   variabile: 1.00
+};
+    // Quota di energia utile della batteria sfruttabile per time-shift puro,
+// in base al profilo orario. Chi consuma solo di giorno non può caricare 
+// di notte per scaricare di giorno (la batteria viene caricata dal FV).
+const timeShiftDisponibileMap = {
+  giorno: 0.10,    // quasi nullo: il time-shift puro non ha senso
+  sera: 0.70,      // utilizza energia notturna caricata in fascia bassa
+  notte: 0.80,     // tipico arbitraggio notte/giorno
+  uniforme: 0.50,  // mix bilanciato
+  variabile: 0.40  // dipende dai turni
 };
 
 // Modulatore "presenza FV": senza FV la batteria fa solo time-shift,
@@ -2317,8 +2324,20 @@ const risparmioStoragePv = energiaFVrecuperata * (costoEnergia - 0.05);
 // (costoEnergia - 0.05) = differenza tra "ricomprato in rete" e "venduto a poco"
 
 // Componente 2: time-shift puro (energia caricata da rete in fascia bassa)
-const energiaTimeShift = energiaUtileAnnua - energiaFVrecuperata;
-const deltaPrezzoTimeShift = Math.max(sector.deltaPrice, constants.valoreStorageTimeShift);
+// Solo una quota dell'energia "non da FV" è davvero utilizzabile per time-shift,
+// in base al profilo orario dell'azienda (chi consuma solo di giorno non può arbitraggiare).
+const energiaResiduaPerTimeShift = energiaUtileAnnua - energiaFVrecuperata;
+const quotaTimeShiftSfruttabile = timeShiftDisponibileMap[profilo] || 0.40;
+const energiaTimeShift = energiaResiduaPerTimeShift * quotaTimeShiftSfruttabile;
+
+// Il delta di prezzo time-shift è una % del costo energia inserito dall'utente.
+// Ratio tipici: 15-22% del costo medio, con un floor minimo per evitare valori azzerati
+// quando il costo inserito è molto basso.
+const deltaPrezzoTimeShift = Math.max(
+  costoEnergia * sector.deltaPriceRatio,
+  constants.valoreStorageTimeShift  // floor: 0.04 €/kWh come pavimento di sicurezza
+);
+
 const risparmioStorageTimeShift = energiaTimeShift * deltaPrezzoTimeShift;
 
 const risparmioStorage = risparmioStoragePv + risparmioStorageTimeShift;
