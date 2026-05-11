@@ -1865,47 +1865,60 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
   
   <script>
     const sectorMap = {
-      industria: {
-        label: "Industria",
-        pvCoverage: 0.35,
-        pvAutoconsumo: 0.70,
-        storageFactor: 0.15,
-        pcsFactor: 0.45,
-        storageCycles: 320,
-        deltaPrice: 0.045,
-        scoreBoost: 1.1
-      },
-      cold_chain: {
-        label: "Catena del freddo",
-        pvCoverage: 0.40,
-        pvAutoconsumo: 0.80,
-        storageFactor: 0.15,
-        pcsFactor: 0.35,
-        storageCycles: 360,
-        deltaPrice: 0.04,
-        scoreBoost: 1.15
-      },
-      artigianato: {
-        label: "Artigianato",
-        pvCoverage: 0.32,
-        pvAutoconsumo: 0.65,
-        storageFactor: 0.10,
-        pcsFactor: 0.30,
-        storageCycles: 250,
-        deltaPrice: 0.04,
-        scoreBoost: 0.95
-      },
-      terziario: {
-        label: "Uffici e terziario",
-        pvCoverage: 0.30,
-        pvAutoconsumo: 0.6,
-        storageFactor: 0.08,
-        pcsFactor: 0.25,
-        storageCycles: 200,
-        deltaPrice: 0.035,
-        scoreBoost: 0.90
-      }
-    };
+
+  industria: {
+    label: "Industria",
+    pvCoverage: 0.35,
+
+    // autoconsumo FV SENZA batteria
+    pvAutoconsumoBase: 0.55,
+
+    // incremento grazie allo storage
+    incrementoStorage: 0.30,
+
+    storageFactor: 0.15,
+    pcsFactor: 0.45,
+    storageCycles: 320,
+    deltaPrice: 0.045,
+    scoreBoost: 1.1
+  },
+
+  cold_chain: {
+    label: "Catena del freddo",
+    pvCoverage: 0.40,
+    pvAutoconsumoBase: 0.70,
+    incrementoStorage: 0.25,
+    storageFactor: 0.15,
+    pcsFactor: 0.35,
+    storageCycles: 360,
+    deltaPrice: 0.04,
+    scoreBoost: 1.15
+  },
+
+  artigianato: {
+    label: "Artigianato",
+    pvCoverage: 0.32,
+    pvAutoconsumoBase: 0.65,
+    incrementoStorage: 0.20,
+    storageFactor: 0.10,
+    pcsFactor: 0.30,
+    storageCycles: 250,
+    deltaPrice: 0.04,
+    scoreBoost: 0.95
+  },
+
+  terziario: {
+    label: "Uffici e terziario",
+    pvCoverage: 0.30,
+    pvAutoconsumoBase: 0.72,
+    incrementoStorage: 0.18,
+    storageFactor: 0.08,
+    pcsFactor: 0.25,
+    storageCycles: 200,
+    deltaPrice: 0.035,
+    scoreBoost: 0.90
+  }
+};
 
     const profileMap = {
       giorno: { pvBonus: 1.00, storageBonus: 0.85 },
