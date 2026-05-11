@@ -2329,7 +2329,7 @@ const energiaUtileAnnua = energiaSpostataAnnua * constants.rendimentoBatteria;
 // Capped sul realistico: non può superare l'energia utile della batteria
 const energiaFVrecuperata = Math.min(
   energiaFVrecuperataDaStorage,
-  energiaUtileAnnua * 0.5
+  energiaUtileAnnua
 );
 const risparmioStoragePv = energiaFVrecuperata * (costoEnergia - 0.05);
 // (costoEnergia - 0.05) = differenza tra "ricomprato in rete" e "venduto a poco"
