@@ -2227,11 +2227,8 @@ const autoconsumoSenzaStorage = autoconsumoSenzaStorageMap[profilo] || 0.50;
 // Driver A: storage dimensionato sull'eccesso FV catturabile
 const eccessoFVannuo = produzioneFV * (1 - autoconsumoSenzaStorage);
 const fattoreCattura = 0.7;
-// Usa i cicli effettivi anche per dimensionare lo storage da FV
-// (la batteria deve essere abbastanza grande da assorbire l'eccesso ai cicli reali)
-const hasFV_temp = pvConsigliato > 0;
-const cicliUtili = calcolaCicliEffettivi(sector, profilo, hasFV_temp);
-let storageKwh_FV = (eccessoFVannuo * fattoreCattura) / cicliUtili;
+// Usa direttamente cicliEffettivi (già calcolato sopra)
+let storageKwh_FV = (eccessoFVannuo * fattoreCattura) / cicliEffettivi;
 
 // Driver B: storage dimensionato sul peak shaving
 let storageKwh_peak = 0;
@@ -2306,8 +2303,7 @@ pcsKw = clamp(
 // RISPARMIO STORAGE (senza doppi conteggi)
 // =====================================================
 
-const hasFV = pvConsigliato > 0;
-const cicliEffettivi = calcolaCicliEffettivi(sector, profilo, hasFV);
+// hasFV e cicliEffettivi sono già stati calcolati in cima, riusiamoli
 const energiaSpostataAnnua = storageKwh * cicliEffettivi;
 const energiaUtileAnnua = energiaSpostataAnnua * constants.rendimentoBatteria;
 
