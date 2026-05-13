@@ -1986,7 +1986,7 @@ const autoconsumoSenzaStorageMap = {
   valoreStorageTimeShift: 0.04,
   costoStoragePerKwh: 400,
   costoPvPerKwp: 750,
-  prezzoVenditaFV: 0.05
+  prezzoVenditaFV: 0.07
 };
 
     const form = document.getElementById('simulatorForm');
@@ -2222,10 +2222,13 @@ const autoconsumoPercentuale = clamp(
   0.97
 );
 
-// Risparmio dal solo FV (autoconsumo base, senza beneficio storage)
+// Risparmio dal solo FV (autoconsumo base + ricavo cessione in rete)
 const autoconsumoFV_base = produzioneFV * autoconsumoBase;
-const risparmioFV = autoconsumoFV_base * costoEnergia;
-
+const cessioneFVrete = produzioneFV * (1 - autoconsumoBase);
+const risparmioFVautoconsumo = autoconsumoFV_base * costoEnergia;
+const ricavoFVcessione = cessioneFVrete * constants.prezzoVenditaFV;
+const risparmioFV = risparmioFVautoconsumo + ricavoFVcessione;
+      
 // Energia FV "salvata" grazie allo storage (passa da autoconsumoBase a autoconsumoPercentuale)
 const energiaFVrecuperataDaStorage = produzioneFV * (autoconsumoPercentuale - autoconsumoBase);
 
@@ -2237,7 +2240,7 @@ const autoconsumoSenzaStorage = autoconsumoSenzaStorageMap[profilo] || 0.50;
 
 // Driver A: storage dimensionato sull'eccesso FV catturabile
 const eccessoFVannuo = produzioneFV * (1 - autoconsumoSenzaStorage);
-const fattoreCattura = 0.7;
+const fattoreCattura = 0.85;
 // Usa direttamente cicliEffettivi (già calcolato sopra)
 let storageKwh_FV = (eccessoFVannuo * fattoreCattura) / cicliEffettivi;
 
