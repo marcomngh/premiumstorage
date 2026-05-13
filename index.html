@@ -1871,7 +1871,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
 
   industria: {
     label: "Industria",
-    pvCoverage: 0.35,
+    pvCoverage: 0.50,
     // autoconsumo FV SENZA batteria
     pvAutoconsumoBase: 0.55,
     // incremento grazie allo storage
@@ -1885,7 +1885,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
 
   cold_chain: {
     label: "Catena del freddo",
-    pvCoverage: 0.40,
+    pvCoverage: 0.60,
     pvAutoconsumoBase: 0.70,
     incrementoStorage: 0.25,
     storageFactor: 0.15,
@@ -1909,7 +1909,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
 
   terziario: {
     label: "Uffici e terziario",
-    pvCoverage: 0.30,
+    pvCoverage: 0.50,
     pvAutoconsumoBase: 0.72,
     incrementoStorage: 0.18,
     storageFactor: 0.08,
@@ -2387,7 +2387,6 @@ document.querySelector('#resPv')
   .textContent = labelPv;
 
 setResult('resPv', formatNumber(pvConsigliato, 0) + ' kWp');
-      setResult('resPv', formatNumber(pvConsigliato, 0) + ' kWp');
       setResult('resSavings', formatCurrency(risparmioTotale, 0));
       setResult('resScore', getRating(score));
 
@@ -2416,7 +2415,7 @@ setResult('resPv', formatNumber(pvConsigliato, 0) + ' kWp');
   'detail3',
   'Risparmio totale: <strong>' + formatCurrency(risparmioTotale, 0) + '/anno</strong>.<br>' +
 '• Da FV (autoconsumo + cessione in rete): <strong>' + formatCurrency(risparmioFV, 0) + '</strong><br>' +
-    x\'• Da storage (maggior autoconsumo + time-shift): <strong>' + formatCurrency(risparmioStorage, 0) + '</strong>'
+    '• Da storage (maggior autoconsumo + time-shift): <strong>' + formatCurrency(risparmioStorage, 0) + '</strong>'
 );
 const rapportoPiccoMedia = potenzaMedia > 0 ? piccoStimato / potenzaMedia : 0;
 let interpretazionePicco = '';
