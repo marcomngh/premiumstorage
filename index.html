@@ -202,6 +202,116 @@
 
       </div>
       <!-- /storage-flow-card -->
+<div class="energy-price-card">
+  <h3>Perché lo storage conviene?</h3>
+  <p>
+    Durante la giornata il prezzo dell’energia può variare molto: la batteria aiuta ad accumulare energia quando costa meno e utilizzarla nei momenti più cari.
+  </p>
+
+  <svg class="energy-chart" viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" role="img">
+    
+    <!-- sfondo -->
+    <rect x="0" y="0" width="620" height="260" rx="22" fill="#f8fafc"/>
+
+    <!-- griglia -->
+    <g stroke="#dbe3ea" stroke-width="1">
+      <line x1="55" y1="40" x2="585" y2="40"/>
+      <line x1="55" y1="85" x2="585" y2="85"/>
+      <line x1="55" y1="130" x2="585" y2="130"/>
+      <line x1="55" y1="175" x2="585" y2="175"/>
+      <line x1="55" y1="220" x2="585" y2="220"/>
+    </g>
+
+    <!-- assi -->
+    <line x1="55" y1="220" x2="585" y2="220" stroke="#152536" stroke-width="2"/>
+    <line x1="55" y1="40" x2="55" y2="220" stroke="#152536" stroke-width="2"/>
+
+    <!-- area basso prezzo -->
+    <rect x="310" y="105" width="125" height="115" rx="10" fill="#dcfce7" opacity="0.9"/>
+    <text x="372" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">
+      CARICA
+    </text>
+
+    <!-- area alto prezzo -->
+    <rect x="455" y="58" width="95" height="162" rx="10" fill="#ffedd5" opacity="0.95"/>
+    <text x="503" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">
+      SCARICA
+    </text>
+
+    <!-- curva prezzo energia -->
+    <polyline
+      points="
+        55,85
+        95,105
+        135,112
+        175,108
+        215,82
+        255,78
+        295,95
+        335,170
+        375,188
+        415,205
+        455,198
+        495,90
+        535,60
+        585,78
+      "
+      fill="none"
+      stroke="#f28c28"
+      stroke-width="5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- punti -->
+    <g fill="#f28c28" stroke="#fff" stroke-width="3">
+      <circle cx="55" cy="85" r="6"/>
+      <circle cx="95" cy="105" r="6"/>
+      <circle cx="135" cy="112" r="6"/>
+      <circle cx="175" cy="108" r="6"/>
+      <circle cx="215" cy="82" r="6"/>
+      <circle cx="255" cy="78" r="6"/>
+      <circle cx="295" cy="95" r="6"/>
+      <circle cx="335" cy="170" r="6"/>
+      <circle cx="375" cy="188" r="6"/>
+      <circle cx="415" cy="205" r="6"/>
+      <circle cx="455" cy="198" r="6"/>
+      <circle cx="495" cy="90" r="6"/>
+      <circle cx="535" cy="60" r="6"/>
+      <circle cx="585" cy="78" r="6"/>
+    </g>
+
+    <!-- etichette asse y -->
+    <text x="18" y="45" font-size="11" fill="#64748b">€/MWh</text>
+    <text x="25" y="88" font-size="11" fill="#64748b">150</text>
+    <text x="25" y="133" font-size="11" fill="#64748b">100</text>
+    <text x="31" y="178" font-size="11" fill="#64748b">50</text>
+    <text x="38" y="224" font-size="11" fill="#64748b">0</text>
+
+    <!-- ore -->
+    <g font-size="11" fill="#64748b">
+      <text x="50" y="242">1</text>
+      <text x="130" y="242">5</text>
+      <text x="210" y="242">9</text>
+      <text x="325" y="242">13</text>
+      <text x="410" y="242">16</text>
+      <text x="490" y="242">19</text>
+      <text x="575" y="242">24</text>
+    </g>
+
+    <!-- icone testuali -->
+    <text x="90" y="205" font-size="18">🌙</text>
+    <text x="360" y="160" font-size="20">☀️</text>
+    <text x="535" y="205" font-size="18">🌙</text>
+
+  </svg>
+
+  <div class="energy-legend">
+    <span><strong class="dot green"></strong> Energia più conveniente: la batteria si carica</span>
+    <span><strong class="dot orange"></strong> Energia più cara: la batteria scarica</span>
+  </div>
+</div>
+      
 
     </div>
     <!-- /colonna sinistra -->
