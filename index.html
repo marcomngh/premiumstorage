@@ -1924,7 +1924,7 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
       giorno: { pvBonus: 1.00, storageBonus: 0.85 },
       sera: { pvBonus: 0.70, storageBonus: 1.10 },
       notte: { pvBonus: 0.45, storageBonus: 1.15 },
-      uniforme: { pvBonus: 0.90, storageBonus: 1.00 },
+      uniforme: { pvBonus: 0.95, storageBonus: 1.00 },
       variabile: { pvBonus: 0.85, storageBonus: 1.05 }
     };
    // Modulatori sui cicli annui dello storage in base al profilo orario.
@@ -1957,10 +1957,10 @@ const cicliFVMap = {
 // Usato per calcolare l'eccesso di produzione FV catturabile dalla batteria
 // e per dimensionare il PCS sulla potenza FV non autoconsumata istantaneamente.
 const autoconsumoSenzaStorageMap = {
-  giorno: 0.60,
+  giorno: 0.55,
   sera: 0.35,
   notte: 0.20,
-  uniforme: 0.50,
+  uniforme: 0.65,
   variabile: 0.45
 };
 
@@ -2243,6 +2243,10 @@ const eccessoFVannuo = produzioneFV * (1 - autoconsumoSenzaStorage);
 const fattoreCattura = 0.85;
 // Usa direttamente cicliEffettivi (già calcolato sopra)
 let storageKwh_FV = (eccessoFVannuo * fattoreCattura) / cicliEffettivi;
+
+// Cap: max 1 kWh storage per kWp FV
+const cap_storage_FV = pvConsigliato * 1.0;
+storageKwh_FV = Math.min(storageKwh_FV, cap_storage_FV);
 
 // Driver B: storage dimensionato sul peak shaving
 let storageKwh_peak = 0;
