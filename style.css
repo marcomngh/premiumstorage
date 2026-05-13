@@ -1501,3 +1501,54 @@
   width: auto;
   display: inline-block;
 }
+.energy-price-card {
+  margin-top: 28px;
+  padding: 26px;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid #d9f2df;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+}
+
+.energy-price-card h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  color: #111827;
+}
+
+.energy-price-card p {
+  margin: 0 0 18px;
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.energy-chart {
+  width: 100%;
+  display: block;
+}
+
+.energy-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  margin-right: 6px;
+}
+
+.dot.green {
+  background: #22c55e;
+}
+
+.dot.orange {
+  background: #f28c28;
+}
