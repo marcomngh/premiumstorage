@@ -2377,6 +2377,16 @@ const risparmioStorage = risparmioStoragePv + risparmioStorageTimeShift;
       score = clamp(score, 3.5, 9.5);
 
       setResult('resBattery', formatNumber(storageKwh, 0) + ' kWh');
+const labelPv = fvSelection.value === 'si'
+  ? 'Fotovoltaico considerato'
+  : 'Fotovoltaico consigliato';
+
+document.querySelector('#resPv')
+  .closest('.result-card')
+  .querySelector('.label span')
+  .textContent = labelPv;
+
+setResult('resPv', formatNumber(pvConsigliato, 0) + ' kWp');
       setResult('resPv', formatNumber(pvConsigliato, 0) + ' kWp');
       setResult('resSavings', formatCurrency(risparmioTotale, 0));
       setResult('resScore', getRating(score));
@@ -2405,8 +2415,8 @@ const risparmioStorage = risparmioStoragePv + risparmioStorageTimeShift;
   setResult(
   'detail3',
   'Risparmio totale: <strong>' + formatCurrency(risparmioTotale, 0) + '/anno</strong>.<br>' +
-  '• Da FV (autoconsumo base): <strong>' + formatCurrency(risparmioFV, 0) + '</strong><br>' +
-  '• Da storage (maggior autoconsumo + time-shift): <strong>' + formatCurrency(risparmioStorage, 0) + '</strong>'
+'• Da FV (autoconsumo + cessione in rete): <strong>' + formatCurrency(risparmioFV, 0) + '</strong><br>' +
+    x\'• Da storage (maggior autoconsumo + time-shift): <strong>' + formatCurrency(risparmioStorage, 0) + '</strong>'
 );
 const rapportoPiccoMedia = potenzaMedia > 0 ? piccoStimato / potenzaMedia : 0;
 let interpretazionePicco = '';
