@@ -1552,3 +1552,19 @@
 .dot.orange {
   background: #f28c28;
 }
+.chart-heading {
+  margin-bottom: 10px;
+}
+
+.chart-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.chart-subtitle {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 3px;
+}
