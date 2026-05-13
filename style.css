@@ -1568,3 +1568,18 @@
   color: #6b7280;
   margin-top: 3px;
 }
+.results-section .container {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.results-section .section-head {
+  grid-column: 2;
+}
+
+.results-section .results-grid,
+.results-section #leadBox {
+  grid-column: 1 / -1;
+}
