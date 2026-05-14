@@ -265,6 +265,7 @@
       background: #fff;
       font-size: 14px;
           white-space: nowrap;
+          min-width: 120px;
     }
 
     .note-box {
