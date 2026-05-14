@@ -2286,7 +2286,13 @@ const autoconsumoSenzaStorageMap = {
       const potenzaImpegnata = parseItalianNumber(document.getElementById('potenzaImpegnata').value);
       const fvSelection = document.querySelector('input[name="fv"]:checked');
       const fvPower = parseItalianNumber(document.getElementById('fvPower').value);
+const provincia = document.getElementById('provincia').value;
 
+if (!provincia) {
+  showError('Seleziona la provincia in cui si trova la tua azienda.');
+  return;
+}
+           
       if (!isFinite(consumoAnnuo) || consumoAnnuo <= 0) {
         showError('Inserisci un consumo annuo valido.');
         return;
