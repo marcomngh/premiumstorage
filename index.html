@@ -342,7 +342,7 @@
   <span> Nessun impegno</span>
   <span> Risultato immediato</span>
 </div>
-      <h2 class="brand-green">Ottieni subito una stima, gratis.</h2>
+      <h2 class="brand-green">Ottieni subito una stima, gratis!</h2>
       <p class="top-note">Compila il form: i risultati sono indicativi e servono per capire rapidamente se ha senso approfondire.</p>
 
       <form id="simulatorForm">
@@ -2584,14 +2584,11 @@ if (rapportoPiccoMedia < 1.5) {
   interpretazionePicco = 'profilo molto sbilanciato';
 }
 
-let detail4 =
-  'Picco stimato: <strong>' + formatNumber(piccoStimato, 0) + ' kW</strong> ' +
-  'contro un assorbimento medio di <strong>' + formatNumber(potenzaMedia, 1) + ' kW</strong> ' +
-  '(' + interpretazionePicco + ', rapporto ' + formatNumber(rapportoPiccoMedia, 1) + 'x).';
+let detail4 = '';
 
 if (isFinite(payback)) {
-  detail4 +=
-    ' Tempo di rientro orientativo: <strong>' +
+  detail4 =
+    'Tempo di rientro orientativo: <strong>' +
     formatNumber(payback, 1) +
     ' anni</strong>.';
 }
