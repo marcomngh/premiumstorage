@@ -1603,7 +1603,12 @@
   }
 
   .ps-nav-links {
-    display: none;
+          display: flex;
+            gap: 12px;
+  }
+       .ps-nav-links {
+            font-size: 12px;
+             white-space: nowrap;
   }
 
   .ps-nav-cta {
