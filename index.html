@@ -2210,14 +2210,19 @@ const autoconsumoSenzaStorageMap = {
     }
 
     function toggleFvField() {
-      const selected = document.querySelector('input[name="fv"]:checked');
-      if (selected && selected.value === 'si') {
-        fvField.style.display = 'flex';
-      } else {
-        fvField.style.display = 'none';
-        fvPowerInput.value = '';
-      }
-    }
+  const selected = document.querySelector('input[name="fv"]:checked');
+  const fvField = document.getElementById('fvField');
+  const fvPowerInput = document.getElementById('fvPower');
+
+  if (!fvField || !fvPowerInput) return;
+
+  if (selected && selected.value === 'si') {
+    fvField.style.display = 'flex';
+  } else {
+    fvField.style.display = 'none';
+    fvPowerInput.value = '';
+  }
+}
 
     function clamp(value, min, max) {
       return Math.min(Math.max(value, min), max);
