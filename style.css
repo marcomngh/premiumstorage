@@ -1603,19 +1603,23 @@
   }
 
   .ps-nav-links {
-          display: flex;
-            gap: 8px;
-  }
-       .ps-nav-links {
-            font-size: 11px;
-             white-space: nowrap;
+          display: none;
+
+  
   }
 
   .ps-nav-cta {
-    height: 30px;
-    padding: 0 8px;
-    font-size: 11px;
+        display: flex;
+    height: 34px;
+    padding: 0 12px;
+    font-size: 12px;
   }
+      .ps-logo img {
+            height: 34px;
+            }
+      .ps-nav-container {
+            padding: 10px 0;
+            }
 
   .container,
   .about-hero-inner,
