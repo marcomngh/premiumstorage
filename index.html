@@ -351,7 +351,7 @@
             <label for="consumoAnnuo">1. Consumo annuo di energia <span class="req">*</span></label>
             <div class="hint">Inserisci il consumo totale annuo in kWh.</div>
             <div class="input-wrap with-suffix">
-              <input id="consumoAnnuo" type="text" inputmode="numeric" placeholder="Es. 250.000" />
+              <input id="consumoAnnuo" type="text" inputmode="numeric" min="20000" placeholder="Es. 250.000" />
               <span class="suffix">kWh/anno</span>
             </div>
           </div>
@@ -402,7 +402,7 @@
             <label for="piccoMassimo">Picco massimo di assorbimento (se lo conosci)</label>
             <div class="hint">Dato facoltativo ma utile per affinare la simulazione.</div>
             <div class="input-wrap with-suffix">
-              <input id="piccoMassimo" type="text" inputmode="numeric" placeholder="Es. 530" />
+              <input id="piccoMassimo" type="text" inputmode="numeric" placeholder="Es. 100" />
               <span class="suffix">kW</span>
             </div>
           </div>
@@ -428,7 +428,7 @@
             <label for="fvPower">Potenza fotovoltaico installata</label>
             <div class="hint">Da compilare solo se hai già un impianto fotovoltaico.</div>
             <div class="input-wrap with-suffix">
-              <input id="fvPower" type="text" inputmode="numeric" placeholder="Es. 100" />
+              <input id="fvPower" type="text" inputmode="numeric" min="21" placeholder="Es. 100" />
               <span class="suffix">kWp</span>
             </div>
           </div>
