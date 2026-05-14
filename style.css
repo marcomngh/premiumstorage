@@ -1604,17 +1604,17 @@
 
   .ps-nav-links {
           display: flex;
-            gap: 12px;
+            gap: 8px;
   }
        .ps-nav-links {
-            font-size: 12px;
+            font-size: 11px;
              white-space: nowrap;
   }
 
   .ps-nav-cta {
-    height: 34px;
-    padding: 0 10px;
-    font-size: 12px;
+    height: 30px;
+    padding: 0 8px;
+    font-size: 11px;
   }
 
   .container,
