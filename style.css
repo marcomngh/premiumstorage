@@ -277,8 +277,8 @@
 
 /* testo */
 .radio-pill span {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   color: #111827;
   line-height: 1.3;
 }
@@ -303,7 +303,7 @@
   }
 
   .radio-pill span {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .radio-pill input[type="radio"] {
