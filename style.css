@@ -1846,27 +1846,51 @@
   }
 }
 
-/* FIX DEFINITIVO bottone verde nel form */
-.simulator-card form button.btn.btn-calc,
-.simulator-card button.btn-calc,
-#simulatorForm button.btn-calc {
-  width: 100% !important;
-  max-width: none !important;
-  min-height: 56px !important;
+/* Footer del form: nota + bottone + stima preliminare */
+.form-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 22px;
+}
 
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+/* Bottone "Calcola la convenienza" nel form */
+#simulatorForm .btn-calc {
+  align-self: flex-start;   /* lo tiene a sinistra, dimensione naturale */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  padding: 16px 24px !important;
-  margin: 20px 0 0 0 !important;
+  width: auto;
+  min-height: 0;
+  padding: 14px 28px;
 
-  border-radius: 20px !important;
-  background: #1f9d55 !important;
-  color: #ffffff !important;
+  border-radius: 16px;
+  background: #1f9d55;
+  color: #ffffff;
 
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  line-height: 1.2 !important;
-  text-align: center !important;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+
+  box-shadow: 0 10px 24px rgba(31,157,85,0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#simulatorForm .btn-calc:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 18px 34px rgba(31,157,85,0.38);
+}
+
+/* Su mobile il bottone va a tutta larghezza per essere comodo da toccare */
+@media (max-width: 768px) {
+  #simulatorForm .btn-calc {
+    align-self: stretch;
+    width: 100%;
+    padding: 16px 22px;
+    font-size: 16px;
+  }
 }
