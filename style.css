@@ -1841,9 +1841,15 @@
     grid-template-columns: 1fr;
   }
 
-  .btn {
-    width: 100%;
-  }
+  .btn:not(.btn-calc) {
+  width: 100%;
+}
+
+.simulator-card .btn-calc {
+  width: auto;
+  max-width: 300px;
+  justify-self: center;
+}
 
   .result-card .big {
     font-size: 30px;
