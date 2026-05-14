@@ -2286,6 +2286,10 @@ const autoconsumoSenzaStorageMap = {
         showError('Inserisci un consumo annuo valido.');
         return;
       }
+      if (consumoAnnuo < 20000) {
+  showError('Il consumo minimo deve essere almeno 20.000 kWh.');
+  return;
+}
       if (!isFinite(costoEnergia) || costoEnergia <= 0) {
         showError("Inserisci un costo medio dell'energia valido.");
         return;
@@ -2310,10 +2314,10 @@ const autoconsumoSenzaStorageMap = {
         showError('Seleziona se hai già un impianto fotovoltaico.');
         return;
       }
-      if (fvSelection.value === 'si' && (!isFinite(fvPower) || fvPower <= 0)) {
-        showError('Inserisci una potenza fotovoltaica valida.');
-        return;
-      }
+      if (fvSelection.value === 'si' && (!isFinite(fvPower) || fvPower <= 20)) {
+  showError('La potenza fotovoltaica deve essere superiore a 20 kW.');
+  return;
+}
 
       const sector = sectorMap[settore];
       const profile = profileMap[profilo];
