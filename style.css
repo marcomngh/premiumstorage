@@ -1585,3 +1585,216 @@
 .results-section #leadBox {
   width: 100%;
 }
+
+@media (max-width: 768px) {
+
+  body {
+    padding-top: 70px;
+    overflow-x: hidden;
+  }
+
+  .ps-nav-container {
+    width: calc(100% - 24px);
+    padding: 12px 0;
+  }
+
+  .ps-logo img {
+    height: 38px;
+  }
+
+  .ps-nav-links {
+    display: none;
+  }
+
+  .ps-nav-cta {
+    height: 34px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .container,
+  .about-hero-inner,
+  .ps-faq-container {
+    width: calc(100% - 24px);
+  }
+
+  .hero {
+    padding: 26px 0 18px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 9vw, 38px);
+    line-height: 1.08;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .stat {
+    padding: 14px;
+  }
+
+  .stat .value {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .card h2 {
+    font-size: 24px;
+  }
+
+  .mini-proof-line {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-size: 12px;
+    white-space: normal;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  input,
+  select {
+    font-size: 16px;
+    padding: 14px 15px;
+  }
+
+  .radio-group {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .radio-pill {
+    min-height: 46px;
+    padding: 10px 8px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .results-inside h3 {
+    font-size: 22px;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-card {
+    padding: 22px 20px;
+  }
+
+  .result-card .big {
+    font-size: 34px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .storage-flow-card {
+    padding: 20px 14px;
+  }
+
+  .storage-flow-card h2 {
+    font-size: 22px;
+  }
+
+  .storage-flow-result {
+    margin-top: 8px;
+    padding: 12px;
+  }
+
+  .case-study .case-images {
+    grid-template-columns: 1fr !important;
+  }
+
+  .case-study .case-images img {
+    height: auto;
+  }
+
+  .case-grid,
+  .case-benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .box-iper {
+    padding: 28px 18px;
+  }
+
+  .title-iper {
+    font-size: 28px;
+  }
+
+  .box-iper p {
+    font-size: 17px;
+  }
+
+  .box-iper .highlight {
+    font-size: 22px;
+  }
+
+  .box-iper .numeri {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contatto-rapido {
+    padding: 22px 18px;
+  }
+
+  .ps-faq-section {
+    padding: 60px 0;
+  }
+
+  .ps-section-header h2 {
+    font-size: 30px;
+  }
+
+  .ps-section-header p {
+    font-size: 16px;
+  }
+
+  .ps-faq-category {
+    padding: 20px !important;
+  }
+
+  .ps-faq-category summary {
+    font-size: 15px;
+    padding: 18px 46px 18px 18px;
+  }
+}
+@media (max-width: 480px) {
+
+  .radio-group {
+    grid-template-columns: 1fr;
+  }
+
+  .mini-proof-line span {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .result-card .big {
+    font-size: 30px;
+  }
+}
