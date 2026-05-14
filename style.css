@@ -1572,17 +1572,16 @@
   margin-top: 3px;
 }
 .results-section .container {
-  display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
-  gap: 32px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .results-section .section-head {
-  grid-column: 2;
+  margin-top: 0;
 }
 
 .results-section .results-grid,
 .results-section #leadBox {
-  grid-column: 1 / -1;
+  width: 100%;
 }
