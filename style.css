@@ -250,23 +250,24 @@
     .with-suffix input { padding-right: 90px; }
 
     .radio-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
 
     .radio-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: #fff;
-      font-size: 14px;
-          white-space: nowrap;
-          min-width: 120px;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #fff;
+  font-size: 14px;
+  white-space: nowrap;
+  min-height: 52px;
+}
 
     .note-box {
       padding: 16px 18px;
