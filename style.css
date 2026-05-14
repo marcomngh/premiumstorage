@@ -1846,26 +1846,27 @@
   }
 }
 
-/* FIX bottone Calcola la convenienza - largo come prima */
-.btn-calc {
+/* FIX DEFINITIVO bottone verde nel form */
+.simulator-card form button.btn.btn-calc,
+.simulator-card button.btn-calc,
+#simulatorForm button.btn-calc {
   width: 100% !important;
   max-width: none !important;
+  min-height: 56px !important;
 
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 
-  padding: 18px 24px !important;
+  padding: 16px 24px !important;
   margin: 20px 0 0 0 !important;
 
   border-radius: 20px !important;
-  background: var(--green);
-  color: #ffffff;
+  background: #1f9d55 !important;
+  color: #ffffff !important;
 
   font-size: 16px !important;
-  font-weight: 700;
+  font-weight: 700 !important;
   line-height: 1.2 !important;
-  white-space: normal !important;
-
-  box-shadow: 0 10px 24px rgba(31,157,85,0.28);
+  text-align: center !important;
 }
