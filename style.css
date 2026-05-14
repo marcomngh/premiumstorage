@@ -1845,42 +1845,29 @@
   width: 100%;
 }
 
-.simulator-card .btn-calc {
-  width: auto;
-  max-width: 300px;
-  justify-self: center;
-}
+/* FIX definitivo bottone Calcola */
+button.btn.btn-calc {
+  width: 300px !important;
+  max-width: 100% !important;
+  min-height: 54px !important;
 
-  .result-card .big {
-    font-size: 30px;
-  }
-}
+  justify-self: center !important;
+  align-self: center !important;
 
-@media (max-width: 480px) {
-  .simulator-card .btn-calc {
-    width: auto;
-    max-width: 300px;
-    min-height: 56px;
-    padding: 14px 28px;
-    margin: 24px auto 0 auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 18px;
-    font-size: 17px;
-    line-height: 1.2;
-  }
-}
-.simulator-card .btn-calc {
-  width: auto;
-  max-width: 300px;
-  min-height: 56px;
-  padding: 14px 28px;
-  margin: 24px auto 0 auto;
-
-  display: flex;
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
+
+  padding: 13px 24px !important;
+  margin: 24px auto 0 auto !important;
+
+  border-radius: 18px;
+  background: var(--green);
+  color: #fff;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  box-shadow: 0 10px 24px rgba(31,157,85,0.28);
 }
