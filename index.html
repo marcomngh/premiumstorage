@@ -351,8 +351,12 @@
             <label for="consumoAnnuo">1. Consumo annuo di energia <span class="req">*</span></label>
             <div class="hint">Inserisci il consumo totale annuo in kWh.</div>
             <div class="input-wrap with-suffix">
-              <input id="consumoAnnuo" type="text" inputmode="numeric" min="20000" placeholder="Es. 250.000" />
+              <input id="consumoAnnuo" type="number" inputmode="numeric" min="20000" placeholder="Es. 250.000" />
               <span class="suffix">kWh/anno</span>
+              if (consumoAnnuo < 20000) {
+  showError("Il consumo minimo deve essere almeno 20.000 kWh.");
+  return;
+}
             </div>
           </div>
 
