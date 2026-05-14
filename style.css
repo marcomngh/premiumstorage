@@ -1586,40 +1586,54 @@
   width: 100%;
 }
 
+/* ===== MOBILE CLEAN FIX ===== */
+
 @media (max-width: 768px) {
 
   body {
-    padding-top: 70px;
+    padding-top: 82px;
     overflow-x: hidden;
+  }
+
+  .ps-navbar {
+    height: auto;
   }
 
   .ps-nav-container {
     width: calc(100% - 24px);
+    margin: 0 auto;
     padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
   }
 
   .ps-logo img {
-    height: 38px;
+    height: 36px;
+    width: auto;
+    display: block;
   }
 
   .ps-nav-links {
-          display: none;
-
-  
+    display: none !important;
   }
 
   .ps-nav-cta {
-        display: flex;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
     height: 34px;
     padding: 0 12px;
-    font-size: 12px;
+    border-radius: 999px;
+    background: var(--green);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
-      .ps-logo img {
-            height: 34px;
-            }
-      .ps-nav-container {
-            padding: 10px 0;
-            }
 
   .container,
   .about-hero-inner,
@@ -1628,7 +1642,7 @@
   }
 
   .hero {
-    padding: 26px 0 18px;
+    padding: 28px 0 18px;
   }
 
   .grid {
@@ -1645,9 +1659,13 @@
     font-size: 16px;
   }
 
-  .stats {
+  .stats,
+  .two-col,
+  .results-grid,
+  .info-grid,
+  .case-grid,
+  .case-benefits {
     grid-template-columns: 1fr;
-    gap: 10px;
   }
 
   .stat {
@@ -1674,11 +1692,6 @@
     white-space: normal;
   }
 
-  .two-col {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
   input,
   select {
     font-size: 16px;
@@ -1697,14 +1710,6 @@
     white-space: nowrap;
   }
 
-  .results-inside h3 {
-    font-size: 22px;
-  }
-
-  .results-grid {
-    grid-template-columns: 1fr;
-  }
-
   .result-card {
     padding: 22px 20px;
   }
@@ -1713,34 +1718,12 @@
     font-size: 34px;
   }
 
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .storage-flow-card {
-    padding: 20px 14px;
-  }
-
-  .storage-flow-card h2 {
-    font-size: 22px;
-  }
-
-  .storage-flow-result {
-    margin-top: 8px;
-    padding: 12px;
-  }
-
   .case-study .case-images {
     grid-template-columns: 1fr !important;
   }
 
   .case-study .case-images img {
     height: auto;
-  }
-
-  .case-grid,
-  .case-benefits {
-    grid-template-columns: 1fr;
   }
 
   .box-iper {
@@ -1789,14 +1772,30 @@
     padding: 18px 46px 18px 18px;
   }
 }
+
 @media (max-width: 480px) {
+
+  body {
+    padding-top: 78px;
+  }
+
+  .ps-nav-container {
+    width: calc(100% - 20px);
+    gap: 8px;
+  }
+
+  .ps-logo img {
+    height: 32px;
+  }
+
+  .ps-nav-cta {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 10.5px;
+  }
 
   .radio-group {
     grid-template-columns: 1fr;
-  }
-
-  .mini-proof-line span {
-    width: 100%;
   }
 
   .btn {
