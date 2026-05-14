@@ -2301,7 +2301,7 @@ if (!provincia) {
   showError('Il consumo minimo deve essere almeno 20.000 kWh.');
   return;
 }
-      if (!isFinite(costoEnergia) || costoEnergia < 0.12)) {
+      if (!isFinite(costoEnergia) || costoEnergia < 0.12) {
         showError("Il costo medio dell'energia deve essere almeno 0,12 €/kWh.");
         return;
       }
