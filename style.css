@@ -258,15 +258,58 @@
     .radio-pill {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 10px;
+  justify-content: space-between;
+
+  width: 100%;
+  min-height: 72px;
+
+  padding: 0 20px;
+  margin-bottom: 14px;
+
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 24px;
+
   background: #fff;
-  font-size: 14px;
-  white-space: nowrap;
-  min-height: 52px;
+  box-sizing: border-box;
+
+  cursor: pointer;
+}
+
+/* testo */
+.radio-pill span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.3;
+}
+
+/* radio button */
+.radio-pill input[type="radio"] {
+  width: 26px;
+  height: 26px;
+  margin: 0;
+
+  flex-shrink: 0;
+  accent-color: #16a34a;
+}
+
+/* mobile */
+@media (max-width: 640px) {
+
+  .radio-pill {
+    min-height: 66px;
+    padding: 0 16px;
+    border-radius: 20px;
+  }
+
+  .radio-pill span {
+    font-size: 17px;
+  }
+
+  .radio-pill input[type="radio"] {
+    width: 24px;
+    height: 24px;
+  }
 }
 
     .note-box {
