@@ -1856,20 +1856,20 @@
 
 /* Bottone "Calcola la convenienza" nel form */
 #simulatorForm .btn-calc {
-  align-self: flex-start;   /* lo tiene a sinistra, dimensione naturale */
+  align-self: stretch;     /* occupa tutta la larghezza del form-footer */
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: auto;
+  width: 100%;
   min-height: 0;
-  padding: 14px 28px;
+  padding: 16px 28px;
 
   border-radius: 16px;
   background: #1f9d55;
   color: #ffffff;
 
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
@@ -1885,11 +1885,9 @@
   box-shadow: 0 18px 34px rgba(31,157,85,0.38);
 }
 
-/* Su mobile il bottone va a tutta larghezza per essere comodo da toccare */
+/* Su mobile resta a tutta larghezza */
 @media (max-width: 768px) {
   #simulatorForm .btn-calc {
-    align-self: stretch;
-    width: 100%;
     padding: 16px 22px;
     font-size: 16px;
   }
