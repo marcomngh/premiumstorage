@@ -617,10 +617,10 @@
         </div>
       </div>
             <div id="leadBox" class="card">
-        <h2 style="font-size:24px; margin:0 0 8px;">Vuoi una simulazione precisa per la tua azienda?</h2>
+        <h2 style="font-size:24px; margin:0 0 8px;">Ricevi la simulazione sulla tua email, gratuitamente.</h2>
         <p class="top-note" style="margin-bottom:18px;">
-          Lascia i tuoi riferimenti e ti ricontatteremo per un'analisi più accurata.
-          Per una valutazione precisa saranno necessari bollette, profilo di carico e dati tecnici dell'impianto.
+          Lascia i tuoi riferimenti, riceverai subito la tua simulazione gratuitamente e nei prossimi giorni sarai contattato da un consulente Premium Storage per un'analisi più accurata.
+          Per una valutazione precisa sarà necessaria copia della bolletta e curva dei consumi per l'analisi del profilo di carico della tua azienda.
         </p>
 
               <div id="form-contatto"></div>
@@ -2669,10 +2669,11 @@ window.scrollTo({
     risparmioStimato: document.getElementById('resSavings').textContent,
     convenienza: document.getElementById('resScore').textContent,
     paybackStimato: document.getElementById('detail4').textContent,
-    dettaglioFV: document.getElementById('detail2').textContent,
-    dettaglioRisparmio: document.getElementById('detail3').textContent,
-    dettaglioStorage: document.getElementById('detail1').textContent,
-    origine: window.location.href
+dettaglioFV: document.getElementById('detail2').textContent,
+dettaglioRisparmio: document.getElementById('detail3').textContent,
+dettaglioStorage: document.getElementById('detail1').textContent,
+piccoMedia: document.getElementById('piccoMassimo').value.trim(),
+origine: window.location.href
   };
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
 
