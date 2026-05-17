@@ -2642,35 +2642,38 @@ window.scrollTo({
 });
 });
     leadForm.addEventListener('submit', async function (event) {
-      event.preventDefault();
-      clearLeadMessages();
+  event.preventDefault();
+  clearLeadMessages();
 
-      const payload = {
-        azienda: document.getElementById('azienda').value.trim(),
-        nomeCognome: document.getElementById('nomeCognome').value.trim(),
-        email: document.getElementById('emailLead').value.trim(),
-        telefono: document.getElementById('telefonoLead').value.trim(),
-        provincia: document.getElementById('provincia').value,
-        consumoAnnuo: document.getElementById('consumoAnnuo').value.trim(),
-        costoEnergia: document.getElementById('costoEnergia').value.trim(),
-        profiloConsumo: document.getElementById('profiloConsumo').value,
-        settoreMerceologico: document.getElementById('settoreMerceologico').value,
-        picchi: document.querySelector('input[name="picchi"]:checked')
-          ? document.querySelector('input[name="picchi"]:checked').value
-          : '',
-        piccoMassimo: document.getElementById('piccoMassimo').value.trim(),
-        potenzaImpegnata: document.getElementById('potenzaImpegnata').value.trim(),
-        haFotovoltaico: document.querySelector('input[name="fv"]:checked')
-          ? document.querySelector('input[name="fv"]:checked').value
-          : '',
-        potenzaFotovoltaico: document.getElementById('fvPower').value.trim(),
-        batteriaConsigliata: document.getElementById('resBattery').textContent,
-        fotovoltaicoConsigliato: document.getElementById('resPv').textContent,
-        risparmioStimato: document.getElementById('resSavings').textContent,
-        convenienza: document.getElementById('resScore').textContent,
-        origine: window.location.href
-      };
-
+  const payload = {
+    azienda: document.getElementById('azienda').value.trim(),
+    nomeCognome: document.getElementById('nomeCognome').value.trim(),
+    email: document.getElementById('emailLead').value.trim(),
+    telefono: document.getElementById('telefonoLead').value.trim(),
+    provincia: document.getElementById('provincia').value,
+    consumoAnnuo: document.getElementById('consumoAnnuo').value.trim(),
+    costoEnergia: document.getElementById('costoEnergia').value.trim(),
+    profiloConsumo: document.getElementById('profiloConsumo').value,
+    settoreMerceologico: document.getElementById('settoreMerceologico').value,
+    picchi: document.querySelector('input[name="picchi"]:checked')
+      ? document.querySelector('input[name="picchi"]:checked').value
+      : '',
+    piccoMassimo: document.getElementById('piccoMassimo').value.trim(),
+    potenzaImpegnata: document.getElementById('potenzaImpegnata').value.trim(),
+    haFotovoltaico: document.querySelector('input[name="fv"]:checked')
+      ? document.querySelector('input[name="fv"]:checked').value
+      : '',
+    potenzaFotovoltaico: document.getElementById('fvPower').value.trim(),
+    batteriaConsigliata: document.getElementById('resBattery').textContent,
+    fotovoltaicoConsigliato: document.getElementById('resPv').textContent,
+    risparmioStimato: document.getElementById('resSavings').textContent,
+    convenienza: document.getElementById('resScore').textContent,
+    paybackStimato: document.getElementById('detail4').textContent,
+    dettaglioFV: document.getElementById('detail2').textContent,
+    dettaglioRisparmio: document.getElementById('detail3').textContent,
+    dettaglioStorage: document.getElementById('detail1').textContent,
+    origine: window.location.href
+  };
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
 
       if (!payload.azienda) {
