@@ -256,29 +256,26 @@ miniForm.addEventListener('submit', async function (event) {
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
 
-  if (!payload.azienda) {
-    alert("Inserisci l'azienda");
-    return;
-  }
+  if (!payload.azienda) { alert("Inserisci l'azienda"); return; }
+  if (!payload.nomeCognome) { alert("Inserisci nome e cognome"); return; }
+  if (!emailOk) { alert("Email non valida"); return; }
 
-  if (!payload.nomeCognome) {
-    alert("Inserisci nome e cognome");
-    return;
-  }
-
-  if (!emailOk) {
-    alert("Email non valida");
-    return;
+  // ===== ATTIVAZIONE SPINNER (sul bottone DEL miniForm) =====
+  const btnMini = miniForm.querySelector('.btn-lead');
+  const testoOrigMini = btnMini ? btnMini.innerHTML : 'Invia richiesta';
+  
+  if (btnMini) {
+    btnMini.classList.add('loading');
+    btnMini.disabled = true;
+    btnMini.innerHTML = '<span class="spinner-btn"></span>Invio in corso, attendi...';
   }
 
   try {
     const formBody = new URLSearchParams(payload);
-
     const response = await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
       body: formBody
     });
-
     const result = await response.json();
 
     if (!result.ok) {
@@ -287,9 +284,14 @@ miniForm.addEventListener('submit', async function (event) {
 
     alert("Richiesta inviata! Ti ricontattiamo a breve.");
     miniForm.reset();
-
   } catch (error) {
     alert("Errore invio: " + error.message);
+  } finally {
+    if (btnMini) {
+      btnMini.classList.remove('loading');
+      btnMini.disabled = false;
+      btnMini.innerHTML = testoOrigMini;
+    }
   }
 });
 
