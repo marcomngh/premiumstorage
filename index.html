@@ -2703,7 +2703,27 @@ origine: window.location.href
         if (!result.ok) {
           throw new Error(result.error || 'Invio non riuscito');
         }
+// Riferimento al bottone (adatta il selettore al tuo)
+const btnInvia = document.querySelector('.btn-invia'); 
+// oppure: document.getElementById('invia-richiesta');
 
+// Salva il testo originale
+const testoOriginale = btnInvia.innerHTML;
+
+// All'inizio dell'invio:
+btnInvia.classList.add('loading');
+btnInvia.innerHTML = '<span class="spinner"></span> Invio in corso, attendi...';
+
+// Quando l'invio è completato con successo:
+// (dentro il .then() o il callback di successo)
+btnInvia.classList.remove('loading');
+btnInvia.innerHTML = testoOriginale;
+// poi mostri il messaggio "Grazie XXX..."
+
+// In caso di errore:
+btnInvia.classList.remove('loading');
+btnInvia.innerHTML = testoOriginale;
+        
         leadSuccessBox.style.display = 'block';
         leadSuccessBox.textContent =
           'Grazie ' + payload.nomeCognome + ', la richiesta per ' + payload.azienda + ' è stata inviata correttamente.';
