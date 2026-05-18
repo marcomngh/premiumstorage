@@ -1891,3 +1891,25 @@
     padding: 16px 22px;
     font-size: 16px;
   }
+/* Spinner animato per bottone invio */
+.spinner-btn {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin-btn 0.8s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes spin-btn {
+  to { transform: rotate(360deg); }
+}
+
+.btn-lead.loading {
+  opacity: 0.85;
+  cursor: not-allowed;
+  pointer-events: none;
+}
