@@ -2641,7 +2641,7 @@ window.scrollTo({
   behavior: 'smooth'
 });
 });
-    leadForm.addEventListener('submit', async function (event) {
+   leadForm.addEventListener('submit', async function (event) {
   event.preventDefault();
   clearLeadMessages();
 
@@ -2669,80 +2669,78 @@ window.scrollTo({
     risparmioStimato: document.getElementById('resSavings').textContent,
     convenienza: document.getElementById('resScore').textContent,
     paybackStimato: document.getElementById('detail4').textContent,
-dettaglioFV: document.getElementById('detail2').textContent,
-dettaglioRisparmio: document.getElementById('detail3').textContent,
-dettaglioStorage: document.getElementById('detail1').textContent,
-piccoMedia: document.getElementById('piccoMassimo').value.trim(),
-origine: window.location.href
+    dettaglioFV: document.getElementById('detail2').textContent,
+    dettaglioRisparmio: document.getElementById('detail3').textContent,
+    dettaglioStorage: document.getElementById('detail1').textContent,
+    piccoMedia: document.getElementById('piccoMassimo').value.trim(),
+    origine: window.location.href
   };
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
 
-      if (!payload.azienda) {
-        return showLeadError("Inserisci il nome dell'azienda.");
-      }
-      if (!payload.nomeCognome) {
-        return showLeadError('Inserisci nome e cognome.');
-      }
-      if (!emailOk) {
-        return showLeadError('Inserisci un indirizzo email valido.');
-      }
-      if (!APPS_SCRIPT_URL || !APPS_SCRIPT_URL.includes('/exec')) {
-        return showLeadError("Inserisci nel codice l'URL della Web App di Google Apps Script.");
-      }
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
 
-      try {
-        const formBody = new URLSearchParams(payload);
+  if (!payload.azienda) {
+    return showLeadError("Inserisci il nome dell'azienda.");
+  }
+  if (!payload.nomeCognome) {
+    return showLeadError('Inserisci nome e cognome.');
+  }
+  if (!emailOk) {
+    return showLeadError('Inserisci un indirizzo email valido.');
+  }
+  if (!APPS_SCRIPT_URL || !APPS_SCRIPT_URL.includes('/exec')) {
+    return showLeadError("Inserisci nel codice l'URL della Web App di Google Apps Script.");
+  }
 
-        const response = await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          body: formBody
-        });
+  // ===== ATTIVAZIONE SPINNER =====
+  const btnInvia = leadForm.querySelector('.btn-lead');
+  const testoOriginale = btnInvia ? btnInvia.innerHTML : 'Invia richiesta';
+  
+  if (btnInvia) {
+    btnInvia.classList.add('loading');
+    btnInvia.disabled = true;
+    btnInvia.innerHTML = '<span class="spinner-btn"></span>Invio in corso, attendi...';
+  }
 
-        const result = await response.json();
+  try {
+    const formBody = new URLSearchParams(payload);
 
-        if (!result.ok) {
-          throw new Error(result.error || 'Invio non riuscito');
-        }
-// Riferimento al bottone (adatta il selettore al tuo)
-const btnInvia = document.querySelector('.btn-invia'); 
-// oppure: document.getElementById('invia-richiesta');
-
-// Salva il testo originale
-const testoOriginale = btnInvia.innerHTML;
-
-// All'inizio dell'invio:
-btnInvia.classList.add('loading');
-btnInvia.innerHTML = '<span class="spinner"></span> Invio in corso, attendi...';
-
-// Quando l'invio è completato con successo:
-// (dentro il .then() o il callback di successo)
-btnInvia.classList.remove('loading');
-btnInvia.innerHTML = testoOriginale;
-// poi mostri il messaggio "Grazie XXX..."
-
-// In caso di errore:
-btnInvia.classList.remove('loading');
-btnInvia.innerHTML = testoOriginale;
-        
-        leadSuccessBox.style.display = 'block';
-        leadSuccessBox.textContent =
-          'Grazie ' + payload.nomeCognome + ', la richiesta per ' + payload.azienda + ' è stata inviata correttamente.';
-        leadForm.reset();
-
-        const fvChecked = document.querySelector('input[name="fv"]:checked');
-        if (fvChecked) {
-          fvChecked.checked = false;
-        }
-        const picchiChecked = document.querySelector('input[name="picchi"]:checked');
-        if (picchiChecked) {
-          picchiChecked.checked = false;
-        }
-
-        toggleFvField();
-      } catch (error) {
-        showLeadError('Invio non riuscito: ' + error.message);
-      }
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: formBody
     });
+
+    const result = await response.json();
+
+    if (!result.ok) {
+      throw new Error(result.error || 'Invio non riuscito');
+    }
+
+    leadSuccessBox.style.display = 'block';
+    leadSuccessBox.textContent =
+      'Grazie ' + payload.nomeCognome + ', la richiesta per ' + payload.azienda + ' è stata inviata correttamente.';
+    leadForm.reset();
+
+    const fvChecked = document.querySelector('input[name="fv"]:checked');
+    if (fvChecked) {
+      fvChecked.checked = false;
+    }
+    const picchiChecked = document.querySelector('input[name="picchi"]:checked');
+    if (picchiChecked) {
+      picchiChecked.checked = false;
+    }
+
+    toggleFvField();
+  } catch (error) {
+    showLeadError('Invio non riuscito: ' + error.message);
+  } finally {
+    // ===== RIPRISTINO BOTTONE (sempre, anche in caso di errore) =====
+    if (btnInvia) {
+      btnInvia.classList.remove('loading');
+      btnInvia.disabled = false;
+      btnInvia.innerHTML = testoOriginale;
+    }
+  }
+});
 
 
 const miniForm = document.getElementById('miniLeadForm');
