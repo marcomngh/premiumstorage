@@ -1892,3 +1892,26 @@
     font-size: 16px;
   }
 }
+/* Spinner animato */
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Bottone in stato loading */
+.btn-invia.loading {
+  opacity: 0.85;
+  cursor: not-allowed;
+  pointer-events: none;
+}
