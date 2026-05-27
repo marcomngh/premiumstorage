@@ -2323,21 +2323,7 @@ if (!provincia) {
   showError('Seleziona la provincia in cui si trova la tua azienda.');
   return;
 }
-      // Validazione picco massimo: non deve superare 1,3x la potenza impegnata
-if (isFinite(piccoMassimo) && piccoMassimo > 0) {
-  if (!isFinite(potenzaImpegnata) || potenzaImpegnata <= 0) {
-    showError('Per validare il picco massimo, inserisci prima una potenza impegnata valida.');
-    return;
-  }
-  const tettoPicco = potenzaImpegnata * 1.3;
-  if (piccoMassimo > tettoPicco) {
-    showError(
-      'Il picco massimo inserito (' + formatNumber(piccoMassimo, 0) + ' kW) supera il limite credibile di ' +
-      formatNumber(tettoPicco, 0) + ' kW, pari a 1,3 volte la potenza impegnata. Verifica il dato per una simulazione attendibile.'
-    );
-    return;
-  }
-}
+    
            
       if (!isFinite(consumoAnnuo) || consumoAnnuo <= 0) {
         showError('Inserisci un consumo annuo valido.');
@@ -2367,6 +2353,21 @@ if (isFinite(piccoMassimo) && piccoMassimo > 0) {
         showError('La potenza impegnata deve essere almeno 20 kW.');
         return;
       }
+        // Validazione picco massimo: non deve superare 1,3x la potenza impegnata
+if (isFinite(piccoMassimo) && piccoMassimo > 0) {
+  if (!isFinite(potenzaImpegnata) || potenzaImpegnata <= 0) {
+    showError('Per validare il picco massimo, inserisci prima una potenza impegnata valida.');
+    return;
+  }
+  const tettoPicco = potenzaImpegnata * 1.3;
+  if (piccoMassimo > tettoPicco) {
+    showError(
+      'Il picco massimo inserito (' + formatNumber(piccoMassimo, 0) + ' kW) supera il limite credibile di ' +
+      formatNumber(tettoPicco, 0) + ' kW, pari a 1,3 volte la potenza impegnata. Verifica il dato per una simulazione attendibile.'
+    );
+    return;
+  }
+}
       if (!fvSelection) {
         showError('Seleziona se hai già un impianto fotovoltaico.');
         return;
