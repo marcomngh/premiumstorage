@@ -2093,8 +2093,34 @@ Riduzione dei fermi macchina causati da micro-interruzioni di rete e maggiore af
     storageCycles: 280,
     deltaPriceRatio: 0.15,
     scoreBoost: 0.90
+  },
+agroindustria: {
+    label: "Agricoltura e agroindustria",
+    pvCoverage: 0.80,
+    pvAutoconsumoBase: 0.50,
+    incrementoStorage: 0.28,
+    storageFactor: 0.14,
+    pcsFactor: 0.35,
+    storageCycles: 300,
+    deltaPriceRatio: 0.18,
+    scoreBoost: 1.05
+  },
+  energivori: {
+    label: "Energivori a ciclo continuo",
+    pvCoverage: 0.90,
+    pvAutoconsumoBase: 0.78,
+    incrementoStorage: 0.15,
+    storageFactor: 0.18,
+    pcsFactor: 0.25,
+    storageCycles: 380,
+    deltaPriceRatio: 0.25,
+    scoreBoost: 1.20
   }
 };
+
+
+
+    
 
     const profileMap = {
       giorno: { pvBonus: 1.00, storageBonus: 0.85 },
