@@ -2313,8 +2313,8 @@ const autoconsumoSenzaStorageMap = {
       const profilo = document.getElementById('profiloConsumo').value;
       const settore = document.getElementById('settoreMerceologico').value;
       const picchiSelection = document.querySelector('input[name="picchi"]:checked');
-      const piccoMassimo = parseItalianNumber(document.getElementById('piccoMassimo').value);
       const potenzaImpegnata = parseItalianNumber(document.getElementById('potenzaImpegnata').value);
+            const piccoMassimo = parseItalianNumber(document.getElementById('piccoMassimo').value);
       const fvSelection = document.querySelector('input[name="fv"]:checked');
       const fvPower = parseItalianNumber(document.getElementById('fvPower').value);
 const provincia = document.getElementById('provincia').value;
@@ -2322,6 +2322,21 @@ const provincia = document.getElementById('provincia').value;
 if (!provincia) {
   showError('Seleziona la provincia in cui si trova la tua azienda.');
   return;
+}
+      // Validazione picco massimo: non deve superare 1,3x la potenza impegnata
+if (isFinite(piccoMassimo) && piccoMassimo > 0) {
+  if (!isFinite(potenzaImpegnata) || potenzaImpegnata <= 0) {
+    showError('Per validare il picco massimo, inserisci prima una potenza impegnata valida.');
+    return;
+  }
+  const tettoPicco = potenzaImpegnata * 1.3;
+  if (piccoMassimo > tettoPicco) {
+    showError(
+      'Il picco massimo inserito (' + formatNumber(piccoMassimo, 0) + ' kW) supera il limite credibile di ' +
+      formatNumber(tettoPicco, 0) + ' kW, pari a 1,3 volte la potenza impegnata. Verifica il dato per una simulazione attendibile.'
+    );
+    return;
+  }
 }
            
       if (!isFinite(consumoAnnuo) || consumoAnnuo <= 0) {
@@ -2387,6 +2402,8 @@ if (!provincia) {
       // Calcola una sola volta i cicli effettivi (servono in più punti)
 const hasFV = pvConsigliato > 0;
 const cicliEffettivi = calcolaCicliEffettivi(sector, profilo, hasFV);
+
+      
 
 // =====================================================
 // PRODUZIONE FV E AUTOCONSUMO
