@@ -2429,7 +2429,7 @@ if (isFinite(piccoMassimo) && piccoMassimo > 0) {
         pvConsigliato = fvPower;
       } else {
         pvConsigliato = consumoAnnuo * sector.pvCoverage / constants.produzionePerKwp;
-        pvConsigliato = clamp(roundToStep(pvConsigliato, 10), 30, 1000);
+        pvConsigliato = clamp(roundToStep(pvConsigliato, 10), 20, 2000);
       }
       // Calcola una sola volta i cicli effettivi (servono in più punti)
 const hasFV = pvConsigliato > 0;
