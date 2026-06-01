@@ -2316,7 +2316,53 @@ const autoconsumoSenzaStorageMap = {
   
   return Math.round(cicliEffettivi);
 }
+function stimaBeneficioPeakShaving(p) {
+  if (!p.storageKwh || p.storageKwh <= 0) return null;
 
+  const PREZZO_KW_ANNO = 50;
+
+  const picco = (p.piccoMassimo > 0) ? p.piccoMassimo : p.potenzaImpegnata * 1.15;
+
+  const coeffSettore = {
+    industria:     0.20,
+    cold_chain:    0.08,
+    artigianato:   0.12,
+    terziario:     0.10,
+    agroindustria: 0.22,
+    energivori:    0.12
+  };
+
+  const modPicchi = {
+    si_frequenti:   1.00,
+    si_occasionali: 0.60,
+    no:             0.15,
+    nonso:          0.40
+  };
+
+  const coeff = (coeffSettore[p.settore] !== undefined) ? coeffSettore[p.settore] : 0.10;
+  const mod   = (modPicchi[p.picchi]     !== undefined) ? modPicchi[p.picchi]     : 0.40;
+
+  const riduzioneComp    = picco * coeff * mod;
+  const riduzioneTecnica = p.storageKwh * 0.5;
+  const riduzioneKw      = Math.min(riduzioneComp, riduzioneTecnica);
+
+  const beneficio = riduzioneKw * PREZZO_KW_ANNO;
+  const r50 = function(v) { return Math.round(v / 50) * 50; };
+
+  return {
+    riduzioneKw:    Math.round(riduzioneKw * 10) / 10,
+    beneficioMin:   r50(beneficio * 0.75),
+    beneficioMax:   r50(beneficio * 1.25),
+    beneficioMedio: Math.round(beneficio),
+    mostraInUI:     beneficio >= 250
+  };
+}
+
+function paybackConPeakShaving(paybackBase, risparmioBase, beneficioMedio) {
+  if (!beneficioMedio || beneficioMedio <= 0) return paybackBase;
+  const nuovo = paybackBase * risparmioBase / (risparmioBase + beneficioMedio);
+  return Math.round(nuovo * 10) / 10;
+}
     document.querySelectorAll('input[name="fv"]').forEach(function (radio) {
       radio.addEventListener('change', toggleFvField);
     });
@@ -2667,13 +2713,31 @@ if (rapportoPiccoMedia < 1.5) {
 let detail4 = '';
 
 if (isFinite(payback)) {
-  detail4 =
-    'Tempo di rientro orientativo: <strong>' +
-    formatNumber(payback, 1) +
-    ' anni</strong>.';
-}
+  const ps = stimaBeneficioPeakShaving({
+    settore: settore,
+    picchi: picchiSelection.value,
+    potenzaImpegnata: potenzaImpegnata,
+    piccoMassimo: isFinite(piccoMassimo) ? piccoMassimo : 0,
+    storageKwh: storageKwh
+  });
 
-detail4 += ' Il beneficio da riduzione kW/picchi non è ancora incluso in modo analitico.';
+  if (ps && ps.mostraInUI) {
+    const paybackNuovo = paybackConPeakShaving(payback, risparmioTotale, ps.beneficioMedio);
+    detail4 =
+      'Tempo di rientro orientativo: <strong>' +
+      formatNumber(payback, 1) + ' anni → ' +
+      formatNumber(paybackNuovo, 1) + ' anni</strong> includendo peak shaving.' +
+      '<br><em>Stima aggiuntiva da peak shaving: ' +
+      formatNumber(ps.beneficioMin, 0) + '–' + formatNumber(ps.beneficioMax, 0) + ' €/anno ' +
+      '(riduzione orientativa ~' + formatNumber(ps.riduzioneKw, 1) + ' kW di potenza impegnata). ' +
+      'Valore prudenziale, da affinare con analisi del profilo di carico.</em>';
+  } else {
+    detail4 =
+      'Tempo di rientro orientativo: <strong>' +
+      formatNumber(payback, 1) +
+      ' anni</strong>.';
+  }
+}
 
 setResult('detail4', detail4);
 
