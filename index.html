@@ -2231,7 +2231,7 @@ const autoconsumoSenzaStorageMap = {
       return new Intl.NumberFormat('it-IT', {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
-        minimumGroupingDigits: 1  
+        useGrouping: 'always' 
       }).format(value);
     }
 
@@ -2241,7 +2241,7 @@ const autoconsumoSenzaStorageMap = {
         currency: 'EUR',
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
-        minimumGroupingDigits: 1
+        useGrouping: 'always' 
       }).format(value);
     }
 
