@@ -2750,7 +2750,7 @@ setResult(
   'detail3',
   'Risparmio totale: <strong>' + formatCurrency(risparmioTotale, 0) + '/anno</strong>.<br>' +
   '• Solo fotovoltaico (autoconsumo parziale + cessione in rete dell\'eccesso): <strong>' + formatCurrency(risparmioFV, 0) + '</strong><br>' +
-  '• Guadagno aggiuntivo dello storage (autoconsumo dei kWh che altrimenti cederesti + time-shift): <strong>' + formatCurrency(risparmioStorage, 0) + '</strong>'
+'• Guadagno aggiuntivo dello storage (autoconsumo, time-shift e, se applicabile, peak shaving): <strong>' + formatCurrency(risparmioStorage, 0) + '</strong>'
 );
 const rapportoPiccoMedia = potenzaMedia > 0 ? piccoStimato / potenzaMedia : 0;
 let interpretazionePicco = '';
