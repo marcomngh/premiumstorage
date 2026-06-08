@@ -2762,7 +2762,8 @@ if (rapportoPiccoMedia < 1.5) {
 
 let detail4 = '';
 
-if (isFinite(payback)) {
+if (isFinite(payback) && payback <= 7) {
+  // Payback entro i 7 anni: mostriamo il tempo di rientro indicativo.
   detail4 =
     'Tempo di rientro orientativo: <strong>' +
     formatNumber(payback, 1) +
@@ -2776,6 +2777,16 @@ if (isFinite(payback)) {
       '(riduzione orientativa ~' + formatNumber(psStorage.riduzioneKw, 1) + ' kW di potenza impegnata). ' +
       'Valore prudenziale, da affinare con analisi del profilo di carico.</em>';
   }
+} else {
+  // Payback oltre i 7 anni (o non calcolabile): evitiamo un numero
+  // che scoraggia ed è poco affidabile senza l'analisi del profilo di carico.
+  // Reindirizziamo alla valutazione del consulente.
+  detail4 =
+    'In base ai dati inseriti, il ritorno dello storage richiede una ' +
+    '<strong>valutazione più approfondita</strong>. ' +
+    'Il profilo di carico reale della tua azienda può cambiare ' +
+    'sensibilmente la convenienza: un consulente analizzerà i tuoi ' +
+    'consumi effettivi per individuare la configurazione più vantaggiosa.';
 }
 
 setResult('detail4', detail4);
