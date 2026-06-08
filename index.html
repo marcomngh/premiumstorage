@@ -2699,6 +2699,9 @@ if (picchiSelection.value === 'no') score -= 0.3;
 
 // Se il costo energia è molto basso, siamo un po' più prudenti
 if (costoEnergia < 0.16) score -= 0.3;
+      // Aziende piccole e senza picchi: più prudenza commerciale
+if (consumoAnnuo < 50000) score -= 0.6;
+if (consumoAnnuo < 50000 && picchiSelection.value === 'no') score -= 0.5;
 
 // Se non c'è FV esistente, evitiamo "Molto alta"
 if (fvSelection.value !== 'si' && score >= 8.5) {
