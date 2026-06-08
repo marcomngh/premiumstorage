@@ -2719,8 +2719,9 @@ document.querySelector('#resPv')
 
 setResult('resPv', formatNumber(pvConsigliato, 0) + ' kWp');
       setResult('resSavings', formatCurrency(risparmioTotale, 0));
-      setResult('resScore', getRating(score));
-
+setResult('resScore', getRating(score));
+// Il giudizio è testo, non un numero: riduciamo il font per tenerlo su una riga
+document.getElementById('resScore').classList.add('big-text');
      setResult(
   'detail1',
   "Profilo rilevato: " + sector.label + ". Storage orientativo calcolato su priorità energetica, presenza di picchi e valorizzazione dell'energia FV accumulata."
