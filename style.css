@@ -487,6 +487,10 @@
 
   word-break: break-word;
 }
+.result-card .big.big-text {
+  font-size: 1.9rem;   /* più piccolo del numero, regola a piacere */
+  line-height: 1.1;
+}
 /* testo */
 .result-card p {
 
