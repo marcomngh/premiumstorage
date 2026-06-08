@@ -2643,24 +2643,27 @@ const risparmioStorageTimeShift = energiaTimeShift * deltaPrezzoTimeShift;
 
 const risparmioStorage = risparmioStoragePv + risparmioStorageTimeShift;
 
-      const risparmioTotale = risparmioFV + risparmioStorage;
+const risparmioTotale = risparmioFV + risparmioStorage;
 
-      const costoStorage = storageKwh * constants.costoStoragePerKwh;
+// Se il FV esiste già, il payback usa solo il risparmio aggiuntivo dello storage.
+// Se il FV non esiste, usa il risparmio totale del progetto FV + storage.
+const risparmioPerPayback = fvSelection.value === 'si'
+  ? risparmioStorage
+  : risparmioTotale;
+
+const costoStorage = storageKwh * constants.costoStoragePerKwh;
 
 // Se il FV esiste già, il payback considera solo il nuovo investimento in storage.
-
 // Se il FV non esiste, considera progetto FV + storage.
-
 const costoPv = fvSelection.value === 'si'
-
   ? 0
-
   : pvConsigliato * constants.costoPvPerKwp;
 
 const investimentoTotale = costoStorage + costoPv;
 
-const payback = risparmioTotale > 0 ? investimentoTotale / risparmioTotale : Infinity;
-
+const payback = risparmioPerPayback > 0
+  ? investimentoTotale / risparmioPerPayback
+  : Infinity;
      let score;
 
 if (payback <= 3) {
