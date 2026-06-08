@@ -2641,7 +2641,24 @@ const deltaPrezzoTimeShift = Math.max(
 
 const risparmioStorageTimeShift = energiaTimeShift * deltaPrezzoTimeShift;
 
-const risparmioStorage = risparmioStoragePv + risparmioStorageTimeShift;
+// Componente 3: peak shaving (riduzione potenza impegnata).
+// Calcolato qui per entrare nel payback ufficiale e nello score,
+// non solo nella visualizzazione di detail4.
+const psStorage = stimaBeneficioPeakShaving({
+  settore: settore,
+  picchi: picchiSelection.value,
+  potenzaImpegnata: potenzaImpegnata,
+  piccoMassimo: isFinite(piccoMassimo) ? piccoMassimo : 0,
+  storageKwh: storageKwh
+});
+
+// Sopra la soglia di significatività (>= 250 €/anno) il peak shaving
+// è un beneficio reale e ricorrente dello storage, quindi lo includiamo.
+const risparmioPeakShaving = (psStorage && psStorage.mostraInUI)
+  ? psStorage.beneficioMedio
+  : 0;
+
+const risparmioStorage = risparmioStoragePv + risparmioStorageTimeShift + risparmioPeakShaving;
 
 const risparmioTotale = risparmioFV + risparmioStorage;
 
@@ -2746,34 +2763,22 @@ if (rapportoPiccoMedia < 1.5) {
 let detail4 = '';
 
 if (isFinite(payback)) {
-  const ps = stimaBeneficioPeakShaving({
-    settore: settore,
-    picchi: picchiSelection.value,
-    potenzaImpegnata: potenzaImpegnata,
-    piccoMassimo: isFinite(piccoMassimo) ? piccoMassimo : 0,
-    storageKwh: storageKwh
-  });
+  detail4 =
+    'Tempo di rientro orientativo: <strong>' +
+    formatNumber(payback, 1) +
+    ' anni</strong>.';
 
-  if (ps && ps.mostraInUI) {
-    const paybackNuovo = paybackConPeakShaving(payback, risparmioTotale, ps.beneficioMedio);
-    detail4 =
-      'Tempo di rientro orientativo: <strong>' +
-      formatNumber(payback, 1) + ' anni → ' +
-      formatNumber(paybackNuovo, 1) + ' anni</strong> includendo peak shaving.' +
-      '<br><em>Stima aggiuntiva da peak shaving: ' +
-      formatNumber(ps.beneficioMin, 0) + '–' + formatNumber(ps.beneficioMax, 0) + ' €/anno ' +
-      '(riduzione orientativa ~' + formatNumber(ps.riduzioneKw, 1) + ' kW di potenza impegnata). ' +
+  // psStorage e risparmioPeakShaving sono già stati calcolati sopra.
+  if (psStorage && psStorage.mostraInUI) {
+    detail4 +=
+      '<br><em>Include una stima del peak shaving di ' +
+      formatNumber(psStorage.beneficioMin, 0) + '–' + formatNumber(psStorage.beneficioMax, 0) + ' €/anno ' +
+      '(riduzione orientativa ~' + formatNumber(psStorage.riduzioneKw, 1) + ' kW di potenza impegnata). ' +
       'Valore prudenziale, da affinare con analisi del profilo di carico.</em>';
-  } else {
-    detail4 =
-      'Tempo di rientro orientativo: <strong>' +
-      formatNumber(payback, 1) +
-      ' anni</strong>.';
   }
 }
 
 setResult('detail4', detail4);
-
       resultsGrid.style.display = 'grid';
 leadBox.style.display = 'block';
 
