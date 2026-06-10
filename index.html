@@ -2249,11 +2249,23 @@ const autoconsumoSenzaStorageMap = {
   document.getElementById(id).innerHTML = text;
 }
 
-    function showError(message) {
+function showError(message) {
       errorBox.style.display = 'block';
       errorBox.textContent = message;
       resultsGrid.style.display = 'none';
       leadBox.style.display = 'none';
+
+      // Azzera i risultati stantii: evita che restino visibili numeri
+      // di un calcolo precedente quando la validazione fallisce.
+      ['resPv', 'resBattery', 'resSavings', 'resScore',
+       'detail1', 'detail2', 'detail3', 'detail4'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.innerHTML = '';
+      });
+      // Rimuove la classe applicata ai rating testuali (es. "Da valutare"),
+      // altrimenti resterebbe attiva sul calcolo valido successivo.
+      var rs = document.getElementById('resScore');
+      if (rs) rs.classList.remove('big-text');
     }
 
     function clearError() {
