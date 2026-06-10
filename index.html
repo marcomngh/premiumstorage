@@ -2693,8 +2693,12 @@ const investimentoTotale = costoStorage + costoPv;
 const payback = risparmioPerPayback > 0
   ? investimentoTotale / risparmioPerPayback
   : Infinity;
-     let score;
+let score;
 
+// --- BASE: il payback resta il driver principale del rating ---
+// Consumo, costo energia, picchi e presenza FV sono GIÀ dentro il payback
+// (influenzano risparmio e investimento), quindi NON li ri-pesiamo qui:
+// lo faremmo contare due volte. Aggiungiamo solo correttivi ortogonali.
 if (payback <= 3) {
   score = 8.8; // Molto alta
 } else if (payback <= 5) {
@@ -2702,20 +2706,40 @@ if (payback <= 3) {
 } else if (payback <= 7) {
   score = 6.2; // Media
 } else {
-  score = 4.8; // Da approfondire
+  score = 4.8; // Da valutare
 }
 
-// Correttivi leggeri
+// --- Correttivo 1: valore assoluto del beneficio storage ---
+// Il payback è un RAPPORTO e non cattura la SCALA del beneficio: un grande
+// energivoro con payback medio ma decine di migliaia di €/anno di risparmio
+// merita comunque un rating più alto. Questa leva è ortogonale al payback.
+if (risparmioStorage >= 30000) {
+  score += 0.6;
+} else if (risparmioStorage >= 15000) {
+  score += 0.3;
+}
+
+// --- Correttivo 2: FV già esistente ---
+// È lo scenario commercialmente più maturo: l'investimento riguarda il solo
+// accumulo (più piccolo, rientro più rapido) e il cliente ha già fatto il
+// primo passo. Lo riconosciamo esplicitamente nel rating.
+if (fvSelection.value === 'si') {
+  score += 0.5;
+}
+
+// --- Correttivi prudenziali (invariati) ---
 if (picchiSelection.value === 'si_frequenti') score += 0.3;
 if (picchiSelection.value === 'no') score -= 0.3;
 
 // Se il costo energia è molto basso, siamo un po' più prudenti
 if (costoEnergia < 0.16) score -= 0.3;
-      // Aziende piccole e senza picchi: più prudenza commerciale
+
+// Aziende piccole e senza picchi: più prudenza commerciale
 if (consumoAnnuo < 50000) score -= 0.6;
 if (consumoAnnuo < 50000 && picchiSelection.value === 'no') score -= 0.5;
 
-// Se non c'è FV esistente, evitiamo "Molto alta"
+// Se non c'è FV esistente, evitiamo "Molto alta" (scenario meno maturo).
+// Posizionato DOPO i correttivi così agisce da cap finale.
 if (fvSelection.value !== 'si' && score >= 8.5) {
   score = 7.4; // Alta
 }
