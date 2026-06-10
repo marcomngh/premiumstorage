@@ -2825,15 +2825,36 @@ if (isFinite(payback) && payback <= 7) {
       'Valore prudenziale, da affinare con analisi del profilo di carico.</em>';
   }
 } else {
-  // Payback oltre i 7 anni (o non calcolabile): evitiamo un numero
-  // che scoraggia ed è poco affidabile senza l'analisi del profilo di carico.
-  // Reindirizziamo alla valutazione del consulente.
-  detail4 =
-    'In base ai dati inseriti, il ritorno dello storage richiede una ' +
-    '<strong>valutazione più approfondita</strong>. ' +
-    'Il profilo di carico reale della tua azienda può cambiare ' +
-    'sensibilmente la convenienza: un consulente analizzerà i tuoi ' +
-    'consumi effettivi per individuare la configurazione più vantaggiosa.';
+  // Payback oltre i 7 anni (o non calcolabile): evitiamo di mostrare un
+  // numero di rientro alto, che scoraggia ed è poco affidabile senza
+  // l'analisi del profilo di carico. Il MESSAGGIO però deve essere coerente
+  // con il rating (score): se la convenienza resta positiva grazie al
+  // beneficio assoluto o al FV già installato, NON usiamo un testo
+  // interlocutorio da "caso incerto" — valorizziamo il beneficio annuo.
+  if (score >= 5) {
+    // Rating "Media" o superiore nonostante il payback lungo:
+    // tipicamente FV già installato (resta il solo investimento storage)
+    // oppure beneficio assoluto elevato. Diamo un messaggio positivo.
+    detail4 =
+      'Lo storage genera un beneficio di <strong>' +
+      formatCurrency(risparmioStorage, 0) + '/anno</strong>. ' +
+      (fvSelection.value === 'si'
+        ? 'Avendo già il fotovoltaico, questa stima riguarda il solo ' +
+          'accumulo aggiuntivo: il tempo di rientro dipende dal profilo di ' +
+          'carico reale e un consulente può individuare la taglia ottimale.'
+        : 'Il valore annuo è rilevante; il tempo di rientro dipende dal ' +
+          'profilo di carico reale e un consulente può ottimizzare la ' +
+          'configurazione per accorciarlo.');
+  } else {
+    // Rating basso ("Da valutare"): caso realmente incerto.
+    // Reindirizziamo alla valutazione del consulente senza numeri.
+    detail4 =
+      'In base ai dati inseriti, il ritorno dello storage richiede una ' +
+      '<strong>valutazione più approfondita</strong>. ' +
+      'Il profilo di carico reale della tua azienda può cambiare ' +
+      'sensibilmente la convenienza: un consulente analizzerà i tuoi ' +
+      'consumi effettivi per individuare la configurazione più vantaggiosa.';
+  }
 }
 
 setResult('detail4', detail4);
