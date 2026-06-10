@@ -2735,8 +2735,15 @@ document.querySelector('#resPv')
 setResult('resPv', formatNumber(pvConsigliato, 0) + ' kWp');
       setResult('resSavings', formatCurrency(risparmioTotale, 0));
 setResult('resScore', getRating(score));
-// Il giudizio è testo, non un numero: riduciamo il font per tenerlo su una riga
-document.getElementById('resScore').classList.add('big-text');
+// Il giudizio è testo, non un numero. Applichiamo il font ridotto SOLO ai
+// rating lunghi (es. "Da valutare"); i rating brevi ("Alta"/"Media")
+// tornano alla dimensione piena. Ricalcolato da zero ad ogni calcolo,
+// così non eredita lo stato della simulazione precedente.
+var resScoreEl = document.getElementById('resScore');
+resScoreEl.classList.remove('big-text');
+if (resScoreEl.textContent.trim().length > 12) {
+  resScoreEl.classList.add('big-text');
+}
      setResult(
   'detail1',
   "Profilo rilevato: " + sector.label + ". Storage orientativo calcolato su priorità energetica, presenza di picchi e valorizzazione dell'energia FV accumulata."
