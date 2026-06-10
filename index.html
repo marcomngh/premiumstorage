@@ -2372,11 +2372,6 @@ function stimaBeneficioPeakShaving(p) {
   };
 }
 
-function paybackConPeakShaving(paybackBase, risparmioBase, beneficioMedio) {
-  if (!beneficioMedio || beneficioMedio <= 0) return paybackBase;
-  const nuovo = paybackBase * risparmioBase / (risparmioBase + beneficioMedio);
-  return Math.round(nuovo * 10) / 10;
-}
     document.querySelectorAll('input[name="fv"]').forEach(function (radio) {
       radio.addEventListener('change', toggleFvField);
     });
