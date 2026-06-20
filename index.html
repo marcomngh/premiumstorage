@@ -3200,6 +3200,77 @@ miniForm.addEventListener('submit', async function (event) {
   ]
 }
 </script>
-  
+<!-- ===== COOKIE BANNER GDPR ===== -->
+<div id="cookieBanner" style="
+  display:none; position:fixed; left:16px; right:16px; bottom:16px;
+  max-width:560px; margin:0 auto; z-index:9999;
+  background:#fff; border:1px solid #e7e7e7; border-radius:16px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.18); padding:22px 24px;
+  font-family:Inter, Arial, sans-serif; color:#333; font-size:14px; line-height:1.5;">
+  <p style="margin:0 0 16px;">
+    Questo sito utilizza cookie tecnici necessari al funzionamento e, previo tuo consenso,
+    cookie statistici (Google Analytics) per analizzare l'utilizzo del sito.
+    Puoi accettarli o rifiutarli. Maggiori informazioni nella
+    <a href="/privacy-policy" style="color:#1f9d55;">Privacy Policy</a>.
+  </p>
+  <div style="display:flex; gap:10px; flex-wrap:wrap;">
+    <button id="cookieAccept" style="
+      flex:1; min-width:120px; padding:12px 18px; border:0; border-radius:12px;
+      background:#1f9d55; color:#fff; font-weight:700; font-size:14px; cursor:pointer;">
+      Accetta
+    </button>
+    <button id="cookieReject" style="
+      flex:1; min-width:120px; padding:12px 18px; border:1px solid #ccc; border-radius:12px;
+      background:#fff; color:#333; font-weight:600; font-size:14px; cursor:pointer;">
+      Rifiuta
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'ps_cookie_consent';
+  var banner = document.getElementById('cookieBanner');
+
+  // 👇 INSERISCI QUI IL TUO ID DI GOOGLE ANALYTICS quando lo attivi (es. 'G-XXXXXXXXXX')
+  var GA_ID = '';
+
+  function caricaGoogleAnalytics() {
+    if (!GA_ID) return; // se non hai ancora impostato l'ID, non fa nulla
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+
+  var scelta = localStorage.getItem(STORAGE_KEY);
+
+  if (scelta === 'accepted') {
+    caricaGoogleAnalytics();
+  } else if (scelta === null) {
+    banner.style.display = 'block'; // mostra il banner solo se non ha ancora scelto
+  }
+
+  document.getElementById('cookieAccept').addEventListener('click', function () {
+    localStorage.setItem(STORAGE_KEY, 'accepted');
+    banner.style.display = 'none';
+    caricaGoogleAnalytics();
+  });
+
+  document.getElementById('cookieReject').addEventListener('click', function () {
+    localStorage.setItem(STORAGE_KEY, 'rejected');
+    banner.style.display = 'none';
+    // nessuno script di tracciamento viene caricato
+  });
+})();
+</script>
+
+      
 </body>
 </html>
