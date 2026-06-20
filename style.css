@@ -1944,14 +1944,13 @@
   margin: 2px 0 0 0;
   flex-shrink: 0;
   cursor: pointer;
-  accent-color: #2e7d32; /* verde coerente col tuo brand */
+  accent-color: #2e7d32;
 }
 
+/* il link non deve avere spazi/padding aggiuntivi */
 .privacy-consent a {
   color: #2e7d32;
   text-decoration: underline;
-}
-
-.privacy-consent .req {
-  color: #d32f2f;
+  margin: 0;
+  padding: 0;
 }
