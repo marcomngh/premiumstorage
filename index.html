@@ -632,29 +632,49 @@
 
               <div id="form-contatto"></div>
         <form id="leadForm">
-          <div class="two-col">
-            <div class="field">
-              <label for="azienda">Azienda <span class="req">*</span></label>
-              <input id="azienda" type="text" placeholder="Es. Rossi Srl" />
-            </div>
-            <div class="field">
-              <label for="nomeCognome">Nome e cognome <span class="req">*</span></label>
-              <input id="nomeCognome" type="text" placeholder="Es. Marco Rossi" />
-            </div>
-            <div class="field">
-              <label for="emailLead">Email <span class="req">*</span></label>
-              <input id="emailLead" type="email" placeholder="Es. nome@azienda.it" />
-            </div>
-            <div class="field">
-              <label for="telefonoLead">Telefono</label>
-              <input id="telefonoLead" type="text" placeholder="Es. 333 1234567" />
-            </div>
-   </div>
+  <div class="two-col">
+    <div class="field">
+      <label for="azienda">Azienda <span class="req">*</span></label>
+      <input id="azienda" type="text" placeholder="Es. Rossi Srl" />
+    </div>
+    <div class="field">
+      <label for="nomeCognome">Nome e cognome <span class="req">*</span></label>
+      <input id="nomeCognome" type="text" placeholder="Es. Marco Rossi" />
+    </div>
+    <div class="field">
+      <label for="emailLead">Email <span class="req">*</span></label>
+      <input id="emailLead" type="email" placeholder="Es. nome@azienda.it" />
+    </div>
+    <div class="field">
+      <label for="telefonoLead">Telefono</label>
+      <input id="telefonoLead" type="text" placeholder="Es. 333 1234567" />
+    </div>
+  </div>
+  <!-- ===== FINE CAMPI / INIZIO CONSENSI GDPR ===== -->
 
-          <div id="leadErrorBox" class="error-box"></div>
-          <div id="leadSuccessBox" class="note-box" style="display:none;">Grazie, richiesta registrata.</div>
-          <button type="submit" class="btn btn-lead">Invia richiesta</button>
-        </form>
+  <!-- Consenso al trattamento per la finalità principale (lead/preventivo) -->
+  <div class="privacy-consent">
+    <label>
+      <input id="consensoPrivacy" type="checkbox" name="consenso_privacy" required />
+      Ho letto e accetto l'<a href="/privacy-policy" target="_blank" rel="noopener">Informativa sulla Privacy</a>
+      e acconsento al trattamento dei miei dati per essere ricontattato in merito alla mia richiesta. <span class="req">*</span>
+    </label>
+  </div>
+
+  <!-- Consenso marketing SEPARATO e FACOLTATIVO -->
+  <div class="privacy-consent">
+    <label>
+      <input id="consensoMarketing" type="checkbox" name="consenso_marketing" />
+      Acconsento a ricevere comunicazioni commerciali e materiale informativo su prodotti e servizi (facoltativo).
+    </label>
+  </div>
+
+  <!-- ===== FINE CONSENSI GDPR ===== -->
+
+  <div id="leadErrorBox" class="error-box"></div>
+  <div id="leadSuccessBox" class="note-box" style="display:none;">Grazie, richiesta registrata.</div>
+  <button type="submit" class="btn btn-lead">Invia richiesta</button>
+</form>
       </div>
     </div>
   </section>
