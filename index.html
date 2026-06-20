@@ -2920,7 +2920,10 @@ window.scrollTo({
     dettaglioRisparmio: document.getElementById('detail3').textContent,
     dettaglioStorage: document.getElementById('detail1').textContent,
     piccoMedia: document.getElementById('piccoMassimo').value.trim(),
-    origine: window.location.href
+    origine: window.location.href,
+consensoPrivacy: document.getElementById('consensoPrivacy').checked,
+    consensoMarketing: document.getElementById('consensoMarketing').checked,
+    timestampConsenso: new Date().toISOString()    
   };
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
@@ -2934,6 +2937,10 @@ window.scrollTo({
   if (!emailOk) {
     return showLeadError('Inserisci un indirizzo email valido.');
   }
+// ===== CONTROLLO CONSENSO PRIVACY (GDPR) =====
+  if (!document.getElementById('consensoPrivacy').checked) {
+    return showLeadError("Devi accettare l'Informativa sulla Privacy per procedere.");
+  }  
   if (!APPS_SCRIPT_URL || !APPS_SCRIPT_URL.includes('/exec')) {
     return showLeadError("Inserisci nel codice l'URL della Web App di Google Apps Script.");
   }
@@ -2989,27 +2996,27 @@ window.scrollTo({
   }
 });
 
-
 const miniForm = document.getElementById('miniLeadForm');
-
 miniForm.addEventListener('submit', async function (event) {
   event.preventDefault();
-
   const payload = {
     azienda: document.getElementById('azienda_rapida').value.trim(),
     nomeCognome: document.getElementById('nome_rapido').value.trim(),
     email: document.getElementById('email_rapida').value.trim(),
     telefono: document.getElementById('telefono_rapido').value.trim(),
     provincia: document.getElementById('provincia_rapida').value,
-    origine: window.location.href + ' - contatto rapido'
+    origine: window.location.href + ' - contatto rapido',
+    consensoPrivacy: document.getElementById('consensoPrivacyMini').checked,
+    timestampConsenso: new Date().toISOString()
   };
-
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
-
   if (!payload.azienda) { alert("Inserisci l'azienda"); return; }
   if (!payload.nomeCognome) { alert("Inserisci nome e cognome"); return; }
   if (!emailOk) { alert("Email non valida"); return; }
-
+  if (!document.getElementById('consensoPrivacyMini').checked) {
+    alert("Devi accettare l'Informativa sulla Privacy per procedere.");
+    return;
+  }
   // ===== ATTIVAZIONE SPINNER (sul bottone DEL miniForm) =====
   const btnMini = miniForm.querySelector('.btn-lead');
   const testoOrigMini = btnMini ? btnMini.innerHTML : 'Invia richiesta';
@@ -3019,7 +3026,6 @@ miniForm.addEventListener('submit', async function (event) {
     btnMini.disabled = true;
     btnMini.innerHTML = '<span class="spinner-btn"></span>Invio in corso, attendi...';
   }
-
   try {
     const formBody = new URLSearchParams(payload);
     const response = await fetch(APPS_SCRIPT_URL, {
@@ -3027,11 +3033,9 @@ miniForm.addEventListener('submit', async function (event) {
       body: formBody
     });
     const result = await response.json();
-
     if (!result.ok) {
       throw new Error(result.error || 'Errore invio');
     }
-
     alert("Richiesta inviata! Ti ricontattiamo a breve.");
     miniForm.reset();
   } catch (error) {
@@ -3044,6 +3048,7 @@ miniForm.addEventListener('submit', async function (event) {
     }
   }
 });
+
     
     toggleFvField();
   </script>
