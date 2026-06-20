@@ -1920,3 +1920,37 @@
 #resultsGrid {
   display: none;
 }
+      /* ===== Blocco consenso privacy GDPR ===== */
+.privacy-consent {
+  margin: 14px 0;
+  text-align: left;
+}
+
+.privacy-consent label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #444;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.privacy-consent input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: #2e7d32; /* verde coerente col tuo brand */
+}
+
+.privacy-consent a {
+  color: #2e7d32;
+  text-decoration: underline;
+}
+
+.privacy-consent .req {
+  color: #d32f2f;
+}
